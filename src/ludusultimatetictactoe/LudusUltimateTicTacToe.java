@@ -13,11 +13,13 @@ public class LudusUltimateTicTacToe {
     /**
      * @param args the command line arguments
      */
+    /*
     public static void main(String[] args) {
         System.out.println("Welcome to Ludus!");
         System.out.println("Something something something");
         System.out.println("testing git stuff");
         System.out.println("testing again");
     }
+    */
     
 }

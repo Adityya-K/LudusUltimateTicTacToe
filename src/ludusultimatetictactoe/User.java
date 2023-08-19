@@ -136,10 +136,8 @@ public class User {
 
     @Override
     public String toString() {
-        DateFormat dateFormat = new SimpleDateFormat(config.dateFormat);  
-        String strDate = dateFormat.format(dateJoined);  
         // escape commas if user decides to enter commas as part of their username
-        return username + "," + rating + "," + encryptedPassword + "," + wins + "," + losses + "," + gamesPlayed + "," + dateJoined;
+        return username + "," + encryptedPassword + "," + rating + "," + wins + "," + losses + "," + gamesPlayed + "," + dateJoined;
     }
     
 }
