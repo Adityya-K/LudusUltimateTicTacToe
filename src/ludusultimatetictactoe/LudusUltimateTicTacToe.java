@@ -16,7 +16,8 @@ public class LudusUltimateTicTacToe {
     public static void main(String[] args) {
         System.out.println("Welcome to Ludus!");
         System.out.println("Something something something");
-        System.out.println("testing git stuff")
+        System.out.println("testing git stuff");
+        System.out.println("testing again");
     }
     
 }
