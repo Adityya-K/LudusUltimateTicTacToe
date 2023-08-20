@@ -4,8 +4,6 @@
  */
 package ludusultimatetictactoe;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 /**
@@ -13,54 +11,11 @@ import javax.swing.JButton;
  * @author oweny
  */
 public class NormalTTT {
-    private int turnNumber = 0;
-    private String[] playerArray = {"X", "O"};
-    private JButton[] btnArray = new JButton[81];
+    private JButton[] btnArray = new JButton[9];
     
-    public void actionPerformed(ActionEvent ae) {
-        // (this is a linear search) Iterates through the array of buttons
-        for (int i = 0; i < btnArray.length; i++) {
-            // Runs if the button was clicked
-            if (ae.getActionCommand().equals("" + i)) {
-                System.out.println(i + 1);
-
-                // Gets the button's text
-                String currentText = btnArray[i].getText();
-
-                // Prevents the user from clicking the same button twice
-                if ("XO".contains(currentText)) {
-                    break;
-                }
-
-                // Sets the button text to the correct player using the parity of the turn number
-                btnArray[i].setText("" + playerArray[turnNumber%2]);
-
-                // Increments the turn number
-                turnNumber++;
-
-                // Stores the game result
-                String gameResult = getGameResult(getAllLines());
-
-                // Checks if the game has been decided
-                if (gameResult.equals("undecided") == false) {
-
-                    // TODO output game result on gui instead of console
-                    // Prints out the game result
-                    System.out.println(gameResult);
-
-                    // TODO reset the board by clicking button instead of automatically
-                    // Resets the board
-                    resetBoard();
-
-                    // Resets the turn number
-                    turnNumber = 0;
-
-                }
-
-                // Stops the search for a button click
-                break;
-            }
-        }
+    public NormalTTT(JButton[] btnArray) 
+    {
+        this.btnArray = btnArray;
     }
     
     // Resets the board
@@ -72,8 +27,8 @@ public class NormalTTT {
     }
 
     // Returns a string with the winner, if there is a draw or if the game is undecided
-    public String getGameResult(String[] lines) {
-        
+    public String getGameResult(int turnNumber) {
+        String[] lines = getAllLines();
         // Initializes the game result string
         String gameResult = "undecided";
         
@@ -154,26 +109,10 @@ public class NormalTTT {
 
     }
     
-    public int getTurnNumber() {
-        return turnNumber;
-    }
-
-    public String[] getPlayerArray() {
-        return playerArray;
-    }
-
     public JButton[] getBtnArray() {
         return btnArray;
     }
     
-    public void setTurnNumber(int turnNumber) {
-        this.turnNumber = turnNumber;
-    }
-
-    public void setPlayerArray(String[] playerArray) {
-        this.playerArray = playerArray;
-    }
-
     public void setBtnArray(JButton[] btnArray) {
         this.btnArray = btnArray;
     }

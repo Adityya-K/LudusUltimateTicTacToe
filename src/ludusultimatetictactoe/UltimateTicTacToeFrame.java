@@ -14,12 +14,14 @@ import javax.swing.JButton;
  */
 public class UltimateTicTacToeFrame extends javax.swing.JFrame implements ActionListener {
 
+    UltTTT ultBoard;
+    
     /**
      * Creates new form UltimateTicTacToeFrame
      */
     public UltimateTicTacToeFrame() {
         initComponents();
-        
+                
         // A for loop that generates the buttons
         for (int i = 0; i < btnArray.length; i++) {
             // Instantiate the button with a label (in this case i+1)
@@ -32,6 +34,8 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
             // Add the button to the buttons panel to be visible.
             panButtons.add(btnArray[i]);
         }
+        
+        ultBoard = new UltTTT(btnArray);
     }
 
     /**
@@ -63,15 +67,9 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // A function that can check any action performed by string
+    // Handles a button click
     public void actionPerformed(ActionEvent ae) {
-        // A for loop that will loop through and figure out which button was pressed
-        for (int i = 0; i < btnArray.length; i++) {
-            if (ae.getActionCommand().equals("" + i)) {
-                System.out.println(i + 1);
-                break;
-            }
-        }
+        
     }
     
     /**
