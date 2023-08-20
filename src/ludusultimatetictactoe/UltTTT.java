@@ -56,8 +56,23 @@ public class UltTTT {
         currentSection = gameBoard[i];
     }
         
+    public void playerTurn(JButton[] btnArray, int index)
+    {
+        btnArray[index].setText("" + playerArray[totalTurnNumber%2]);
+        // update total turn number
+        totalTurnNumber++;
+
+        //update subsection turn number
+        currentSection.setTurnNumber(currentSection.getTurnNumber() + 1);
+
+        //TODO: Highlight section to show that the player has won the section
+        String winner = currentSection.getGameResult();
+        currentSection.highlight(winner);
+
+        calcNextSection(index);
+    }
+    
     // this method's contents are basically repeated twice
-    // but im too braindead to fix it rn
     public void actionPerformed(ActionEvent ae) {
         if (currentSection == goAnywhere)
         {
@@ -83,18 +98,7 @@ public class UltTTT {
                             break;
                         }
 
-                        btnArray[j].setText("" + playerArray[totalTurnNumber%2]);
-                        // update total turn number
-                        totalTurnNumber++;
-
-                        //update subsection turn number
-                        checkSection.setTurnNumber(checkSection.getTurnNumber() + 1);
-
-                        //TODO: Highlight section to show that the player has won the section
-
-                        calcNextSection(j);
-
-                        madeMove = true;
+                        playerTurn(btnArray, j);
                         break;
                     }
                 }
@@ -120,17 +124,7 @@ public class UltTTT {
                         break;
                     }
 
-                    btnArray[i].setText("" + playerArray[totalTurnNumber%2]);
-                    // update total turn number
-                    totalTurnNumber++;
-
-                    //update subsection turn number
-                    currentSection.setTurnNumber(currentSection.getTurnNumber() + 1);
-
-                    //TODO: Highlight section to show that the player has won the section
-
-                    calcNextSection(i);
-                    
+                    playerTurn(btnArray, i);
                     break;
                 }
             }
@@ -141,7 +135,7 @@ public class UltTTT {
         if (!gameResult.equals("undecided"))
         {
             System.out.println(gameResult);
-            resetBoard();
+            //resetBoard(); // temp not reset board
         }
     }
     

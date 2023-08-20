@@ -15,6 +15,7 @@ import javax.swing.JButton;
  */
 public class UltimateTicTacToeFrame extends javax.swing.JFrame implements ActionListener {
 
+    public static final Color BACKGROUND_COLOR = new Color(128, 176, 247);
     UltTTT ultBoard;
     
     /**
@@ -33,7 +34,7 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
             // Add the frame as the actionlistener (i.e. where the action happens)
             btnArray[i].addActionListener(this);
             
-            btnArray[i].setBackground(new Color(128, 176, 247));
+            btnArray[i].setBackground(BACKGROUND_COLOR);
             
             if ((i <= 2 && i >= 0) || (i <= 11 && i >= 9) || (i <= 20 && i >= 18)) {
                 panTTTB1.add(btnArray[i]);
