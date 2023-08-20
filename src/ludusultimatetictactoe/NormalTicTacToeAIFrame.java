@@ -6,32 +6,103 @@ package ludusultimatetictactoe;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import javax.swing.JButton;
 
 /**
  *
- * @author Eks
+ * @author Eks and Adityya
  */
-public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionListener{
+public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements ActionListener{
 
-    // Turn number variable that is incremented every time a button is pressed
-    int turnNumber = 0;
+    // Board
+    String[] board = new String[9];
     
-    // Array that stores the X and O characters. Used with turnNumber to reflect player change
-    String[] playerArray = {"X", "O"};
+    String ai = "X";
+    String player = "O";
+    
     
     /**
      * Creates new form NormalTicTacToeFrame
      */
-    public NormalTicTacToeFrame() {
+    public NormalTicTacToeAIFrame() {
         initComponents();
         
         // Creates all the buttons
         for (int i = 0; i < btnArray.length; i++) {
-            btnArray[i] = new JButton((i + 1) + "");
+            btnArray[i] = new JButton(" ");
             btnArray[i].setActionCommand("" + i);
             btnArray[i].addActionListener(this);
             panButtons.add(btnArray[i]);
+        }
+        
+        if (ai.equals("X")) {
+            moveAI();
+        }
+    }
+    
+    private void moveAI() {
+        Double bestMoveScore = Double.NEGATIVE_INFINITY;
+        int moveIndex = -1;
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] == null) {
+                board[i] = ai;
+                double moveScore = minimax(board, 0, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, false);
+                board[i] = null;
+                if (moveScore > bestMoveScore) {
+                    bestMoveScore = moveScore;
+                    moveIndex = i;
+                }
+            }
+        }
+        
+        board[moveIndex] = ai;
+        btnArray[moveIndex].setText(ai);
+        
+    }
+    
+    private double minimax(String[] board, int depth, double alpha, double beta, boolean isMaximizing) {
+        String gameResult = getGameResult(getAllLines());
+        if (gameResult.equals(ai)) {
+            return 10;
+        }
+        if (gameResult.equals(player)) {
+            return -10;
+        }
+        if (gameResult.equals("draw")) {
+            return 0;
+        }
+        if (isMaximizing) {
+            double maxEval = Double.NEGATIVE_INFINITY; 
+            for (int i = 0; i < board.length; i++) {
+                if (board[i] == null) {
+                    board[i] = ai;
+                    maxEval = Math.max(maxEval, minimax(board, depth + 1, alpha, beta, false));
+                    board[i] = null;
+                    alpha = Math.max(alpha, maxEval);
+                    if (beta <= alpha) {
+                        break;
+                    }
+                }
+
+            }
+            return maxEval;
+        }
+        else  {
+            double minEval = Double.POSITIVE_INFINITY;
+            for (int i = 0; i < board.length; i++) {
+                if (board[i] == null) {
+                    board[i] = player;
+                    minEval = Math.min(minEval, minimax(board, depth + 1, alpha, beta, true));
+                    board [i] = null;
+                    beta = Math.min(beta, minEval);
+                    if (beta <= alpha) {
+                        break;
+                    }
+                }
+
+            }
+            return minEval;
         }
     }
 
@@ -42,27 +113,19 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
         for (int i = 0; i < btnArray.length; i++) {
             
             // Runs if the button was clicked
-            if (ae.getActionCommand().equals("" + i)) {
-                
-                // Gets the button's text
-                String currentText = btnArray[i].getText();
-                
-                // Prevents the user from clicking the same button twice
-                if ("XO".contains(currentText)) {
-                    break;
-                }
-                
+            if (ae.getActionCommand().equals("" + i) && board[i] == null) {
+                // Board stuff
+                board[i] = player;
                 // Sets the button text to the correct player using the parity of the turn number
-                btnArray[i].setText("" + playerArray[turnNumber%2]);
+                btnArray[i].setText(player);
                 
-                // Increments the turn number
-                turnNumber++;
+                moveAI();
                 
                 // Stores the game result
                 String gameResult = getGameResult(getAllLines());
                 
                 // Checks if the game has been decided
-                if (gameResult.equals("undecided") == false) {
+                if (!gameResult.equals("undecided")) {
                     
                     // TODO output game result on gui instead of console
                     // Prints out the game result
@@ -72,8 +135,7 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
                     // Resets the board
                     resetBoard();
                     
-                    // Resets the turn number
-                    turnNumber = 0;
+                    moveAI();
                     
                 }
                 
@@ -133,20 +195,21 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NormalTicTacToeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NormalTicTacToeAIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NormalTicTacToeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NormalTicTacToeAIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NormalTicTacToeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NormalTicTacToeAIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NormalTicTacToeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NormalTicTacToeAIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new NormalTicTacToeFrame().setVisible(true);
+                new NormalTicTacToeAIFrame().setVisible(true);
             }
         });
     }
@@ -161,6 +224,7 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
         // Iterates through every index in the array and resets the text
         for (int i = 0; i < btnArray.length; i++) {
             btnArray[i].setText("" + (i+1));
+            board[i] = null;
         }
     }
 
@@ -179,11 +243,8 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
             // Runs if X won
             if (line.equals("XXX")) {
                 
-                // Resets the board
-                resetBoard();
-                
                 // Sets the result string
-                gameResult = "X won!";
+                gameResult = "X";
                 
                 // Indicates there is not a draw
                 draw = false;
@@ -194,11 +255,9 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
             // Runs if O won
             } else if (line.equals("OOO")) {
                 
-                // Resets the board
-                resetBoard();
                 
                 // Sets the result string
-                gameResult = "O won!";
+                gameResult = "O";
                 
                 // Indicates there is not a draw
                 draw = false;
@@ -209,8 +268,13 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
             }
         }
         
-        if (draw == true && turnNumber == 9) {
-            gameResult = "It's a draw!";
+        if (draw == true) {
+            gameResult = "draw";
+            for (int i = 0; i < board.length; i++) {
+                if (board[i] == null) {
+                    gameResult = "undecided";
+                }
+            }
         }
         
         return gameResult;
@@ -222,27 +286,19 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
         // Initializes the array of lines (3 vertical, 3 horizontal, 2 diagonal)
         String[] lines = new String[8];
         
-        // Initializes the array of squares (9 squares on the board)
-        String[] squares = new String[9];
-        
-        // Iterates through all of the squares on the board, putting them into the array
-        for (int i = 0; i < btnArray.length; i++) {
-            squares[i] = btnArray[i].getText();
-        }
-        
         // Setting the horizontal lines
-        lines[0] = squares[0] + squares[1] + squares[2];
-        lines[1] = squares[3] + squares[4] + squares[5];
-        lines[2] = squares[6] + squares[7] + squares[8];
+        lines[0] = board[0] + board[1] + board[2];
+        lines[1] = board[3] + board[4] + board[5];
+        lines[2] = board[6] + board[7] + board[8];
         
         // Setting the vertical lines
-        lines[3] = squares[0] + squares[3] + squares[6];
-        lines[4] = squares[1] + squares[4] + squares[7];
-        lines[5] = squares[2] + squares[5] + squares[8];
+        lines[3] = board[0] + board[3] + board[6];
+        lines[4] = board[1] + board[4] + board[7];
+        lines[5] = board[2] + board[5] + board[8];
         
         // Setting the diagonal lines
-        lines[6] = squares[0] + squares[4] + squares[8];
-        lines[7] = squares[2] + squares[4] + squares[6];
+        lines[6] = board[0] + board[4] + board[8];
+        lines[7] = board[2] + board[4] + board[6];
         
         // Returns the lines
         return lines;
