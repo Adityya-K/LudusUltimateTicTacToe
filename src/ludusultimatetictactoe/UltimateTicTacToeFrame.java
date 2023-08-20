@@ -4,6 +4,7 @@
  */
 package ludusultimatetictactoe;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -31,12 +32,50 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
             btnArray[i].setActionCommand("" + i);
             // Add the frame as the actionlistener (i.e. where the action happens)
             btnArray[i].addActionListener(this);
-            // Add the button to the buttons panel to be visible.
-            panButtons.add(btnArray[i]);
+            
+            btnArray[i].setBackground(new Color(128, 176, 247));
+            
+            if ((i <= 2 && i >= 0) || (i <= 11 && i >= 9) || (i <= 20 && i >= 18)) {
+                panTTTB1.add(btnArray[i]);
+            }
+            
+            if ((i <= 5 && i >= 3) || (i <= 14 && i >= 12) || (i <= 23 && i >= 21)) {
+                panTTTB2.add(btnArray[i]);
+            }
+            
+            if ((i <= 8 && i >= 6) || (i <= 17 && i >= 15) || (i <= 26 && i >= 24)) {
+                panTTTB3.add(btnArray[i]);
+            }
+            
+            if ((i <= 29 && i >= 27) || (i <= 38 && i >= 36) || (i <= 47 && i >= 45)) {
+                panTTTB4.add(btnArray[i]);
+            }
+            
+            if ((i <= 32 && i >= 30) || (i <= 41 && i >= 39) || (i <= 50 && i >= 48)) {
+                panTTTB5.add(btnArray[i]);
+            }
+            
+            if ((i <= 35 && i >= 33) || (i <= 44 && i >= 42) || (i <= 53 && i >= 51)) {
+                panTTTB6.add(btnArray[i]);
+            }
+            
+            if ((i <= 56 && i >= 54) || (i <= 65 && i >= 63) || (i <= 74 && i >= 72)) {
+                panTTTB7.add(btnArray[i]);
+            }
+            
+            if ((i <= 59 && i >= 57) || (i <= 68 && i >= 66) || (i <= 77 && i >= 75)) {
+                panTTTB8.add(btnArray[i]);
+            }
+            
+            if ((i <= 62 && i >= 60) || (i <= 71 && i >= 69) || (i <= 80 && i >= 78)) {
+                panTTTB9.add(btnArray[i]);
+            }
         }
         
         ultBoard = new UltTTT(btnArray);
     }
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,21 +86,95 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         panButtons = new javax.swing.JPanel();
+        panTTTB1 = new javax.swing.JPanel();
+        panTTTB2 = new javax.swing.JPanel();
+        panTTTB3 = new javax.swing.JPanel();
+        panTTTB4 = new javax.swing.JPanel();
+        panTTTB5 = new javax.swing.JPanel();
+        panTTTB6 = new javax.swing.JPanel();
+        panTTTB7 = new javax.swing.JPanel();
+        panTTTB8 = new javax.swing.JPanel();
+        panTTTB9 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        panButtons.setLayout(new java.awt.GridLayout(9, 9));
+        jLabel1.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Ulitmate Tic Tac Toe");
+
+        panButtons.setBackground(new java.awt.Color(0, 0, 153));
+        panButtons.setLayout(new java.awt.GridLayout(3, 3, 20, 20));
+
+        panTTTB1.setBackground(new java.awt.Color(0, 102, 255));
+        panTTTB1.setPreferredSize(new java.awt.Dimension(100, 100));
+        panTTTB1.setLayout(new java.awt.GridLayout(3, 3));
+        panButtons.add(panTTTB1);
+
+        panTTTB2.setBackground(new java.awt.Color(0, 102, 255));
+        panTTTB2.setPreferredSize(new java.awt.Dimension(100, 100));
+        panTTTB2.setLayout(new java.awt.GridLayout(3, 3));
+        panButtons.add(panTTTB2);
+
+        panTTTB3.setBackground(new java.awt.Color(0, 102, 255));
+        panTTTB3.setPreferredSize(new java.awt.Dimension(100, 100));
+        panTTTB3.setLayout(new java.awt.GridLayout(3, 3));
+        panButtons.add(panTTTB3);
+
+        panTTTB4.setBackground(new java.awt.Color(0, 102, 255));
+        panTTTB4.setMinimumSize(new java.awt.Dimension(0, 0));
+        panTTTB4.setPreferredSize(new java.awt.Dimension(100, 100));
+        panTTTB4.setLayout(new java.awt.GridLayout(3, 3));
+        panButtons.add(panTTTB4);
+
+        panTTTB5.setBackground(new java.awt.Color(0, 102, 255));
+        panTTTB5.setMinimumSize(new java.awt.Dimension(0, 0));
+        panTTTB5.setPreferredSize(new java.awt.Dimension(100, 100));
+        panTTTB5.setLayout(new java.awt.GridLayout(3, 3));
+        panButtons.add(panTTTB5);
+
+        panTTTB6.setBackground(new java.awt.Color(0, 102, 255));
+        panTTTB6.setMinimumSize(new java.awt.Dimension(0, 0));
+        panTTTB6.setPreferredSize(new java.awt.Dimension(100, 100));
+        panTTTB6.setLayout(new java.awt.GridLayout(3, 3));
+        panButtons.add(panTTTB6);
+
+        panTTTB7.setBackground(new java.awt.Color(0, 102, 255));
+        panTTTB7.setMinimumSize(new java.awt.Dimension(0, 0));
+        panTTTB7.setPreferredSize(new java.awt.Dimension(100, 100));
+        panTTTB7.setLayout(new java.awt.GridLayout(3, 3));
+        panButtons.add(panTTTB7);
+
+        panTTTB8.setBackground(new java.awt.Color(0, 102, 255));
+        panTTTB8.setMinimumSize(new java.awt.Dimension(0, 0));
+        panTTTB8.setPreferredSize(new java.awt.Dimension(100, 100));
+        panTTTB8.setLayout(new java.awt.GridLayout(3, 3));
+        panButtons.add(panTTTB8);
+
+        panTTTB9.setBackground(new java.awt.Color(0, 102, 255));
+        panTTTB9.setMinimumSize(new java.awt.Dimension(0, 0));
+        panTTTB9.setPreferredSize(new java.awt.Dimension(100, 100));
+        panTTTB9.setLayout(new java.awt.GridLayout(3, 3));
+        panButtons.add(panTTTB9);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 626, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 653, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addComponent(panButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -107,7 +220,17 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel panButtons;
+    private javax.swing.JPanel panTTTB1;
+    private javax.swing.JPanel panTTTB2;
+    private javax.swing.JPanel panTTTB3;
+    private javax.swing.JPanel panTTTB4;
+    private javax.swing.JPanel panTTTB5;
+    private javax.swing.JPanel panTTTB6;
+    private javax.swing.JPanel panTTTB7;
+    private javax.swing.JPanel panTTTB8;
+    private javax.swing.JPanel panTTTB9;
     // End of variables declaration//GEN-END:variables
     // Creating an array for cleaner code (So we don't have to create 86 seperate buttons)
     private JButton[] btnArray = new JButton[81];
