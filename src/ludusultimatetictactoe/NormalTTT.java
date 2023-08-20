@@ -11,14 +11,17 @@ import javax.swing.JButton;
  * @author oweny
  */
 public class NormalTTT {
+
     private JButton[] btnArray = new JButton[9];
+    private int turnNumber = 0;
     
-    public NormalTTT(JButton[] btnArray) 
+    public NormalTTT() {}
+    
+    public NormalTTT(JButton[] btnArray)
     {
         this.btnArray = btnArray;
     }
     
-    // Resets the board
     public void resetBoard() {
         // Iterates through every index in the array and resets the text
         for (int i = 0; i < btnArray.length; i++) {
@@ -27,7 +30,7 @@ public class NormalTTT {
     }
 
     // Returns a string with the winner, if there is a draw or if the game is undecided
-    public String getGameResult(int turnNumber) {
+    public String getGameResult() {
         String[] lines = getAllLines();
         // Initializes the game result string
         String gameResult = "undecided";
@@ -39,13 +42,9 @@ public class NormalTTT {
         for (String line : lines) {
             
             // Runs if X won
-            if (line.equals("XXX")) {
-                
-                // Resets the board
-                resetBoard();
-                
+            if (line.equals("XXX")) {                
                 // Sets the result string
-                gameResult = "X won!";
+                gameResult = "X";
                 
                 // Indicates there is not a draw
                 draw = false;
@@ -54,13 +53,9 @@ public class NormalTTT {
                 break;
             
             // Runs if O won
-            } else if (line.equals("OOO")) {
-                
-                // Resets the board
-                resetBoard();
-                
+            } else if (line.equals("OOO")) {                
                 // Sets the result string
-                gameResult = "O won!";
+                gameResult = "O";
                 
                 // Indicates there is not a draw
                 draw = false;
@@ -72,7 +67,7 @@ public class NormalTTT {
         }
         
         if (draw == true && turnNumber == 9) {
-            gameResult = "It's a draw!";
+            gameResult = "draw";
         }
         
         return gameResult;
@@ -113,7 +108,15 @@ public class NormalTTT {
         return btnArray;
     }
     
+    public int getTurnNumber() {
+        return turnNumber;
+    }
+        
     public void setBtnArray(JButton[] btnArray) {
         this.btnArray = btnArray;
+    }
+    
+    public void setTurnNumber(int turnNumber) {
+        this.turnNumber = turnNumber;
     }
 }

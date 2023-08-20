@@ -25,7 +25,7 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         // A for loop that generates the buttons
         for (int i = 0; i < btnArray.length; i++) {
             // Instantiate the button with a label (in this case i+1)
-            btnArray[i] = new JButton((i + 1) + "");
+            btnArray[i] = new JButton((i) + "");
             // Set an action command that the action performed function will
             // recieve (in this case it is i again)
             btnArray[i].setActionCommand("" + i);
@@ -69,7 +69,7 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
 
     // Handles a button click
     public void actionPerformed(ActionEvent ae) {
-        
+        ultBoard.actionPerformed(ae);
     }
     
     /**
