@@ -13,7 +13,7 @@ import javax.swing.JButton;
  */
 public class UltTTT {
     private NormalTTT[] gameBoard = new NormalTTT[9];
-    private String[] playerArray = {"X", "O"};
+    private final String[] PLAYER_ARRAY = {"X", "O"};
     private int totalTurnNumber = 0;
     private NormalTTT currentSection;
     
@@ -41,7 +41,7 @@ public class UltTTT {
             gameBoard[i] = new NormalTTT(subBtnArray);
         }
         
-        currentSection = gameBoard[6]; // start bottom left
+        currentSection = goAnywhere; // start anywhere
     }
     
     public void calcNextSection(int i)
@@ -58,7 +58,7 @@ public class UltTTT {
         
     public void playerTurn(JButton[] btnArray, int index)
     {
-        btnArray[index].setText("" + playerArray[totalTurnNumber%2]);
+        btnArray[index].setText("" + PLAYER_ARRAY[totalTurnNumber%2]);
         // update total turn number
         totalTurnNumber++;
 
