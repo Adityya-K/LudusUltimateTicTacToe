@@ -16,7 +16,7 @@ public class frmMainMenu extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public frmMainMenu() {
-        setSize(940, 788);
+        setSize(938, 788);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
@@ -39,9 +39,9 @@ public class frmMainMenu extends javax.swing.JFrame {
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(940, 788));
-        setMinimumSize(new java.awt.Dimension(940, 788));
-        setPreferredSize(new java.awt.Dimension(940, 788));
+        setMaximumSize(new java.awt.Dimension(938, 788));
+        setMinimumSize(new java.awt.Dimension(938, 788));
+        setPreferredSize(new java.awt.Dimension(938, 788));
         getContentPane().setLayout(null);
 
         lblTitle.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N

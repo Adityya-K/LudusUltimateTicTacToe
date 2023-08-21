@@ -18,7 +18,7 @@ public class frmRegistration extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public frmRegistration() {
-        setSize(940, 788);
+        setSize(938, 788);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
     }
@@ -45,9 +45,9 @@ public class frmRegistration extends javax.swing.JFrame {
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(940, 788));
-        setMinimumSize(new java.awt.Dimension(940, 788));
-        setPreferredSize(new java.awt.Dimension(940, 788));
+        setMaximumSize(new java.awt.Dimension(938, 788));
+        setMinimumSize(new java.awt.Dimension(938, 788));
+        setPreferredSize(new java.awt.Dimension(938, 788));
         getContentPane().setLayout(null);
         getContentPane().add(txtEmail);
         txtEmail.setBounds(260, 280, 430, 50);

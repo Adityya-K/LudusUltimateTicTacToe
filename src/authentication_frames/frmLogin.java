@@ -18,7 +18,7 @@ public class frmLogin extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public frmLogin() {
-        setSize(940, 820);
+        setSize(938, 820);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
         String createAccount = "<HTML>Don't have an account? <u>Create one!</u></HTML>";
@@ -47,9 +47,9 @@ public class frmLogin extends javax.swing.JFrame {
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(940, 788));
-        setMinimumSize(new java.awt.Dimension(940, 788));
-        setPreferredSize(new java.awt.Dimension(940, 788));
+        setMaximumSize(new java.awt.Dimension(938, 788));
+        setMinimumSize(new java.awt.Dimension(938, 788));
+        setPreferredSize(new java.awt.Dimension(938, 788));
         getContentPane().setLayout(null);
 
         lblForgotPassword.setBackground(new java.awt.Color(255, 255, 255));
