@@ -10,14 +10,13 @@ import javax.swing.JFrame;
  *
  * @author gaudium
  */
-public class frmMainMenu extends javax.swing.JFrame {
+public class frmLeaderboard extends javax.swing.JFrame {
 
     /**
      * Creates new form frmLogin
      */
-    public frmMainMenu() {
-        setSize(940, 820);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public frmLeaderboard() {
+        setSize(940, 728);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
     }
@@ -32,61 +31,56 @@ public class frmMainMenu extends javax.swing.JFrame {
     private void initComponents() {
 
         lblTitle = new javax.swing.JLabel();
-        btnUTTT = new javax.swing.JButton();
-        btnLoginOut = new javax.swing.JButton();
-        btnLeaderboard = new javax.swing.JButton();
-        btnNTTT = new javax.swing.JButton();
+        btnGoToMain = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(940, 850));
+        setMaximumSize(new java.awt.Dimension(940, 788));
         setMinimumSize(new java.awt.Dimension(940, 788));
         setPreferredSize(new java.awt.Dimension(940, 788));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         lblTitle.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("MENU");
+        lblTitle.setText("LEADERBOARD");
         getContentPane().add(lblTitle);
-        lblTitle.setBounds(0, 180, 940, 50);
+        lblTitle.setBounds(0, 150, 940, 50);
 
-        btnUTTT.setBackground(new java.awt.Color(0, 102, 255));
-        btnUTTT.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        btnUTTT.setForeground(new java.awt.Color(255, 255, 255));
-        btnUTTT.setText("Play Ultimate Tic Tac Toe");
-        getContentPane().add(btnUTTT);
-        btnUTTT.setBounds(260, 360, 430, 40);
+        btnGoToMain.setBackground(new java.awt.Color(0, 102, 255));
+        btnGoToMain.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnGoToMain.setForeground(new java.awt.Color(255, 255, 255));
+        btnGoToMain.setText("Go To Main Menu");
+        getContentPane().add(btnGoToMain);
+        btnGoToMain.setBounds(610, 700, 250, 40);
 
-        btnLoginOut.setBackground(new java.awt.Color(0, 102, 255));
-        btnLoginOut.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        btnLoginOut.setForeground(new java.awt.Color(255, 255, 255));
-        btnLoginOut.setText("Log Out");
-        getContentPane().add(btnLoginOut);
-        btnLoginOut.setBounds(260, 510, 430, 40);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
-        btnLeaderboard.setBackground(new java.awt.Color(0, 102, 255));
-        btnLeaderboard.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        btnLeaderboard.setForeground(new java.awt.Color(255, 255, 255));
-        btnLeaderboard.setText("Leaderboard");
-        getContentPane().add(btnLeaderboard);
-        btnLeaderboard.setBounds(260, 440, 430, 40);
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(100, 230, 740, 406);
 
-        btnNTTT.setBackground(new java.awt.Color(0, 102, 255));
-        btnNTTT.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        btnNTTT.setForeground(new java.awt.Color(255, 255, 255));
-        btnNTTT.setText("Play Normal Tic Tac Toe");
-        getContentPane().add(btnNTTT);
-        btnNTTT.setBounds(260, 280, 430, 40);
-
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image_assets/main-menu-background.png"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image_assets/leaderboard-background.png"))); // NOI18N
         lblBackground.setText("jLabel1");
-        lblBackground.setMaximumSize(new java.awt.Dimension(940, 788));
-        lblBackground.setMinimumSize(new java.awt.Dimension(940, 788));
+        lblBackground.setMaximumSize(new java.awt.Dimension(1080, 1080));
+        lblBackground.setMinimumSize(new java.awt.Dimension(940, 840));
         lblBackground.setName(""); // NOI18N
-        lblBackground.setPreferredSize(new java.awt.Dimension(940, 788));
+        lblBackground.setPreferredSize(new java.awt.Dimension(940, 850));
         getContentPane().add(lblBackground);
-        lblBackground.setBounds(-2, -10, 940, 800);
+        lblBackground.setBounds(0, 0, 940, 788);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -108,30 +102,31 @@ public class frmMainMenu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmLeaderboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmLeaderboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmLeaderboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(frmLeaderboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmMainMenu().setVisible(true);
+                new frmLeaderboard().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnLeaderboard;
-    private javax.swing.JButton btnLoginOut;
-    private javax.swing.JButton btnNTTT;
-    private javax.swing.JButton btnUTTT;
+    private javax.swing.JButton btnGoToMain;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables

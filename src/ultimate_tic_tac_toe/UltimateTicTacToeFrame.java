@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 /**
@@ -22,6 +23,9 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
      * Creates new form UltimateTicTacToeFrame
      */
     public UltimateTicTacToeFrame() {
+        setSize(940, 820);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
         addButtonsToPanel(panTTTB1, btnArray[0], 0);
         addButtonsToPanel(panTTTB2, btnArray[1], 1);

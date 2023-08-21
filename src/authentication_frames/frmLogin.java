@@ -4,6 +4,8 @@
  */
 package authentication_frames;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author gaudium
@@ -14,6 +16,10 @@ public class frmLogin extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public frmLogin() {
+        setSize(940, 820);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
+        setVisible(true);
         initComponents();
         String createAccount = "<HTML>Don't have an account? <u>Create one!</u></HTML>";
         String forgotPassword = "<HTML><u>Forgot Password?</u></HTML>";
@@ -41,7 +47,7 @@ public class frmLogin extends javax.swing.JFrame {
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(940, 788));
+        setMaximumSize(new java.awt.Dimension(940, 850));
         setMinimumSize(new java.awt.Dimension(940, 788));
         setPreferredSize(new java.awt.Dimension(940, 788));
         getContentPane().setLayout(null);

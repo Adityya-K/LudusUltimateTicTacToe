@@ -4,6 +4,8 @@
  */
 package authentication_frames;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author gaudium
@@ -14,6 +16,7 @@ public class frmRegistration extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public frmRegistration() {
+        setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
     }
 
@@ -39,7 +42,7 @@ public class frmRegistration extends javax.swing.JFrame {
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(940, 788));
+        setMaximumSize(new java.awt.Dimension(940, 850));
         setMinimumSize(new java.awt.Dimension(940, 788));
         setPreferredSize(new java.awt.Dimension(940, 788));
         getContentPane().setLayout(null);
@@ -112,9 +115,9 @@ public class frmRegistration extends javax.swing.JFrame {
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // TODO add your handling code here:
         // Switching window code
-//        frmLogin loginFrame = new frmLogin();
-//        loginFrame.setVisible(true);
-//        this.dispose();
+        frmLogin loginFrame = new frmLogin();
+        loginFrame.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
