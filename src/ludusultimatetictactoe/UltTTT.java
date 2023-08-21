@@ -13,7 +13,7 @@ public class UltTTT {
     private NormalTTT[] gameBoard = new NormalTTT[9];
     private String currentPlayer = "X";
     private int totalTurnNumber = 0;
-    private int currentSection = -1;
+    private int currentSectionIndex = -1;
         
     public UltTTT(JButton[][] btnArray) 
     {
@@ -24,18 +24,18 @@ public class UltTTT {
     }
     
     public String movePlayer (int boardNumber, int boardIndex) {
-        if (currentSection == -1) {
+        if (currentSectionIndex == -1) {
             gameBoard[boardNumber].setMove(boardIndex, currentPlayer);
             currentPlayer = "O";
-            currentSection = boardIndex;
+            currentSectionIndex = boardIndex;
             return "MoveMade";
         }
         
-        if (((currentSection == boardNumber) || !gameBoard[currentSection].getGameResult().equals("undecided")) && 
+        if (((currentSectionIndex == boardNumber) || !gameBoard[currentSectionIndex].getGameResult().equals("undecided")) && 
                 (gameBoard[boardNumber].setMove(boardIndex, currentPlayer))) {
             currentPlayer = currentPlayer.equals("X") ? "O" : "X";
-            currentSection = boardIndex;
-            System.out.println(currentSection);
+            currentSectionIndex = boardIndex;
+            System.out.println(currentSectionIndex);
             if (!getGameResult().equals("undecided")) {
                 return getGameResult() + "Won";
             }
