@@ -135,4 +135,42 @@ public class NormalTTT {
         return lines;
 
     }
+    
+    public int findWin(String p) {
+        int moveIndex = -1;
+        String [] lines = getAllLines();
+        int winningLineIndex = -1;
+        String winningLine = "";
+        String [] indicesInLines = {"012", "345", "678", "036", "147", "258", "048", "246"};
+                
+        for (int i = 0; i < lines.length; i++) {
+            if (lines[i].equals(p + p + "null") || lines[i].equals(p + "null" + p) || lines[i].equals("null" + p + p)) {
+                winningLineIndex = i;
+                winningLine = lines[i];
+                break;
+            }
+        }
+        
+        if (winningLineIndex != -1) {
+            if (winningLine.equals(p + p + "null")) {
+                moveIndex = Integer.parseInt(String.valueOf(indicesInLines[winningLineIndex].charAt(2)));
+            } else if (winningLine.equals(p + "null" + p)) {
+                moveIndex = Integer.parseInt(String.valueOf(indicesInLines[winningLineIndex].charAt(1)));
+            } else {
+                moveIndex = Integer.parseInt(String.valueOf(indicesInLines[winningLineIndex].charAt(0)));
+            }
+        }
+        
+        return moveIndex;
+    }
+    
+    public String[] getBoard() {
+        return board;
+    }
+    
+    public String getIndex(int i)
+    {
+        return board[i];
+    }
+
 }

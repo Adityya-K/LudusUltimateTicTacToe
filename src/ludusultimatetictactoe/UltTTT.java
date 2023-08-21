@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ludusultimatetictactoe;
+import java.util.ArrayList;
+import java.util.Random;
 import javax.swing.JButton;
 
 /**
@@ -14,15 +16,120 @@ public class UltTTT {
     private String currentPlayer = "X";
     private int totalTurnNumber = 0;
     private int currentSectionIndex = -1;
+    
+    private String playerPiece;
+    private String ai; // None, Easy, Medium
         
-    public UltTTT(JButton[][] btnArray) 
+    public UltTTT(JButton[][] btnArray, String playerPiece, String ai) 
     {
         for (int i = 0; i < gameBoard.length; i++) {
             gameBoard[i] = new NormalTTT(btnArray[i]);
         }
+        
+        this.playerPiece = playerPiece;
+        this.ai = ai;
     }
     
-    public String movePlayer (int boardNumber, int boardIndex) {
+    public int[] moveValidRandom()
+    {
+        Random rand = new Random();
+         
+        NormalTTT subBoard;
+        int boardIndex;
+        
+        if (currentSectionIndex == -1 || !gameBoard[currentSectionIndex].getGameResult().equals("undecided"))
+        {
+            ArrayList<NormalTTT> availableBoards = new ArrayList<>();
+            for (int i = 0; i < 9; i++)
+            {
+                if (gameBoard[i].getGameResult().equals("undecided"))
+                {
+                    availableBoards.add(gameBoard[i]);
+                }
+            }
+            
+            boardIndex = rand.nextInt(availableBoards.size());
+            subBoard = availableBoards.get(boardIndex);
+        }
+        else
+        {
+            boardIndex = currentSectionIndex;
+            subBoard = gameBoard[boardIndex];
+        }
+        
+        ArrayList<Integer> blankIndexes = new ArrayList<>();
+
+        for (int i = 0; i < 9; i++)
+        {
+            if (subBoard.getBoard()[i] == null)
+            {
+                blankIndexes.add(i);
+            }
+        }
+        
+        int subIndex = blankIndexes.get(rand.nextInt(blankIndexes.size()));
+        
+        return new int[]{boardIndex, subIndex};
+    }
+    
+        public int[] findWinningIndex()
+    {
+        int[] boardAndIndex = {-1, -1};
+        
+        if (currentSectionIndex == -1 || !gameBoard[currentSectionIndex].getGameResult().equals("undecided"))
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                int winIndex = gameBoard[i].findWin(currentPlayer);
+                
+                if (gameBoard[i].getGameResult().equals("undecided") && winIndex != -1)
+                {
+                    return new int[]{i, winIndex};
+                }
+            }
+        }
+        else
+        {
+            int winIndex = gameBoard[currentSectionIndex].findWin(currentPlayer);
+            
+            if (winIndex != -1)
+            {
+                return new int[]{currentSectionIndex, winIndex};
+            }
+        }
+        
+        return boardAndIndex;
+    }
+        
+    public void moveAI()
+    {
+        int[] boardAndIndex = {-1, -1};
+        
+        if (ai.equals("Medium"))
+        {
+            boardAndIndex = findWinningIndex();
+            System.out.println("Winning index " + boardAndIndex[0]);
+        }
+        
+        if (ai.equals("Easy") || boardAndIndex[0] == -1) {
+            boardAndIndex = moveValidRandom();
+        }
+        
+        NormalTTT subBoard = gameBoard[boardAndIndex[0]];
+        int index = boardAndIndex[1];
+
+        subBoard.setMove(index, currentPlayer);
+        
+        currentSectionIndex = index;
+        currentPlayer = currentPlayer.equals("X") ? "O" : "X";
+    }
+    
+    public String movePlayer (int boardNumber, int boardIndex) {        
+        if (!currentPlayer.equals(playerPiece) && !ai.equals("None"))
+        {
+            return "NotYourTurn";
+        }
+        
         if (currentSectionIndex == -1) {
             gameBoard[boardNumber].setMove(boardIndex, currentPlayer);
             currentPlayer = "O";
@@ -109,5 +216,13 @@ public class UltTTT {
         for (int i = 0; i < gameBoard.length; i++) {
             gameBoard[i].resetBoard();
         }
+    }
+    
+    public String getAi() {
+        return ai;
+    }
+
+    public String getPlayerPiece() {
+        return playerPiece;
     }
 }
