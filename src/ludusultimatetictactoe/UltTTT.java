@@ -13,35 +13,20 @@ import javax.swing.JButton;
  */
 public class UltTTT {
     private NormalTTT[] gameBoard = new NormalTTT[9];
-    private String[] playerArray = {"X", "O"};
+    private String player1, player2;
     private int totalTurnNumber = 0;
     private NormalTTT currentSection;
     
     final private NormalTTT goAnywhere = new NormalTTT();
     
-    public UltTTT(JButton[] btnArray) 
+    public UltTTT(JButton[][] btnArray, String player1, String player2) 
     {
-        // setup array of normal ttt
-        int[] groupStarts = {0, 3, 6, 27, 30, 33, 54, 57, 60};
-        for (int i = 0; i < 9; i++)
-        {
-            int start = groupStarts[i];
-            JButton[] subBtnArray = new JButton[9];
-            int arraySize = 0;
-            
-            for (int rowOffset = 0; rowOffset <= 18; rowOffset += 9)
-            {
-                for (int columnOffset = 0; columnOffset < 3; columnOffset++)
-                {
-                    subBtnArray[arraySize] = btnArray[start + rowOffset + columnOffset];
-                    arraySize++;
-                }
-            }
-            
-            gameBoard[i] = new NormalTTT(subBtnArray);
+        for (int i = 0; i < gameBoard.length; i++) {
+            gameBoard[i] = new NormalTTT(btnArray[i]);
         }
         
-        currentSection = gameBoard[6]; // start bottom left
+        this.player1 = player1;
+        this.player2 = player2;
     }
     
     public void calcNextSection(int i)

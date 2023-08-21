@@ -8,6 +8,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
@@ -22,57 +23,17 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
      */
     public UltimateTicTacToeFrame() {
         initComponents();
-                
-        // A for loop that generates the buttons
-        for (int i = 0; i < btnArray.length; i++) {
-            // Instantiate the button with a label (in this case i+1)
-            btnArray[i] = new JButton((i) + "");
-            // Set an action command that the action performed function will
-            // recieve (in this case it is i again)
-            btnArray[i].setActionCommand("" + i);
-            // Add the frame as the actionlistener (i.e. where the action happens)
-            btnArray[i].addActionListener(this);
-            
-            btnArray[i].setBackground(new Color(128, 176, 247));
-            
-            if ((i <= 2 && i >= 0) || (i <= 11 && i >= 9) || (i <= 20 && i >= 18)) {
-                panTTTB1.add(btnArray[i]);
-            }
-            
-            if ((i <= 5 && i >= 3) || (i <= 14 && i >= 12) || (i <= 23 && i >= 21)) {
-                panTTTB2.add(btnArray[i]);
-            }
-            
-            if ((i <= 8 && i >= 6) || (i <= 17 && i >= 15) || (i <= 26 && i >= 24)) {
-                panTTTB3.add(btnArray[i]);
-            }
-            
-            if ((i <= 29 && i >= 27) || (i <= 38 && i >= 36) || (i <= 47 && i >= 45)) {
-                panTTTB4.add(btnArray[i]);
-            }
-            
-            if ((i <= 32 && i >= 30) || (i <= 41 && i >= 39) || (i <= 50 && i >= 48)) {
-                panTTTB5.add(btnArray[i]);
-            }
-            
-            if ((i <= 35 && i >= 33) || (i <= 44 && i >= 42) || (i <= 53 && i >= 51)) {
-                panTTTB6.add(btnArray[i]);
-            }
-            
-            if ((i <= 56 && i >= 54) || (i <= 65 && i >= 63) || (i <= 74 && i >= 72)) {
-                panTTTB7.add(btnArray[i]);
-            }
-            
-            if ((i <= 59 && i >= 57) || (i <= 68 && i >= 66) || (i <= 77 && i >= 75)) {
-                panTTTB8.add(btnArray[i]);
-            }
-            
-            if ((i <= 62 && i >= 60) || (i <= 71 && i >= 69) || (i <= 80 && i >= 78)) {
-                panTTTB9.add(btnArray[i]);
-            }
-        }
+        addButtonsToPanel(panTTTB1, btnArray[0], 0);
+        addButtonsToPanel(panTTTB2, btnArray[1], 1);
+        addButtonsToPanel(panTTTB3, btnArray[2], 2);
+        addButtonsToPanel(panTTTB4, btnArray[3], 3);
+        addButtonsToPanel(panTTTB5, btnArray[4], 4);
+        addButtonsToPanel(panTTTB6, btnArray[5], 5);
+        addButtonsToPanel(panTTTB7, btnArray[6], 6);
+        addButtonsToPanel(panTTTB8, btnArray[7], 7);
+        addButtonsToPanel(panTTTB9, btnArray[8], 8);
         
-        ultBoard = new UltTTT(btnArray);
+        ultBoard = new UltTTT(btnArray, "X", "O");
     }
     
     
@@ -180,9 +141,32 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void addButtonsToPanel(JPanel panel, JButton[] btnArray, int index) {
+        for (int i = 0; i < 9; i++) {
+            // Instantiate the button with a label (in this case i+1)
+            btnArray[i] = new JButton();
+            // Set an action command that the action performed function will
+            // recieve (in this case it is i again)
+            btnArray[i].setActionCommand(index + "" + i);
+            // Add the frame as the actionlistener (i.e. where the action happens)
+            btnArray[i].addActionListener(this);
+            
+            btnArray[i].setBackground(new Color(128, 176, 247));
+            
+            panel.add(btnArray[i]);
+        }
+    }
+    
+    
     // Handles a button click
     public void actionPerformed(ActionEvent ae) {
-        ultBoard.actionPerformed(ae);
+        for (int i = 0; i < btnArray.length; i++) {
+            for (int j = 0; j < btnArray[i].length; j++) {
+                if (ae.getActionCommand().equals(i + "" + j)) {
+                    System.out.println(i + " " + j);
+                }
+            }
+        }
     }
     
     /**
@@ -233,5 +217,5 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
     private javax.swing.JPanel panTTTB9;
     // End of variables declaration//GEN-END:variables
     // Creating an array for cleaner code (So we don't have to create 86 seperate buttons)
-    private JButton[] btnArray = new JButton[81];
+    private JButton[][] btnArray = new JButton[9][9];
 }
