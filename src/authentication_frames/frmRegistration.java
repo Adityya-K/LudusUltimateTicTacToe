@@ -9,7 +9,7 @@ package authentication_frames;
  * @author gaudium
  */
 public class frmRegistration extends javax.swing.JFrame {
-
+ 
     /**
      * Creates new form frmLogin
      */
@@ -31,7 +31,7 @@ public class frmRegistration extends javax.swing.JFrame {
         lblEmail = new javax.swing.JLabel();
         lblUsername = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
         lblPassword = new javax.swing.JLabel();
         txtPassword = new javax.swing.JTextField();
         lblConfirmPassword = new javax.swing.JLabel();
@@ -68,12 +68,17 @@ public class frmRegistration extends javax.swing.JFrame {
         getContentPane().add(lblTitle);
         lblTitle.setBounds(0, 50, 940, 50);
 
-        jButton1.setBackground(new java.awt.Color(0, 102, 255));
-        jButton1.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Register new account");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(250, 600, 430, 40);
+        btnRegister.setBackground(new java.awt.Color(0, 102, 255));
+        btnRegister.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnRegister.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegister.setText("Register new account");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRegister);
+        btnRegister.setBounds(250, 600, 430, 40);
 
         lblPassword.setBackground(new java.awt.Color(255, 255, 255));
         lblPassword.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
@@ -103,6 +108,14 @@ public class frmRegistration extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        // TODO add your handling code here:
+        // Switching window code
+//        frmLogin loginFrame = new frmLogin();
+//        loginFrame.setVisible(true);
+//        this.dispose();
+    }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -141,7 +154,7 @@ public class frmRegistration extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnRegister;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblConfirmPassword;
     private javax.swing.JLabel lblEmail;
