@@ -1,6 +1,8 @@
 
-package ludusultimatetictactoe;
+package user;
 
+import user.SHAEncryption;
+import user.config;
 import java.util.*;
 import java.text.DateFormat;  
 import java.text.SimpleDateFormat;  
@@ -58,13 +60,13 @@ public class User {
         this.losses = losses;
     }
 
-    public Board getCurrentGame() {
-        return currentGame;
-    }
-
-    public void setCurrentGame(Board currentGame) {
-        this.currentGame = currentGame;
-    }
+//    public Board getCurrentGame() {
+//        return currentGame;
+//    }
+//
+//    public void setCurrentGame(Board currentGame) {
+//        this.currentGame = currentGame;
+//    }
 
     public int getGamesPlayed() {
         return gamesPlayed;
@@ -89,7 +91,7 @@ public class User {
     private int losses;
     private int gamesPlayed;
     private String dateJoined;
-    private Board currentGame; // TODO
+    // private Board currentGame; // TODO
     
     // Basic user when regristering.
     public User(String username, String password) {

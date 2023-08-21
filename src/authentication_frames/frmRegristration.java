@@ -1,6 +1,9 @@
 
-package ludusultimatetictactoe;
+package authentication_frames;
 
+import user.UserDatabase;
+import user.User;
+import user.Validation;
 import java.util.*;
 /**
  *

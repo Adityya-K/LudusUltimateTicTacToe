@@ -1,4 +1,4 @@
-package ludusultimatetictactoe;
+package user;
 
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;

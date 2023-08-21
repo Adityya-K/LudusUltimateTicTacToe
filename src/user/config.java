@@ -1,5 +1,5 @@
 
-package ludusultimatetictactoe;
+package user;
 
 
 public class config {

@@ -1,4 +1,4 @@
-package ludusultimatetictactoe;
+package user;
 
 
 import java.nio.charset.StandardCharsets;
