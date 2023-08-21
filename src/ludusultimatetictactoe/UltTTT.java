@@ -108,7 +108,7 @@ public class UltTTT {
         if (ai.equals("Medium"))
         {
             boardAndIndex = findWinningIndex();
-            System.out.println("Winning index " + boardAndIndex[0]);
+            System.out.println("Winning board " + boardAndIndex[0]);
         }
         
         if (ai.equals("Easy") || boardAndIndex[0] == -1) {
