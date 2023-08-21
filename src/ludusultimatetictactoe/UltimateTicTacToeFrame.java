@@ -164,7 +164,6 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
             for (int j = 0; j < btnArray[i].length; j++) {
                 if (ae.getActionCommand().equals(i + "" + j)) {
                     System.out.println(ultBoard.movePlayer(i, j));
-                    ultBoard.resetBoard();
                 }
             }
         }
