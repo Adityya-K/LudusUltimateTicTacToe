@@ -16,7 +16,7 @@ public class frmLeaderboard extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public frmLeaderboard() {
-        setSize(940, 728);
+        setSize(940, 788);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
     }
@@ -55,7 +55,7 @@ public class frmLeaderboard extends javax.swing.JFrame {
         btnGoToMain.setForeground(new java.awt.Color(255, 255, 255));
         btnGoToMain.setText("Go To Main Menu");
         getContentPane().add(btnGoToMain);
-        btnGoToMain.setBounds(610, 700, 250, 40);
+        btnGoToMain.setBounds(590, 600, 250, 40);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -71,12 +71,12 @@ public class frmLeaderboard extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(100, 230, 740, 406);
+        jScrollPane1.setBounds(100, 230, 740, 350);
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image_assets/leaderboard-background.png"))); // NOI18N
         lblBackground.setText("jLabel1");
-        lblBackground.setMaximumSize(new java.awt.Dimension(1080, 1080));
-        lblBackground.setMinimumSize(new java.awt.Dimension(940, 840));
+        lblBackground.setMaximumSize(new java.awt.Dimension(940, 788));
+        lblBackground.setMinimumSize(new java.awt.Dimension(940, 788));
         lblBackground.setName(""); // NOI18N
         lblBackground.setPreferredSize(new java.awt.Dimension(940, 850));
         getContentPane().add(lblBackground);

@@ -49,7 +49,7 @@ public class frmLogin extends javax.swing.JFrame {
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(940, 850));
+        setMaximumSize(new java.awt.Dimension(940, 788));
         setMinimumSize(new java.awt.Dimension(940, 788));
         setPreferredSize(new java.awt.Dimension(940, 788));
         getContentPane().setLayout(null);
@@ -61,7 +61,7 @@ public class frmLogin extends javax.swing.JFrame {
         lblForgotPassword.setText("Forgot Password?");
         lblForgotPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(lblForgotPassword);
-        lblForgotPassword.setBounds(0, 580, 940, 24);
+        lblForgotPassword.setBounds(0, 580, 940, 26);
 
         lblCreateAccount.setBackground(new java.awt.Color(255, 255, 255));
         lblCreateAccount.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
@@ -70,7 +70,7 @@ public class frmLogin extends javax.swing.JFrame {
         lblCreateAccount.setText("Create an account");
         lblCreateAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(lblCreateAccount);
-        lblCreateAccount.setBounds(0, 540, 940, 24);
+        lblCreateAccount.setBounds(0, 540, 940, 26);
         getContentPane().add(txtPassword);
         txtPassword.setBounds(260, 400, 430, 50);
         getContentPane().add(txtUsername);
@@ -81,13 +81,13 @@ public class frmLogin extends javax.swing.JFrame {
         lblPassword.setForeground(new java.awt.Color(255, 255, 255));
         lblPassword.setText("Password:");
         getContentPane().add(lblPassword);
-        lblPassword.setBounds(260, 340, 150, 32);
+        lblPassword.setBounds(260, 340, 150, 33);
 
         lblUsername.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         lblUsername.setForeground(new java.awt.Color(255, 255, 255));
         lblUsername.setText("Username:");
         getContentPane().add(lblUsername);
-        lblUsername.setBounds(260, 220, 150, 32);
+        lblUsername.setBounds(260, 220, 150, 33);
 
         lblTitle.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));

@@ -18,6 +18,7 @@ public class frmRegistration extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public frmRegistration() {
+        setSize(940, 788);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
     }
@@ -44,7 +45,7 @@ public class frmRegistration extends javax.swing.JFrame {
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(940, 850));
+        setMaximumSize(new java.awt.Dimension(940, 788));
         setMinimumSize(new java.awt.Dimension(940, 788));
         setPreferredSize(new java.awt.Dimension(940, 788));
         getContentPane().setLayout(null);
@@ -58,13 +59,13 @@ public class frmRegistration extends javax.swing.JFrame {
         lblEmail.setForeground(new java.awt.Color(255, 255, 255));
         lblEmail.setText("Email:");
         getContentPane().add(lblEmail);
-        lblEmail.setBounds(260, 240, 150, 32);
+        lblEmail.setBounds(260, 240, 150, 33);
 
         lblUsername.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         lblUsername.setForeground(new java.awt.Color(255, 255, 255));
         lblUsername.setText("Username:");
         getContentPane().add(lblUsername);
-        lblUsername.setBounds(260, 130, 150, 32);
+        lblUsername.setBounds(260, 130, 150, 33);
 
         lblTitle.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
@@ -90,7 +91,7 @@ public class frmRegistration extends javax.swing.JFrame {
         lblPassword.setForeground(new java.awt.Color(255, 255, 255));
         lblPassword.setText("Password:");
         getContentPane().add(lblPassword);
-        lblPassword.setBounds(260, 350, 150, 32);
+        lblPassword.setBounds(260, 350, 150, 33);
         getContentPane().add(txtPassword);
         txtPassword.setBounds(260, 390, 430, 50);
 
@@ -99,7 +100,7 @@ public class frmRegistration extends javax.swing.JFrame {
         lblConfirmPassword.setForeground(new java.awt.Color(255, 255, 255));
         lblConfirmPassword.setText("Confirm Password:");
         getContentPane().add(lblConfirmPassword);
-        lblConfirmPassword.setBounds(260, 460, 250, 32);
+        lblConfirmPassword.setBounds(260, 460, 250, 33);
         getContentPane().add(txtConfirmPassword);
         txtConfirmPassword.setBounds(260, 500, 430, 50);
 
@@ -109,7 +110,7 @@ public class frmRegistration extends javax.swing.JFrame {
         lblBackground.setMinimumSize(new java.awt.Dimension(940, 788));
         lblBackground.setPreferredSize(new java.awt.Dimension(940, 788));
         getContentPane().add(lblBackground);
-        lblBackground.setBounds(0, 0, 940, 790);
+        lblBackground.setBounds(0, 0, 940, 788);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
