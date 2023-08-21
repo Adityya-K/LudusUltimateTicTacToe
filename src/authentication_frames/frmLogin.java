@@ -19,9 +19,7 @@ public class frmLogin extends javax.swing.JFrame {
      */
     public frmLogin() {
         setSize(940, 820);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
-        setVisible(true);
         initComponents();
         String createAccount = "<HTML>Don't have an account? <u>Create one!</u></HTML>";
         String forgotPassword = "<HTML><u>Forgot Password?</u></HTML>";
