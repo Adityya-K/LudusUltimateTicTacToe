@@ -18,6 +18,7 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
     // Board
     String[] board = new String[9];
     
+    String difficulty = "easy";
     String ai = "X";
     String player = "O";
     
@@ -39,6 +40,15 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         if (ai.equals("X")) {
             moveAI();
         }
+    }
+    
+    private void moveEasyComputer() {
+        int moveIndex;
+        do {
+            moveIndex = (int) (Math.random() * 9);
+        } while (board[moveIndex] != null);
+        board[moveIndex] = ai;
+        btnArray[moveIndex].setText(ai);
     }
     
     private void moveAI() {
@@ -119,7 +129,11 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                 // Sets the button text to the correct player using the parity of the turn number
                 btnArray[i].setText(player);
                 
-                moveAI();
+                if (difficulty.equals("easy")) {
+                    moveEasyComputer();
+                } else if (difficulty.equals("hard")) {
+                    moveAI();
+                }
                 
                 // Stores the game result
                 String gameResult = getGameResult(getAllLines());
@@ -135,7 +149,11 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                     // Resets the board
                     resetBoard();
                     
-                    moveAI();
+                    if (difficulty.equals("easy")) {
+                        moveEasyComputer();
+                    } else if (difficulty.equals("hard")) {
+                        moveAI();
+                    }
                     
                 }
                 
@@ -223,7 +241,7 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
     private void resetBoard() {
         // Iterates through every index in the array and resets the text
         for (int i = 0; i < btnArray.length; i++) {
-            btnArray[i].setText("" + (i+1));
+            btnArray[i].setText(" ");
             board[i] = null;
         }
     }
@@ -304,4 +322,5 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         return lines;
         
     }
+    
 }
