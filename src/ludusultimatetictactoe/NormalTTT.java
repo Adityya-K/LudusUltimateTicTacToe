@@ -36,13 +36,8 @@ public class NormalTTT {
     public void resetBoard() {
         // Iterates through every index in the array and resets the text
         for (int i = 0; i < btnArray.length; i++) {
-<<<<<<< HEAD
             board[i] = null;
             btnArray[i].setText("");
-=======
-            btnArray[i].setBackground(UltimateTicTacToeFrame.BACKGROUND_COLOR);
-            btnArray[i].setText("" + (i+1));
->>>>>>> main
         }
     }
     
