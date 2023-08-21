@@ -18,7 +18,7 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
     // Board
     String[] board = new String[9];
     
-    String difficulty = "easy";
+    String difficulty = "medium";
     String ai = "X";
     String player = "O";
     
@@ -49,6 +49,45 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         } while (board[moveIndex] != null);
         board[moveIndex] = ai;
         btnArray[moveIndex].setText(ai);
+    }
+    
+    private void moveMediumComputer() {
+        int moveIndex = findWin();
+        if (moveIndex == -1) {
+            do {
+                moveIndex = (int) (Math.random() * 9);
+            } while (board[moveIndex] != null);
+        }
+        board[moveIndex] = ai;
+        btnArray[moveIndex].setText(ai);
+    }
+    
+    private int findWin() {
+        int moveIndex = -1;
+        String [] lines = getAllLines();
+        int winningLineIndex = -1;
+        String winningLine = "";
+        String [] indicesInLines = {"012", "345", "678", "036", "147", "258", "048", "246"};
+        
+        for (int i = 0; i < lines.length; i++) {
+            if (lines[i].equals("XXnull") || lines[i].equals("XnullX") || lines[i].equals("nullXX")) {
+                winningLineIndex = i;
+                winningLine = lines[i];
+                break;
+            }
+        }
+        
+        if (winningLineIndex != -1) {
+            if (winningLine.equals("XXnull")) {
+                moveIndex = Integer.parseInt(String.valueOf(indicesInLines[winningLineIndex].charAt(2)));
+            } else if (winningLine.equals("XnullX")) {
+                moveIndex = Integer.parseInt(String.valueOf(indicesInLines[winningLineIndex].charAt(1)));
+            } else {
+                moveIndex = Integer.parseInt(String.valueOf(indicesInLines[winningLineIndex].charAt(0)));
+            }
+        }
+        
+        return moveIndex;
     }
     
     private void moveAI() {
@@ -131,6 +170,8 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                 
                 if (difficulty.equals("easy")) {
                     moveEasyComputer();
+                } else if (difficulty.equals("medium")) {
+                    moveMediumComputer();
                 } else if (difficulty.equals("hard")) {
                     moveAI();
                 }
@@ -151,6 +192,8 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                     
                     if (difficulty.equals("easy")) {
                         moveEasyComputer();
+                    } else if (difficulty.equals("medium")) {
+                        moveMediumComputer();
                     } else if (difficulty.equals("hard")) {
                         moveAI();
                     }
