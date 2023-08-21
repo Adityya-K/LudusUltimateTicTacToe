@@ -33,7 +33,7 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         addButtonsToPanel(panTTTB8, btnArray[7], 7);
         addButtonsToPanel(panTTTB9, btnArray[8], 8);
         
-        ultBoard = new UltTTT(btnArray, "X", "O");
+        ultBoard = new UltTTT(btnArray);
     }
     
     
@@ -163,7 +163,8 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         for (int i = 0; i < btnArray.length; i++) {
             for (int j = 0; j < btnArray[i].length; j++) {
                 if (ae.getActionCommand().equals(i + "" + j)) {
-                    System.out.println(i + " " + j);
+                    System.out.println(ultBoard.movePlayer(i, j));
+                    ultBoard.resetBoard();
                 }
             }
         }

@@ -22,8 +22,9 @@ public class NormalTTT {
     }
     
     public boolean setMove(int index, String player) {
-        if (board[index] == null) {
+        if (board[index] == null && getGameResult().equals("undecided")) {
             board[index] = player;
+            btnArray[index].setText(player);
             return true;
         }
         else {
@@ -38,13 +39,9 @@ public class NormalTTT {
             btnArray[i].setText("");
         }
     }
-    
-    public String getBoardResult() {
-        return getGameResult();
-    }
 
     // Returns a string with the winner, if there is a draw or if the game is undecided
-    private String getGameResult() {
+    public String getGameResult() {
         String[] lines = getAllLines();
         // Initializes the game result string
         String gameResult = "undecided";

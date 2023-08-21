@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ludusultimatetictactoe;
-
-import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 
 /**
@@ -13,125 +11,43 @@ import javax.swing.JButton;
  */
 public class UltTTT {
     private NormalTTT[] gameBoard = new NormalTTT[9];
-    private String player1, player2;
+    private String currentPlayer = "X";
     private int totalTurnNumber = 0;
-    private NormalTTT currentSection;
-    
-    final private NormalTTT goAnywhere = new NormalTTT();
-    
-    public UltTTT(JButton[][] btnArray, String player1, String player2) 
+    private int currentSection = -1;
+        
+    public UltTTT(JButton[][] btnArray) 
     {
         for (int i = 0; i < gameBoard.length; i++) {
             gameBoard[i] = new NormalTTT(btnArray[i]);
         }
         
-        this.player1 = player1;
-        this.player2 = player2;
     }
     
-    public void calcNextSection(int i)
-    {
-        // target section's game has already ended
-        if (!gameBoard[i].getGameResult().equals("undecided"))
-        {
-            currentSection = goAnywhere; // put a blank ttt board to symbolize you can go anywhere
-            return;
+    public String movePlayer (int boardNumber, int boardIndex) {
+        if (currentSection == -1) {
+            gameBoard[boardNumber].setMove(boardIndex, currentPlayer);
+            currentPlayer = "O";
+            currentSection = boardIndex;
+            return "MoveMade";
         }
         
-        currentSection = gameBoard[i];
-    }
-        
-    // this method's contents are basically repeated twice
-    // but im too braindead to fix it rn
-    public void actionPerformed(ActionEvent ae) {
-        if (currentSection == goAnywhere)
-        {
-            Boolean madeMove = false;
-            
-            for (int i = 0; i < 9; i++)
-            {
-                NormalTTT checkSection = gameBoard[i];
-                if (!checkSection.getGameResult().equals("undecided"))
-                {
-                    continue;
-                }
-                
-                JButton[] btnArray = checkSection.getBtnArray();
-                // only look at the buttons in the current array
-
-                for (int j = 0; j < btnArray.length; j++) {
-                    // Runs if the button was clicked
-                    String currentText = btnArray[j].getText();
-                    if (ae.getActionCommand().equals(currentText)) {
-                        // Prevents the user from clicking the same button twice
-                        if ("XO".contains(currentText)) {
-                            break;
-                        }
-
-                        btnArray[j].setText("" + playerArray[totalTurnNumber%2]);
-                        // update total turn number
-                        totalTurnNumber++;
-
-                        //update subsection turn number
-                        checkSection.setTurnNumber(checkSection.getTurnNumber() + 1);
-
-                        //TODO: Highlight section to show that the player has won the section
-
-                        calcNextSection(j);
-
-                        madeMove = true;
-                        break;
-                    }
-                }
-                
-                if (madeMove)
-                {
-                    break;
-                }
+        if (((currentSection == boardNumber) || !gameBoard[currentSection].getGameResult().equals("undecided")) && 
+                (gameBoard[boardNumber].setMove(boardIndex, currentPlayer))) {
+            currentPlayer = currentPlayer.equals("X") ? "O" : "X";
+            currentSection = boardIndex;
+            System.out.println(currentSection);
+            if (!getGameResult().equals("undecided")) {
+                return getGameResult() + "Won";
             }
-        }
-        else
-        {
-            JButton[] btnArray = currentSection.getBtnArray();
-            // only look at the buttons in the current array
-
-            for (int i = 0; i < btnArray.length; i++) {
-                // Runs if the button was clicked
-                String currentText = btnArray[i].getText();
-                if (ae.getActionCommand().equals(currentText)) {
-
-                    // Prevents the user from clicking the same button twice
-                    if ("XO".contains(currentText)) {
-                        break;
-                    }
-
-                    btnArray[i].setText("" + playerArray[totalTurnNumber%2]);
-                    // update total turn number
-                    totalTurnNumber++;
-
-                    //update subsection turn number
-                    currentSection.setTurnNumber(currentSection.getTurnNumber() + 1);
-
-                    //TODO: Highlight section to show that the player has won the section
-
-                    calcNextSection(i);
-                    
-                    break;
-                }
-            }
-        }
-        
-        String gameResult = getGameResult();
-        
-        if (!gameResult.equals("undecided"))
-        {
-            System.out.println(gameResult);
-            resetBoard();
+            return "MoveMade";
+        } 
+        else {
+            return "Invalid";
         }
     }
     
     // Returns a string with the winner, if there is a draw or if the game is undecided
-    public String getGameResult() {
+    private String getGameResult() {
         String[] lines = getAllLines();
         String gameResult = "undecided";
         
@@ -152,38 +68,37 @@ public class UltTTT {
             }
         }
         
-        if (draw == true && totalTurnNumber == 81) {
-            gameResult = "-";
+        for( int i = 0; i < gameBoard.length; i++ ) {
+            if (gameBoard[i].getGameResult().equals("undecided")) {
+                draw = false;
+                break;
+            }
+        }
+        
+        if (draw) {
+            return "draw";
         }
         
         return gameResult;
     }
     
-    public String[] getAllLines() {
+    private String[] getAllLines() {
         // Initializes the array of lines (3 vertical, 3 horizontal, 2 diagonal)
         String[] lines = new String[8];
 
-        // Initializes the array of squares (9 squares on the board)
-        String[] squares = new String[9];
-
-        // Iterates through all of the squares on the board, putting them into the array
-        for (int i = 0; i < gameBoard.length; i++) {
-            squares[i] = gameBoard[i].getGameResult();
-        }
-
         // Setting the horizontal lines
-        lines[0] = squares[0] + squares[1] + squares[2];
-        lines[1] = squares[3] + squares[4] + squares[5];
-        lines[2] = squares[6] + squares[7] + squares[8];
+        lines[0] = gameBoard[0].getGameResult() + gameBoard[1].getGameResult() + gameBoard[2].getGameResult();
+        lines[1] = gameBoard[3].getGameResult() + gameBoard[4].getGameResult() + gameBoard[5].getGameResult();
+        lines[2] = gameBoard[6].getGameResult() + gameBoard[7].getGameResult() + gameBoard[8].getGameResult();
 
         // Setting the vertical lines
-        lines[3] = squares[0] + squares[3] + squares[6];
-        lines[4] = squares[1] + squares[4] + squares[7];
-        lines[5] = squares[2] + squares[5] + squares[8];
+        lines[3] = gameBoard[0].getGameResult() + gameBoard[3].getGameResult() + gameBoard[6].getGameResult();
+        lines[4] = gameBoard[1].getGameResult() + gameBoard[4].getGameResult() + gameBoard[7].getGameResult();
+        lines[5] = gameBoard[2].getGameResult() + gameBoard[5].getGameResult() + gameBoard[8].getGameResult();
 
         // Setting the diagonal lines
-        lines[6] = squares[0] + squares[4] + squares[8];
-        lines[7] = squares[2] + squares[4] + squares[6];
+        lines[6] = gameBoard[0].getGameResult() + gameBoard[4].getGameResult() + gameBoard[8].getGameResult();
+        lines[7] = gameBoard[2].getGameResult() + gameBoard[4].getGameResult() + gameBoard[6].getGameResult();
 
         // Returns the lines
         return lines;
