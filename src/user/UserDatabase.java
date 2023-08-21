@@ -19,16 +19,16 @@ username,encryptedPassword,rating,wins,losses,currentGame,gamesPlayed,dateJoined
 
 // need to user .loadDatabase(); before adding user
 public class UserDatabase {
-    private String USER_DATABASE_FILE_PATH = "userDatabase.txt";
-    private String userDatabaseEncryptionKey = config.userDataBaseEncryptionKey;
+    private static String USER_DATABASE_FILE_PATH = "userDatabase.txt";
+    private static String userDatabaseEncryptionKey = config.userDataBaseEncryptionKey;
 
-    public ArrayList<User> getUserDatabase() {
+    public static ArrayList<User> getUserDatabase() {
         return userDatabase;
     }
-    private ArrayList<User> userDatabase = new ArrayList<>();
+    private static ArrayList<User> userDatabase = new ArrayList<>();
     
     // loads the database from the file, returns done if done
-    public String loadDatabase() {
+    public static String loadDatabase() {
         String fileData = "";
         try{
             BufferedReader reader = new BufferedReader(new FileReader(USER_DATABASE_FILE_PATH));
@@ -65,7 +65,7 @@ public class UserDatabase {
         return "done";
     }
     
-    public User getUser(String userName, String password) {
+    public static User getUser(String userName, String password) {
         // perform linear search on user database.
         // todo hash maps instead
         for (User user: userDatabase) {
@@ -81,19 +81,29 @@ public class UserDatabase {
         return null;
     }
     
+    public static boolean existsUser(String userName) {
+        // perform linear search on user database.
+        // todo hash maps instead
+        for (User user: userDatabase) {
+            if (user.getUsername().equals(userName)) {
+                return true;
+            }
+        }
+        // otherwise return null.
+        return false;
+    }    
     // also saves the user DB
-    public User addUser(String userName, String password) {
-        User newUser = new User(userName, password);
+    public static User addUser(String userName, String password, String email) {
+        User newUser = new User(userName, password, email);
         userDatabase.add(newUser);
         saveUserDatabase(userDatabase);
         return newUser;
-        
     }
 
     public UserDatabase() {
     }
     
-    public void saveUserDatabase(ArrayList<User> users) {
+    public static void saveUserDatabase(ArrayList<User> users) {
         String fileData = "";
         
         for (User user: users) {
@@ -114,13 +124,13 @@ public class UserDatabase {
         }
     }
 
-    public String decryptDataBase (String encryptedDatabase) {
+    public static String decryptDataBase (String encryptedDatabase) {
         AESEncryption aes = new AESEncryption();
         String decryptedDatabase = aes.decrypt(encryptedDatabase, userDatabaseEncryptionKey);
         return decryptedDatabase;
     }
     
-    public String encryptDataBase (String database) {
+    public static String encryptDataBase (String database) {
         AESEncryption aes = new AESEncryption();
         String encryptedDatabase = aes.encrypt(database, userDatabaseEncryptionKey);
         return encryptedDatabase;

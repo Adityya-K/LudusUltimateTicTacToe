@@ -13,12 +13,20 @@ import java.text.SimpleDateFormat;
  */
 
 /*
-username,encryptedPassword,rating,wins,losses,currentGame,gamesPlayed,dateJoined
+username,encryptedPassword,rating,wins,losses,currentGame,gamesPlayed,dateJoined, email
 */
 
 public class User {
     
-    
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getUsername() {
         return username;
@@ -94,7 +102,7 @@ public class User {
     // private Board currentGame; // TODO
     
     // Basic user when regristering.
-    public User(String username, String password) {
+    public User(String username, String password, String email) {
         this.username = username;
         // sha256 encrypt the passowrd
         this.encryptedPassword = SHAEncryption.getSHA256Hash(password);
@@ -111,7 +119,7 @@ public class User {
     
     // User object constructor with all attributes
 
-    public User(String username, double rating, String encryptedPassword, int wins, int losses, int gamesPlayed, String dateJoined) {
+    public User(String username, double rating, String encryptedPassword, int wins, int losses, int gamesPlayed, String dateJoined, String email) {
         this.username = username;
         this.rating = rating;
         this.encryptedPassword = encryptedPassword;
@@ -119,6 +127,7 @@ public class User {
         this.losses = losses;
         this.gamesPlayed = gamesPlayed;
         this.dateJoined = dateJoined;
+        this.email = email;
     }
     
     // user object constructor when loaded from database
@@ -134,12 +143,13 @@ public class User {
         this.losses = Integer.parseInt(attributes[4]);
         this.gamesPlayed = Integer.parseInt(attributes[5]);
         this.dateJoined = attributes[6];
+        this.email = attributes[7];
     }
 
     @Override
     public String toString() {
         // escape commas if user decides to enter commas as part of their username
-        return username + "," + encryptedPassword + "," + rating + "," + wins + "," + losses + "," + gamesPlayed + "," + dateJoined;
+        return username + "," + encryptedPassword + "," + rating + "," + wins + "," + losses + "," + gamesPlayed + "," + dateJoined + "," + email;
     }
     
 }
