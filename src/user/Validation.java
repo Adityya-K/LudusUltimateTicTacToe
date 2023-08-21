@@ -13,4 +13,13 @@ public class Validation {
         }
         
     }
+    
+    public static String validateEmail(String email) {
+        if (!email.contains(",")) {
+            return "ok";
+        } else {
+            return "Email contains commas. No commas allowed.";
+        }
+        
+    }    
 }

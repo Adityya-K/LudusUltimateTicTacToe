@@ -10,6 +10,8 @@ import javax.swing.JFrame;
  *
  * @author gaudium
  */
+import user.*;
+
 public class frmRegistration extends javax.swing.JFrame {
  
     /**
@@ -56,13 +58,13 @@ public class frmRegistration extends javax.swing.JFrame {
         lblEmail.setForeground(new java.awt.Color(255, 255, 255));
         lblEmail.setText("Email:");
         getContentPane().add(lblEmail);
-        lblEmail.setBounds(260, 240, 150, 33);
+        lblEmail.setBounds(260, 240, 150, 32);
 
         lblUsername.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         lblUsername.setForeground(new java.awt.Color(255, 255, 255));
         lblUsername.setText("Username:");
         getContentPane().add(lblUsername);
-        lblUsername.setBounds(260, 130, 150, 33);
+        lblUsername.setBounds(260, 130, 150, 32);
 
         lblTitle.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
@@ -88,7 +90,7 @@ public class frmRegistration extends javax.swing.JFrame {
         lblPassword.setForeground(new java.awt.Color(255, 255, 255));
         lblPassword.setText("Password:");
         getContentPane().add(lblPassword);
-        lblPassword.setBounds(260, 350, 150, 33);
+        lblPassword.setBounds(260, 350, 150, 32);
         getContentPane().add(txtPassword);
         txtPassword.setBounds(260, 390, 430, 50);
 
@@ -97,7 +99,7 @@ public class frmRegistration extends javax.swing.JFrame {
         lblConfirmPassword.setForeground(new java.awt.Color(255, 255, 255));
         lblConfirmPassword.setText("Confirm Password:");
         getContentPane().add(lblConfirmPassword);
-        lblConfirmPassword.setBounds(260, 460, 250, 33);
+        lblConfirmPassword.setBounds(260, 460, 250, 32);
         getContentPane().add(txtConfirmPassword);
         txtConfirmPassword.setBounds(260, 500, 430, 50);
 
@@ -111,9 +113,37 @@ public class frmRegistration extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    String error;
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        // TODO add your handling code here:
+        error = "";
+        String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        String confirmPassword = txtConfirmPassword.getText();
+        String email = txtEmail.getText();
+        
+        String userValidation = Validation.validateUserName(username);
+        String emailValidation = Validation.validateEmail(email);
+        // ensure username is OK.
+        if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || email.isEmpty()) {
+            error = "Some fields are empty";
+        } else if (!password.equals(confirmPassword)) {
+            error = "Passwords and confirmation password don't match";
+        } else if (!userValidation.equals("ok")) {
+            error = userValidation;
+        } else if (!emailValidation.equals("ok")){
+            error = emailValidation;
+        }
+        else if (UserDatabase.existsUser(username) == true) {
+            error = "Username already exists";
+        }
+        else {
+            User currentUser = UserDatabase.addUser(username, password, email);
+            System.out.println(currentUser.toString());
+            // open game jframe
+        }
+        //lblErrors.setText(error);        
+
+// TODO add your handling code here:
         // Switching window code
         frmLogin loginFrame = new frmLogin();
         loginFrame.setVisible(true);
