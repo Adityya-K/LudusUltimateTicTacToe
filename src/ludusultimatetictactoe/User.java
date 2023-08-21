@@ -1,4 +1,3 @@
-
 package ludusultimatetictactoe;
 
 import java.util.*;
@@ -11,13 +10,23 @@ import java.text.SimpleDateFormat;
  */
 
 /*
-username,encryptedPassword,rating,wins,losses,currentGame,gamesPlayed,dateJoined
+username,encryptedPassword,rating,wins,losses,currentGame,gamesPlayed,dateJoined,email,games
 */
 
 public class User {
     
     
-
+    private String username;
+    private double rating;
+    private String encryptedPassword;
+    private int wins;
+    private int losses;
+    private int gamesPlayed;
+    private String dateJoined;
+    private String email;
+    //private ArrayList<Game> games; // TODO
+    
+    
     public String getUsername() {
         return username;
     }
@@ -58,14 +67,6 @@ public class User {
         this.losses = losses;
     }
 
-    public Board getCurrentGame() {
-        return currentGame;
-    }
-
-    public void setCurrentGame(Board currentGame) {
-        this.currentGame = currentGame;
-    }
-
     public int getGamesPlayed() {
         return gamesPlayed;
     }
@@ -82,23 +83,44 @@ public class User {
         this.dateJoined = dateJoined;
     }
     
-    private String username;
-    private double rating;
-    private String encryptedPassword;
-    private int wins;
-    private int losses;
-    private int gamesPlayed;
-    private String dateJoined;
-    private Board currentGame; // TODO
+    /*
+    public void addGame(Game game) {
+        games.add(game);
+    }
+    */
+    
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    /*
+    public ArrayList<Game> getGames() {
+        return games;
+    }
+    
+    public Game getLastGame() {
+        return games.get(games.size() - 1);
+    }
+
+    public void setGames(ArrayList<Game> games) {
+        this.games = games;
+    }
+    */
+
     
     // Basic user when regristering.
-    public User(String username, String password) {
+    public User(String username, String password, String email) {
         this.username = username;
         // sha256 encrypt the passowrd
         this.encryptedPassword = SHAEncryption.getSHA256Hash(password);
         this.wins = 0;
         this.losses = 0;
         this.gamesPlayed = 0;
+        this.email = email;
         
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat(config.dateFormat);  
@@ -121,7 +143,7 @@ public class User {
     
     // user object constructor when loaded from database
     // String user object to --> user object
-    // username,encryptedPassword,rating,wins,losses,gamesPlayed,dateJoined
+    // username,encryptedPassword,rating,wins,losses,gamesPlayed,dateJoined,email,games
 
     public User(String userString) {
         String [] attributes = userString.split(",");
@@ -132,12 +154,17 @@ public class User {
         this.losses = Integer.parseInt(attributes[4]);
         this.gamesPlayed = Integer.parseInt(attributes[5]);
         this.dateJoined = attributes[6];
+        this.email = attributes[7];
+        
+        
     }
 
     @Override
     public String toString() {
         // escape commas if user decides to enter commas as part of their username
-        return username + "," + encryptedPassword + "," + rating + "," + wins + "," + losses + "," + gamesPlayed + "," + dateJoined;
+        return username + "," + encryptedPassword + "," + rating + "," + wins + "," + losses + "," + gamesPlayed + "," + dateJoined + "," + email;
     }
     
+    
 }
+

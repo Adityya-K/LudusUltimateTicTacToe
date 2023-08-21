@@ -21,7 +21,7 @@ public class AESEncryption {
     private static byte[] key;
     private static final String ALGORITHM = "AES";
 
-    public void prepareSecreteKey(String myKey) {
+    public static void prepareSecreteKey(String myKey) {
         MessageDigest sha = null;
         try {
             key = myKey.getBytes(StandardCharsets.UTF_8);
@@ -34,7 +34,7 @@ public class AESEncryption {
         }
     }
 
-    public String encrypt(String strToEncrypt, String secret) {
+    public static String encrypt(String strToEncrypt, String secret) {
         try {
             prepareSecreteKey(secret);
             Cipher cipher = Cipher.getInstance(ALGORITHM);
@@ -46,7 +46,7 @@ public class AESEncryption {
         return null;
     }
 
-    public String decrypt(String strToDecrypt, String secret) {
+    public static String decrypt(String strToDecrypt, String secret) {
         try {
             prepareSecreteKey(secret);
             Cipher cipher = Cipher.getInstance(ALGORITHM);

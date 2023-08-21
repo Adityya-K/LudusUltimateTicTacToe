@@ -15,6 +15,8 @@ username,encryptedPassword,rating,wins,losses,currentGame,gamesPlayed,dateJoined
 */
 
 // need to user .loadDatabase(); before adding user
+
+
 public class UserDatabase {
     private String USER_DATABASE_FILE_PATH = "userDatabase.txt";
     private String userDatabaseEncryptionKey = config.userDataBaseEncryptionKey;
@@ -78,15 +80,34 @@ public class UserDatabase {
         return null;
     }
     
+    public boolean userExists(String userName) {
+        for (User user: userDatabase) {
+            if (user.getUsername().equals(userName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
     // also saves the user DB
-    public User addUser(String userName, String password) {
-        User newUser = new User(userName, password);
+    public User addUser(String userName, String password, String email) {
+        User newUser = new User(userName, password, email);
         userDatabase.add(newUser);
         saveUserDatabase(userDatabase);
         return newUser;
         
     }
-
+    /*
+    public void getTopPlayers(int numPlayers) {
+        // quicksort the top players
+        ArrayList<User> topPlayers = new ArrayList<>();
+        
+        // quicksort
+        for ()
+    }
+    */
+    
+    
     public UserDatabase() {
     }
     
