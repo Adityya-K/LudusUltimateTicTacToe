@@ -14,20 +14,35 @@ import javax.swing.JButton;
 public class NormalTTT {
 
     private JButton[] btnArray = new JButton[9];
-    private int turnNumber = 0;
+    private String[] board = new String[9];
     
-    public NormalTTT() {}
     
     public NormalTTT(JButton[] btnArray)
     {
         this.btnArray = btnArray;
     }
     
+    public boolean setMove(int index, String player) {
+        if (board[index] == null && getGameResult().equals("undecided")) {
+            board[index] = player;
+            btnArray[index].setText(player);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+    
     public void resetBoard() {
         // Iterates through every index in the array and resets the text
         for (int i = 0; i < btnArray.length; i++) {
+<<<<<<< HEAD
+            board[i] = null;
+            btnArray[i].setText("");
+=======
             btnArray[i].setBackground(UltimateTicTacToeFrame.BACKGROUND_COLOR);
             btnArray[i].setText("" + (i+1));
+>>>>>>> main
         }
     }
     
@@ -89,57 +104,40 @@ public class NormalTTT {
             }
         }
         
-        if (draw == true && turnNumber == 9) {
-            gameResult = "draw";
+        for( int i = 0; i < board.length; i++ ) {
+            if (board[i] == null) {
+                draw = false;
+                break;
+            }
+        }
+        
+        if (draw) {
+            return "draw";
         }
         
         return gameResult;
     }
             
-    public String[] getAllLines() {
-        // Initializes the array of lines (3 vertical, 3 horizontal, 2 diagonal)
+    private String[] getAllLines() {
+        
         String[] lines = new String[8];
 
-        // Initializes the array of squares (9 squares on the board)
-        String[] squares = new String[9];
-
-        // Iterates through all of the squares on the board, putting them into the array
-        for (int i = 0; i < btnArray.length; i++) {
-            squares[i] = btnArray[i].getText();
-        }
-
         // Setting the horizontal lines
-        lines[0] = squares[0] + squares[1] + squares[2];
-        lines[1] = squares[3] + squares[4] + squares[5];
-        lines[2] = squares[6] + squares[7] + squares[8];
+        lines[0] = board[0] + board[1] + board[2];
+        lines[1] = board[3] + board[4] + board[5];
+        lines[2] = board[6] + board[7] + board[8];
 
         // Setting the vertical lines
-        lines[3] = squares[0] + squares[3] + squares[6];
-        lines[4] = squares[1] + squares[4] + squares[7];
-        lines[5] = squares[2] + squares[5] + squares[8];
+        lines[3] = board[0] + board[3] + board[6];
+        lines[4] = board[1] + board[4] + board[7];
+        lines[5] = board[2] + board[5] + board[8];
 
         // Setting the diagonal lines
-        lines[6] = squares[0] + squares[4] + squares[8];
-        lines[7] = squares[2] + squares[4] + squares[6];
+        lines[6] = board[0] + board[4] + board[8];
+        lines[7] = board[2] + board[4] + board[6];
 
         // Returns the lines
         return lines;
 
-    }
-    
-    public JButton[] getBtnArray() {
-        return btnArray;
-    }
-    
-    public int getTurnNumber() {
-        return turnNumber;
-    }
-        
-    public void setBtnArray(JButton[] btnArray) {
-        this.btnArray = btnArray;
-    }
-    
-    public void setTurnNumber(int turnNumber) {
-        this.turnNumber = turnNumber;
     }
 }

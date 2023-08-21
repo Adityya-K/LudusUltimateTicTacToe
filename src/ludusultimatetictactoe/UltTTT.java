@@ -3,8 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ludusultimatetictactoe;
-
-import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 
 /**
@@ -13,46 +11,48 @@ import javax.swing.JButton;
  */
 public class UltTTT {
     private NormalTTT[] gameBoard = new NormalTTT[9];
+<<<<<<< HEAD
+    private String currentPlayer = "X";
+=======
     private final String[] PLAYER_ARRAY = {"X", "O"};
+>>>>>>> main
     private int totalTurnNumber = 0;
-    private NormalTTT currentSection;
-    
-    final private NormalTTT goAnywhere = new NormalTTT();
-    
-    public UltTTT(JButton[] btnArray) 
+    private int currentSectionIndex = -1;
+        
+    public UltTTT(JButton[][] btnArray) 
     {
-        // setup array of normal ttt
-        int[] groupStarts = {0, 3, 6, 27, 30, 33, 54, 57, 60};
-        for (int i = 0; i < 9; i++)
-        {
-            int start = groupStarts[i];
-            JButton[] subBtnArray = new JButton[9];
-            int arraySize = 0;
-            
-            for (int rowOffset = 0; rowOffset <= 18; rowOffset += 9)
-            {
-                for (int columnOffset = 0; columnOffset < 3; columnOffset++)
-                {
-                    subBtnArray[arraySize] = btnArray[start + rowOffset + columnOffset];
-                    arraySize++;
-                }
-            }
-            
-            gameBoard[i] = new NormalTTT(subBtnArray);
+        for (int i = 0; i < gameBoard.length; i++) {
+            gameBoard[i] = new NormalTTT(btnArray[i]);
         }
         
+<<<<<<< HEAD
+=======
         currentSection = goAnywhere; // start anywhere
+>>>>>>> main
     }
     
-    public void calcNextSection(int i)
-    {
-        // target section's game has already ended
-        if (!gameBoard[i].getGameResult().equals("undecided"))
-        {
-            currentSection = goAnywhere; // put a blank ttt board to symbolize you can go anywhere
-            return;
+    public String movePlayer (int boardNumber, int boardIndex) {
+        if (currentSectionIndex == -1) {
+            gameBoard[boardNumber].setMove(boardIndex, currentPlayer);
+            currentPlayer = "O";
+            currentSectionIndex = boardIndex;
+            return "MoveMade";
         }
         
+<<<<<<< HEAD
+        if (((currentSectionIndex == boardNumber) || !gameBoard[currentSectionIndex].getGameResult().equals("undecided")) && 
+                (gameBoard[boardNumber].setMove(boardIndex, currentPlayer))) {
+            currentPlayer = currentPlayer.equals("X") ? "O" : "X";
+            currentSectionIndex = boardIndex;
+            System.out.println(currentSectionIndex);
+            if (!getGameResult().equals("undecided")) {
+                return getGameResult() + "Won";
+            }
+            return "MoveMade";
+        } 
+        else {
+            return "Invalid";
+=======
         currentSection = gameBoard[i];
     }
         
@@ -136,11 +136,12 @@ public class UltTTT {
         {
             System.out.println(gameResult);
             //resetBoard(); // temp not reset board
+>>>>>>> main
         }
     }
     
     // Returns a string with the winner, if there is a draw or if the game is undecided
-    public String getGameResult() {
+    private String getGameResult() {
         String[] lines = getAllLines();
         String gameResult = "undecided";
         
@@ -161,38 +162,37 @@ public class UltTTT {
             }
         }
         
-        if (draw == true && totalTurnNumber == 81) {
-            gameResult = "-";
+        for( int i = 0; i < gameBoard.length; i++ ) {
+            if (gameBoard[i].getGameResult().equals("undecided")) {
+                draw = false;
+                break;
+            }
+        }
+        
+        if (draw) {
+            return "draw";
         }
         
         return gameResult;
     }
     
-    public String[] getAllLines() {
+    private String[] getAllLines() {
         // Initializes the array of lines (3 vertical, 3 horizontal, 2 diagonal)
         String[] lines = new String[8];
 
-        // Initializes the array of squares (9 squares on the board)
-        String[] squares = new String[9];
-
-        // Iterates through all of the squares on the board, putting them into the array
-        for (int i = 0; i < gameBoard.length; i++) {
-            squares[i] = gameBoard[i].getGameResult();
-        }
-
         // Setting the horizontal lines
-        lines[0] = squares[0] + squares[1] + squares[2];
-        lines[1] = squares[3] + squares[4] + squares[5];
-        lines[2] = squares[6] + squares[7] + squares[8];
+        lines[0] = gameBoard[0].getGameResult() + gameBoard[1].getGameResult() + gameBoard[2].getGameResult();
+        lines[1] = gameBoard[3].getGameResult() + gameBoard[4].getGameResult() + gameBoard[5].getGameResult();
+        lines[2] = gameBoard[6].getGameResult() + gameBoard[7].getGameResult() + gameBoard[8].getGameResult();
 
         // Setting the vertical lines
-        lines[3] = squares[0] + squares[3] + squares[6];
-        lines[4] = squares[1] + squares[4] + squares[7];
-        lines[5] = squares[2] + squares[5] + squares[8];
+        lines[3] = gameBoard[0].getGameResult() + gameBoard[3].getGameResult() + gameBoard[6].getGameResult();
+        lines[4] = gameBoard[1].getGameResult() + gameBoard[4].getGameResult() + gameBoard[7].getGameResult();
+        lines[5] = gameBoard[2].getGameResult() + gameBoard[5].getGameResult() + gameBoard[8].getGameResult();
 
         // Setting the diagonal lines
-        lines[6] = squares[0] + squares[4] + squares[8];
-        lines[7] = squares[2] + squares[4] + squares[6];
+        lines[6] = gameBoard[0].getGameResult() + gameBoard[4].getGameResult() + gameBoard[8].getGameResult();
+        lines[7] = gameBoard[2].getGameResult() + gameBoard[4].getGameResult() + gameBoard[6].getGameResult();
 
         // Returns the lines
         return lines;
