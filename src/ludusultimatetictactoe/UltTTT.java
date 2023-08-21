@@ -11,7 +11,11 @@ import javax.swing.JButton;
  */
 public class UltTTT {
     private NormalTTT[] gameBoard = new NormalTTT[9];
+<<<<<<< HEAD
     private String currentPlayer = "X";
+=======
+    private final String[] PLAYER_ARRAY = {"X", "O"};
+>>>>>>> main
     private int totalTurnNumber = 0;
     private int currentSectionIndex = -1;
         
@@ -21,6 +25,10 @@ public class UltTTT {
             gameBoard[i] = new NormalTTT(btnArray[i]);
         }
         
+<<<<<<< HEAD
+=======
+        currentSection = goAnywhere; // start anywhere
+>>>>>>> main
     }
     
     public String movePlayer (int boardNumber, int boardIndex) {
@@ -31,6 +39,7 @@ public class UltTTT {
             return "MoveMade";
         }
         
+<<<<<<< HEAD
         if (((currentSectionIndex == boardNumber) || !gameBoard[currentSectionIndex].getGameResult().equals("undecided")) && 
                 (gameBoard[boardNumber].setMove(boardIndex, currentPlayer))) {
             currentPlayer = currentPlayer.equals("X") ? "O" : "X";
@@ -43,6 +52,91 @@ public class UltTTT {
         } 
         else {
             return "Invalid";
+=======
+        currentSection = gameBoard[i];
+    }
+        
+    public void playerTurn(JButton[] btnArray, int index)
+    {
+        btnArray[index].setText("" + PLAYER_ARRAY[totalTurnNumber%2]);
+        // update total turn number
+        totalTurnNumber++;
+
+        //update subsection turn number
+        currentSection.setTurnNumber(currentSection.getTurnNumber() + 1);
+
+        //TODO: Highlight section to show that the player has won the section
+        String winner = currentSection.getGameResult();
+        currentSection.highlight(winner);
+
+        calcNextSection(index);
+    }
+    
+    // this method's contents are basically repeated twice
+    public void actionPerformed(ActionEvent ae) {
+        if (currentSection == goAnywhere)
+        {
+            Boolean madeMove = false;
+            
+            for (int i = 0; i < 9; i++)
+            {
+                NormalTTT checkSection = gameBoard[i];
+                if (!checkSection.getGameResult().equals("undecided"))
+                {
+                    continue;
+                }
+                
+                JButton[] btnArray = checkSection.getBtnArray();
+                // only look at the buttons in the current array
+
+                for (int j = 0; j < btnArray.length; j++) {
+                    // Runs if the button was clicked
+                    String currentText = btnArray[j].getText();
+                    if (ae.getActionCommand().equals(currentText)) {
+                        // Prevents the user from clicking the same button twice
+                        if ("XO".contains(currentText)) {
+                            break;
+                        }
+
+                        playerTurn(btnArray, j);
+                        break;
+                    }
+                }
+                
+                if (madeMove)
+                {
+                    break;
+                }
+            }
+        }
+        else
+        {
+            JButton[] btnArray = currentSection.getBtnArray();
+            // only look at the buttons in the current array
+
+            for (int i = 0; i < btnArray.length; i++) {
+                // Runs if the button was clicked
+                String currentText = btnArray[i].getText();
+                if (ae.getActionCommand().equals(currentText)) {
+
+                    // Prevents the user from clicking the same button twice
+                    if ("XO".contains(currentText)) {
+                        break;
+                    }
+
+                    playerTurn(btnArray, i);
+                    break;
+                }
+            }
+        }
+        
+        String gameResult = getGameResult();
+        
+        if (!gameResult.equals("undecided"))
+        {
+            System.out.println(gameResult);
+            //resetBoard(); // temp not reset board
+>>>>>>> main
         }
     }
     

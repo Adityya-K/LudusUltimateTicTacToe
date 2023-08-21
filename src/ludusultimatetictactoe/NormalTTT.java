@@ -4,6 +4,7 @@
  */
 package ludusultimatetictactoe;
 
+import java.awt.Color;
 import javax.swing.JButton;
 
 /**
@@ -35,8 +36,34 @@ public class NormalTTT {
     public void resetBoard() {
         // Iterates through every index in the array and resets the text
         for (int i = 0; i < btnArray.length; i++) {
+<<<<<<< HEAD
             board[i] = null;
             btnArray[i].setText("");
+=======
+            btnArray[i].setBackground(UltimateTicTacToeFrame.BACKGROUND_COLOR);
+            btnArray[i].setText("" + (i+1));
+>>>>>>> main
+        }
+    }
+    
+    public void highlight(String piece)
+    {        
+        if (piece.equals("X"))
+        {
+            for (int i = 0; i < 9; i += 2)
+            {
+                btnArray[i].setBackground(Color.black);
+            }
+        }
+        else if (piece.equals("O"))
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                if (i != 4)
+                {
+                    btnArray[i].setBackground(Color.black);
+                }
+            }
         }
     }
 
