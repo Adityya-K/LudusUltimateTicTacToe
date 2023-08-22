@@ -5,18 +5,19 @@
 package menu;
 
 import javax.swing.JFrame;
+import normal_tic_tac_toe.ModeSelectFrame;
 
 /**
  *
  * @author gaudium
  */
-public class frmMainMenu extends javax.swing.JFrame {
+public class MainMenuFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form frmLogin
      */
-    public frmMainMenu() {
-        setSize(940, 788);
+    public MainMenuFrame() {
+        setSize(938, 788);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
@@ -39,9 +40,7 @@ public class frmMainMenu extends javax.swing.JFrame {
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(940, 788));
-        setMinimumSize(new java.awt.Dimension(940, 788));
-        setPreferredSize(new java.awt.Dimension(940, 788));
+        setMinimumSize(new java.awt.Dimension(938, 788));
         getContentPane().setLayout(null);
 
         lblTitle.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
@@ -76,6 +75,11 @@ public class frmMainMenu extends javax.swing.JFrame {
         btnNTTT.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         btnNTTT.setForeground(new java.awt.Color(255, 255, 255));
         btnNTTT.setText("Play Normal Tic Tac Toe");
+        btnNTTT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNTTTActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnNTTT);
         btnNTTT.setBounds(260, 280, 430, 40);
 
@@ -90,6 +94,13 @@ public class frmMainMenu extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnNTTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNTTTActionPerformed
+        // TODO add your handling code here:
+        ModeSelectFrame frmNTTModeSelect = new ModeSelectFrame();
+        frmNTTModeSelect.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnNTTTActionPerformed
 
     /**
      * @param args the command line arguments
@@ -108,21 +119,23 @@ public class frmMainMenu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainMenuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainMenuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainMenuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmMainMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MainMenuFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmMainMenu().setVisible(true);
+                new MainMenuFrame().setVisible(true);
             }
         });
     }

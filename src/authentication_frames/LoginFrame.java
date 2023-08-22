@@ -5,6 +5,8 @@
 package authentication_frames;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import menu.MainMenuFrame;
 
 /**
  *
@@ -12,15 +14,15 @@ import javax.swing.JFrame;
  */
 import user.*;
 
-public class frmLogin extends javax.swing.JFrame {
+public class LoginFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form frmLogin
      */
-    public frmLogin() {
+    public LoginFrame() {
         UserDatabase.loadDatabase();
 
-        setSize(940, 820);
+        setSize(938, 820);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
         String createAccount = "<HTML>Don't have an account? <u>Create one!</u></HTML>";
@@ -40,19 +42,17 @@ public class frmLogin extends javax.swing.JFrame {
 
         lblForgotPassword = new javax.swing.JLabel();
         lblCreateAccount = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
         txtUsername = new javax.swing.JTextField();
         lblPassword = new javax.swing.JLabel();
         lblUsername = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
         btnLogin = new javax.swing.JButton();
+        txtPassword = new javax.swing.JPasswordField();
         lblBackground = new javax.swing.JLabel();
         lblForgotPassword1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(940, 788));
-        setMinimumSize(new java.awt.Dimension(940, 788));
-        setPreferredSize(new java.awt.Dimension(940, 788));
+        setMinimumSize(new java.awt.Dimension(938, 788));
         getContentPane().setLayout(null);
 
         lblForgotPassword.setBackground(new java.awt.Color(255, 255, 255));
@@ -70,10 +70,15 @@ public class frmLogin extends javax.swing.JFrame {
         lblCreateAccount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblCreateAccount.setText("Create an account");
         lblCreateAccount.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        lblCreateAccount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblCreateAccountMouseClicked(evt);
+            }
+        });
         getContentPane().add(lblCreateAccount);
-        lblCreateAccount.setBounds(0, 540, 940, 24);
         getContentPane().add(txtPassword);
         txtPassword.setBounds(260, 400, 430, 50);
+        lblCreateAccount.setBounds(0, 540, 940, 26);
         getContentPane().add(txtUsername);
         txtUsername.setBounds(260, 270, 430, 50);
 
@@ -108,6 +113,8 @@ public class frmLogin extends javax.swing.JFrame {
         });
         getContentPane().add(btnLogin);
         btnLogin.setBounds(260, 480, 430, 40);
+        getContentPane().add(txtPassword);
+        txtPassword.setBounds(260, 390, 430, 50);
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image_assets/login-background.png"))); // NOI18N
         lblBackground.setText("jLabel1");
@@ -132,22 +139,26 @@ public class frmLogin extends javax.swing.JFrame {
     
     String error;
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        error = "";
         String username = txtUsername.getText();
-        String password = txtPassword.getText();
+        String password = String.valueOf(txtPassword.getPassword());
         User currentUser = UserDatabase.getUser(username, password);
         
         if (currentUser == null) {
-            error = "Invalid username or invalid password. Try again!";
+            JOptionPane.showMessageDialog(this, "Invalid username or invalid password. Try again!", "Login Error", JOptionPane.ERROR_MESSAGE);
         } else {
             System.out.println(currentUser.toString());
-
-            // open the game jframe
-            
+            MainMenuFrame frmMainMenu = new MainMenuFrame(); 
+            frmMainMenu.setVisible(true);
+            this.dispose();
         }
-        System.out.println(error);
-        // lblErrors.setText(error);
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void lblCreateAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCreateAccountMouseClicked
+        // TODO add your handling code here:
+        RegistrationFrame frmRegistration = new RegistrationFrame();
+        frmRegistration.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lblCreateAccountMouseClicked
 
     /**
      * @param args the command line arguments
@@ -166,20 +177,22 @@ public class frmLogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LoginFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmLogin().setVisible(true);
+                UserDatabase.loadDatabase();
+                new LoginFrame().setVisible(true);
             }
         });
     }
@@ -193,7 +206,7 @@ public class frmLogin extends javax.swing.JFrame {
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUsername;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }

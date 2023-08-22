@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import menu.MainMenuFrame;
 
 /**
  *
@@ -24,10 +25,13 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
     String ai = "O";
     String player = "X";
     
-    public void setGame (String difficulty, String ai, String player) {
+    public void setGameProperties (String difficulty, String ai, String player) {
         this.ai = ai;
         this.player = player;
         this.difficulty = difficulty;
+        
+        lblComputerIs.setText("Computer is: " + ai + " ( " + difficulty.toUpperCase() + " difficulty )");
+        lblPlayerIs.setText("You are: " + player);
     }
     
     /**
@@ -57,9 +61,6 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                 moveAI();
             }
         }
-        
-        lblComputerIs.setText("Computer is: " + ai);
-        lblPlayerIs.setText("You are: " + player);
     }
     
     private void moveEasyComputer() {
@@ -219,16 +220,6 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                         btnArray[j].setEnabled(false);
                     }
                     
-                    if (ai.equals("X")) {
-                        if (difficulty.equals("easy")) {
-                            moveEasyComputer();
-                        } else if (difficulty.equals("medium")) {
-                            moveMediumComputer();
-                        } else if (difficulty.equals("hard")) {
-                            moveAI();
-                        }
-                    }
-                    
                 }
                 
                 // Stops the search for a button click
@@ -246,11 +237,11 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel2 = new javax.swing.JPanel();
+        panRootBackground = new javax.swing.JPanel();
         btnRestart = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblTitle = new javax.swing.JLabel();
         lblPlayerIs = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        panBackground = new javax.swing.JPanel();
         panButtons = new javax.swing.JPanel();
         btnToMainMenu = new javax.swing.JButton();
         btnHelp = new javax.swing.JButton();
@@ -260,9 +251,9 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         setMaximumSize(new java.awt.Dimension(940, 788));
         setMinimumSize(new java.awt.Dimension(940, 788));
 
-        jPanel2.setBackground(new java.awt.Color(0, 35, 82));
-        jPanel2.setMinimumSize(new java.awt.Dimension(940, 788));
-        jPanel2.setPreferredSize(new java.awt.Dimension(940, 788));
+        panRootBackground.setBackground(new java.awt.Color(0, 35, 82));
+        panRootBackground.setMinimumSize(new java.awt.Dimension(940, 788));
+        panRootBackground.setPreferredSize(new java.awt.Dimension(940, 788));
 
         btnRestart.setBackground(new java.awt.Color(0, 102, 255));
         btnRestart.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -274,29 +265,34 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("NORMAL TIC TAC TOE");
+        lblTitle.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
+        lblTitle.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitle.setText("NORMAL TIC TAC TOE (COMPUTER OPPONENT)");
 
         lblPlayerIs.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         lblPlayerIs.setForeground(new java.awt.Color(255, 255, 255));
         lblPlayerIs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblPlayerIs.setText("You are: O");
 
-        jPanel1.setBackground(new java.awt.Color(0, 35, 82));
-        jPanel1.setForeground(new java.awt.Color(0, 102, 255));
+        panBackground.setBackground(new java.awt.Color(0, 35, 82));
+        panBackground.setForeground(new java.awt.Color(0, 102, 255));
 
         panButtons.setBackground(new java.awt.Color(0, 102, 255));
         panButtons.setMinimumSize(new java.awt.Dimension(100, 100));
         panButtons.setPreferredSize(new java.awt.Dimension(500, 500));
         panButtons.setLayout(new java.awt.GridLayout(3, 3));
-        jPanel1.add(panButtons);
+        panBackground.add(panButtons);
 
         btnToMainMenu.setBackground(new java.awt.Color(0, 102, 255));
         btnToMainMenu.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         btnToMainMenu.setForeground(new java.awt.Color(255, 255, 255));
         btnToMainMenu.setText("To Main Menu");
+        btnToMainMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnToMainMenuActionPerformed(evt);
+            }
+        });
 
         btnHelp.setBackground(new java.awt.Color(0, 102, 255));
         btnHelp.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -308,13 +304,13 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         lblComputerIs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblComputerIs.setText("Computer is: X");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panRootBackgroundLayout = new javax.swing.GroupLayout(panRootBackground);
+        panRootBackground.setLayout(panRootBackgroundLayout);
+        panRootBackgroundLayout.setHorizontalGroup(
+            panRootBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panRootBackgroundLayout.createSequentialGroup()
                 .addGap(39, 39, 39)
                 .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -322,25 +318,25 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                 .addGap(18, 18, 18)
                 .addComponent(btnToMainMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panRootBackgroundLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(lblComputerIs, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(62, 62, 62)
                 .addComponent(lblPlayerIs, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        panRootBackgroundLayout.setVerticalGroup(
+            panRootBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panRootBackgroundLayout.createSequentialGroup()
                 .addContainerGap(17, Short.MAX_VALUE)
-                .addComponent(jLabel1)
+                .addComponent(lblTitle)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panRootBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblPlayerIs)
                     .addComponent(lblComputerIs))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 512, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panRootBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRestart)
                     .addComponent(btnToMainMenu)
                     .addComponent(btnHelp))
@@ -351,11 +347,11 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panRootBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panRootBackground, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -365,6 +361,13 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         // TODO add your handling code here:
         resetBoard();
     }//GEN-LAST:event_btnRestartActionPerformed
+
+    private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
+        // TODO add your handling code here:
+        MainMenuFrame frmMainMenu = new MainMenuFrame();
+        frmMainMenu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnToMainMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -406,12 +409,12 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
     private javax.swing.JButton btnHelp;
     private javax.swing.JButton btnRestart;
     private javax.swing.JButton btnToMainMenu;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblComputerIs;
     private javax.swing.JLabel lblPlayerIs;
+    private javax.swing.JLabel lblTitle;
+    private javax.swing.JPanel panBackground;
     private javax.swing.JPanel panButtons;
+    private javax.swing.JPanel panRootBackground;
     // End of variables declaration//GEN-END:variables
     private JButton[] btnArray = new JButton[9];
 
@@ -422,6 +425,16 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
             btnArray[i].setText(" ");
             btnArray[i].setEnabled(true);
             board[i] = null;
+        }
+        
+        if (ai.equals("X")) {
+            if (difficulty.equals("easy")) {
+                moveEasyComputer();
+            } else if (difficulty.equals("medium")) {
+                moveMediumComputer();
+            } else if (difficulty.equals("hard")) {
+                moveAI();
+            }
         }
     }
 

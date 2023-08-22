@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import menu.MainMenuFrame;
 
 /**
  *
@@ -147,6 +148,11 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
         btnToMainMenu.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         btnToMainMenu.setForeground(new java.awt.Color(255, 255, 255));
         btnToMainMenu.setText("To Main Menu");
+        btnToMainMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnToMainMenuActionPerformed(evt);
+            }
+        });
 
         btnHelp.setBackground(new java.awt.Color(0, 102, 255));
         btnHelp.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -211,6 +217,13 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
         // TODO add your handling code here:
         resetBoard();
     }//GEN-LAST:event_btnRestartActionPerformed
+
+    private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
+        // TODO add your handling code here:
+        MainMenuFrame frmMainMenu = new MainMenuFrame();
+        frmMainMenu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnToMainMenuActionPerformed
 
     /**
      * @param args the command line arguments
