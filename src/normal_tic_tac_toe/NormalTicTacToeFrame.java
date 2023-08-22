@@ -234,6 +234,29 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void saveGame() {
+        int movesPresent = 0;
+        for (int i = 0; i < btnArray.length; i++) {
+            if (!btnArray[i].getText().isBlank()) {
+                movesPresent++;
+            }
+        }
+        
+        if(movesPresent < 1) {
+            return;
+        }
+        
+        if (JOptionPane.showConfirmDialog(this, "Would you like to save your current game?", "Save Game?",JOptionPane.YES_NO_OPTION) == 0) {
+            String boardString = "";
+            for (int i = 0; i < btnArray.length; i++) {
+                boardString += btnArray[i].getText() + ":";
+            }
+            SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), "X", "normal", "player", Integer.toString(turnNumber), boardString);
+            CurrentUser.getUser().saveGame(currentGame);
+            System.out.print(currentGame);
+        }
+    }
+    
     private void btnRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestartActionPerformed
         // TODO add your handling code here:
         resetBoard();
@@ -241,7 +264,8 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
         // TODO add your handling code here:
-        if (JOptionPane.showConfirmDialog(this, "Going to main menu will discard the current game, are you sure?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {    
+        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit Mid-Game?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {    
+            saveGame();
             MainMenuFrame frmMainMenu = new MainMenuFrame();
             frmMainMenu.setVisible(true);
             this.dispose();
@@ -259,15 +283,7 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        if (JOptionPane.showConfirmDialog(this, "Would you like to save your current game?", "Save Game?",JOptionPane.YES_NO_OPTION) == 0) {
-            String boardString = "";
-            for (int i = 0; i < btnArray.length; i++) {
-                boardString += btnArray[i].getText() + ":";
-            }
-            SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), "X", "normal", "player", Integer.toString(turnNumber), boardString);
-            CurrentUser.getUser().saveGame(currentGame);
-            System.out.print(currentGame);
-        }
+        saveGame();
     }//GEN-LAST:event_formWindowClosing
 
     /**

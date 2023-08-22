@@ -222,6 +222,29 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         }
     }
 
+    private void saveGame() {
+        int movesPresent = 0;
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] != null) {
+                movesPresent++;
+            }
+        }
+        
+        if(movesPresent < 2) {
+            return;
+        }
+        
+        if (JOptionPane.showConfirmDialog(this, "Would you like to save your current game?", "Save Game?",JOptionPane.YES_NO_OPTION) == 0) {
+            String boardString = "";
+            for (int i = 0; i < board.length; i++) {
+                boardString += (board[i] == null ? "e" : board[i]) + ":";
+            }
+            SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), player, "normal", "computer", difficulty, player, boardString);
+            CurrentUser.getUser().saveGame(currentGame);
+            System.out.print(currentGame);
+        }
+    }
+    
     // Handles a button click
     public void actionPerformed(ActionEvent ae) {
         
@@ -444,7 +467,8 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
         // TODO add your handling code here:
-        if (JOptionPane.showConfirmDialog(this, "Going to main menu will discard the current game, are you sure?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {    
+        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {    
+            saveGame();
             MainMenuFrame frmMainMenu = new MainMenuFrame();
             frmMainMenu.setVisible(true);
             this.dispose();
@@ -462,15 +486,7 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        if (JOptionPane.showConfirmDialog(this, "Would you like to save your current game?", "Save Game?",JOptionPane.YES_NO_OPTION) == 0) {
-            String boardString = "";
-            for (int i = 0; i < board.length; i++) {
-                boardString += (board[i] == null ? "e" : board[i]) + ":";
-            }
-            SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), player, "normal", "computer", difficulty, player, boardString);
-            CurrentUser.getUser().saveGame(currentGame);
-            System.out.print(currentGame);
-        }
+        saveGame();
     }//GEN-LAST:event_formWindowClosing
 
     /**
