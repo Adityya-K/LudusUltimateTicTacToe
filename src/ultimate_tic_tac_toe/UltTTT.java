@@ -120,7 +120,9 @@ public class UltTTT {
 
         subBoard.setMove(index, currentPlayer);
         currentSectionIndex = index;
-        gameBoard[currentSectionIndex].highlightButtons();
+        if (gameBoard[currentSectionIndex].getGameResult().equals("undecided")) {
+            gameBoard[currentSectionIndex].highlightButtons();
+        }
         currentPlayer = currentPlayer.equals("X") ? "O" : "X";
     }
     

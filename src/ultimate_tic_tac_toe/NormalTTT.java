@@ -60,6 +60,7 @@ public class NormalTTT {
         btnArray[1].setBackground(winColor);
         btnArray[2].setBackground(winColor);
         btnArray[3].setBackground(winColor);
+        btnArray[4].setBackground(new Color(128, 176, 247));
         btnArray[5].setBackground(winColor);
         btnArray[6].setBackground(winColor);
         btnArray[7].setBackground(winColor);
@@ -67,6 +68,9 @@ public class NormalTTT {
     }
     
     public void setButtonsX () {
+        for (int i = 0; i < btnArray.length; i++) {
+            btnArray[i].setBackground(new Color(128, 176, 247));
+        }
         btnArray[0].setBackground(winColor);
         btnArray[2].setBackground(winColor);
         btnArray[4].setBackground(winColor);
