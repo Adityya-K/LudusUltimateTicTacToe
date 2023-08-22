@@ -149,7 +149,7 @@ public class UserDatabase {
         fileData = fileData.trim();
         
         String encryptedFile = encryptDataBase(fileData);
-        
+        /*
         try {
             System.out.println("Saving file");
             BufferedWriter writer = new BufferedWriter(new FileWriter(USER_DATABASE_FILE_PATH));
@@ -157,7 +157,7 @@ public class UserDatabase {
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
         
         // Saving unencrypted file for debugging purposes:
         try {
