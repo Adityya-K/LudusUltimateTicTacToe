@@ -41,6 +41,7 @@ public class SavedGamesFrame extends javax.swing.JFrame {
         // display either smaller of the size of the top players arraylist or the PLAYERS_TO_DISPLAY
         // loop trough each element up until the numbre of playuers to display
         for (int i = 0; i < gamesPlayed.size(); i++) {
+            System.out.println(gamesPlayed.get(i).getPosition());
             model.addRow(new Object[]{gamesPlayed.get(i).getGameType(), gamesPlayed.get(i).getOpponentType(), gamesPlayed.get(i).getAIDifficulty() == null ? " " : gamesPlayed.get(i).getAIDifficulty()});
         }
         
