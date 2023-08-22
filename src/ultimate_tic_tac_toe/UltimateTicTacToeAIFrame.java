@@ -37,6 +37,33 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
         }
     }
     
+    public void setGameProperties (String difficulty, String ai, String player, String[][] board, int currentSectionIndex) {
+        lblComputerIs.setText("Computer is: " + ai + " ( " + difficulty.toUpperCase() + " difficulty )");
+        lblPlayerIs.setText("You are: " + player);
+        
+        ultBoard = new UltTTT(btnArray, player, difficulty);
+        NormalTTT[] gameBoard = ultBoard.getGameBoard();
+        ultBoard.setCurrentSectionIndex(currentSectionIndex);
+        gameBoard[currentSectionIndex].highlightButtons();
+        
+        for (int i = 0; i < gameBoard.length; i++) {
+            for (int j = 0; j < gameBoard[i].getBoard().length; j++) {
+                gameBoard[i].getBoard()[j] = board[i][j].equals("e") ? null : board[i][j];
+                btnArray[i][j].setForeground(new Color(0,102,255));
+                btnArray[i][j].setText(board[i][j].equals("e") ? " " : board[i][j]);
+            }
+        }
+        
+        if (ultBoard.getPlayerPiece().equals("O")) // ai goes first
+        {
+            ultBoard.moveAI();
+        }
+        
+        String result = ultBoard.getGameResult();
+        
+        winBehavoir(result);
+    }
+    
     /**
      * Creates new form UltimateTicTacToeFrame
      */
@@ -176,6 +203,11 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
         btnHelp.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         btnHelp.setForeground(new java.awt.Color(255, 255, 255));
         btnHelp.setText("Help");
+        btnHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHelpActionPerformed(evt);
+            }
+        });
 
         btnRestart.setBackground(new java.awt.Color(0, 102, 255));
         btnRestart.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -254,15 +286,79 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void winBehavoir (String result) {
+        if (!(result.equals("MoveMade") || result.equals("Invalid") || result.equals("undecided"))) {
+            JOptionPane.showMessageDialog(this, result.equals("draw") ? "It was a draw" : result + " won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            disableButtons();
+            if (result.equals(ultBoard.getPlayerPiece()) && !result.equals("draw")) {
+                CurrentUser.getUser().addWin();
+                switch (ultBoard.getAi()) {
+                    case "Easy":
+                        CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() + 10);
+                        break;
+                    case "Medium":
+                        CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() + 20);
+                        break;
+                }
+            }
+            else if (!result.equals(ultBoard.getPlayerPiece()) && !result.equals("draw")) {
+                CurrentUser.getUser().addLoss();
+                switch (ultBoard.getAi()) {
+                    case "Easy":
+                        CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() >= 20 ? CurrentUser.getUser().getRating() - 20 : 0);
+                        break;
+                    case "Medium":
+                        CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() >= 10 ? CurrentUser.getUser().getRating() - 10 : 0);
+                        break;
+                }
+            }
+            
+            System.out.println(CurrentUser.getUser().getWins() + " " + CurrentUser.getUser().getLosses());
+        }
+    }
+    
+    private void saveGame() {
+        int movesPresent = 0;
+        NormalTTT[] gameBoard = ultBoard.getGameBoard();
+        
+        for (int i = 0; i < gameBoard.length; i++) {
+            for (int j = 0; j < gameBoard[i].getBoard().length; j++) {
+                if (gameBoard[i].getBoard()[j] != null) {
+                    movesPresent++;
+                }
+            }
+        }
+        
+        if(movesPresent < 2) {
+            return;
+        }
+        
+        if (JOptionPane.showConfirmDialog(this, "Would you like to save your current game?", "Save Game?",JOptionPane.YES_NO_OPTION) == 0) {
+            String boardString = "";
+            for (int i = 0; i < ultBoard.getGameBoard().length; i++) {
+                for (int j = 0; j < ultBoard.getGameBoard()[i].getBoard().length; j++) {
+                    boardString += (ultBoard.getGameBoard()[i].getBoard()[j] == null ? "e" : ultBoard.getGameBoard()[i].getBoard()[j]) + ":";
+                }
+            }
+            boardString += Integer.toString(ultBoard.getCurrentSectionIndex());
+            SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), ultBoard.getPlayerPiece(), "ultimate", "computer", ultBoard.getAi(), ultBoard.getPlayerPiece(), boardString);
+            CurrentUser.getUser().saveGame(currentGame);
+            System.out.print(currentGame);
+        }
+    }
+    
     private void btnRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestartActionPerformed
         // TODO add your handling code here:
         ultBoard.resetBoard();
+        ultBoard.setCurrentPlayer("X");
+        ultBoard.setCurrentSectionIndex(-1);
         enableButtons();
     }//GEN-LAST:event_btnRestartActionPerformed
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
         // TODO add your handling code here:
-        if (JOptionPane.showConfirmDialog(this, "Going to main menu will discard the current game, are you sure?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {    
+        if (JOptionPane.showConfirmDialog(this, "Do you want to quit Mid-game?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {   
+            saveGame();
             MainMenuFrame frmMainMenu = new MainMenuFrame();
             frmMainMenu.setVisible(true);
             this.dispose();
@@ -280,18 +376,14 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        if (JOptionPane.showConfirmDialog(this, "Would you like to save your current game?", "Save Game?",JOptionPane.YES_NO_OPTION) == 0) {
-            String boardString = "";
-            for (int i = 0; i < ultBoard.getGameBoard().length; i++) {
-                for (int j = 0; j < ultBoard.getGameBoard()[i].getBoard().length; j++) {
-                    boardString += ultBoard.getGameBoard()[i].getBoard()[j] + "|";
-                }
-            }
-            SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), ultBoard.getPlayerPiece(), "ultimate", "computer", ultBoard.getAi(), ultBoard.getPlayerPiece(), boardString);
-            CurrentUser.getUser().saveGame(currentGame);
-            System.out.print(currentGame);
-        }
+        saveGame();
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
+        // TODO add your handling code here:
+        UltimateHelpFrame frmUltimateHelp = new UltimateHelpFrame();
+        frmUltimateHelp.setVisible(true);
+    }//GEN-LAST:event_btnHelpActionPerformed
 
     private void addButtonsToPanel(JPanel panel, JButton[] btnArray, int index) {
         for (int i = 0; i < 9; i++) {
@@ -349,34 +441,7 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
             result = ultBoard.getGameResult();
         }
         
-        if (!(result.equals("MoveMade") || result.equals("Invalid") || result.equals("undecided"))) {
-            JOptionPane.showMessageDialog(this, result.equals("draw") ? "It was a draw" : result + " won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
-            disableButtons();
-            if (result.equals(ultBoard.getPlayerPiece()) && !result.equals("draw")) {
-                CurrentUser.getUser().addWin();
-                switch (ultBoard.getAi()) {
-                    case "Easy":
-                        CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() + 10);
-                        break;
-                    case "Medium":
-                        CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() + 20);
-                        break;
-                }
-            }
-            else if (!result.equals(ultBoard.getPlayerPiece()) && !result.equals("draw")) {
-                CurrentUser.getUser().addLoss();
-                switch (ultBoard.getAi()) {
-                    case "Easy":
-                        CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() >= 20 ? CurrentUser.getUser().getRating() - 20 : 0);
-                        break;
-                    case "Medium":
-                        CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() >= 10 ? CurrentUser.getUser().getRating() - 10 : 0);
-                        break;
-                }
-            }
-            
-            System.out.println(CurrentUser.getUser().getWins() + " " + CurrentUser.getUser().getLosses());
-        }
+        winBehavoir(result);
     }
     
     /**

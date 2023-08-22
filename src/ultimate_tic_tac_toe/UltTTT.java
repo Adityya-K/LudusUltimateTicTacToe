@@ -119,8 +119,8 @@ public class UltTTT {
         int index = boardAndIndex[1];
 
         subBoard.setMove(index, currentPlayer);
-        
         currentSectionIndex = index;
+        gameBoard[currentSectionIndex].highlightButtons();
         currentPlayer = currentPlayer.equals("X") ? "O" : "X";
     }
     
@@ -134,13 +134,23 @@ public class UltTTT {
             gameBoard[boardNumber].setMove(boardIndex, currentPlayer);
             currentPlayer = "O";
             currentSectionIndex = boardIndex;
+            if (ai.equals("None")) {
+                gameBoard[currentSectionIndex].highlightButtons();
+            }
             return "MoveMade";
         }
         
         if (((currentSectionIndex == boardNumber) || !gameBoard[currentSectionIndex].getGameResult().equals("undecided")) && 
                 (gameBoard[boardNumber].setMove(boardIndex, currentPlayer))) {
             currentPlayer = currentPlayer.equals("X") ? "O" : "X";
+            if (gameBoard[currentSectionIndex].getGameResult().equals("undecided")) {
+                gameBoard[currentSectionIndex].unHighlightButtons();
+            }
             currentSectionIndex = boardIndex;
+            
+            if (gameBoard[currentSectionIndex].getGameResult().equals("undecided") && ai.equals("None")) {
+                gameBoard[currentSectionIndex].highlightButtons();
+            }
             System.out.println(currentSectionIndex);
             if (!getGameResult().equals("undecided")) {
                 return getGameResult();
@@ -231,7 +241,20 @@ public class UltTTT {
         return currentPlayer;
     }
     
+    public void setCurrentPlayer(String a) {
+        this.currentPlayer = a;
+    }
+    
     public NormalTTT[] getGameBoard() {
         return gameBoard;
     }
+    
+    public int getCurrentSectionIndex() {
+        return currentSectionIndex;
+    } 
+    
+    public void setCurrentSectionIndex (int a) {
+        this.currentSectionIndex = a;
+    }
+            
 }

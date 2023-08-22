@@ -164,9 +164,6 @@ public class LoginFrame extends javax.swing.JFrame {
             
             // Sets the current user as the user
             CurrentUser.setUser(currentUser);
-            
-            // TODO delete these two lines
-            CurrentUser.getUser().saveGame(new SavedGame(currentUser.getUsername(), "X", "NORMAL", "AI", "HARD", "xxxoooxxx", "ME"));
             CurrentUser.getUser().setRating(1000);
             
             // Displays the main menu

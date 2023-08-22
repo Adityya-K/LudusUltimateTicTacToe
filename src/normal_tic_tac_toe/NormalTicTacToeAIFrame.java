@@ -54,6 +54,7 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         this.board = board;
         
         for (int i = 0; i < btnArray.length; i++) {
+            btnArray[i].setForeground(new Color(0,102,255));
             btnArray[i].setText(board[i].equals("e") ? " " : board[i]);
             this.board[i] = board[i].equals("e") ? null : board[i];
         }
@@ -68,6 +69,20 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                 moveMediumComputer();
             } else if (difficulty.equals("hard")) {
                 moveAI();
+            }
+        }
+        
+        String gameResult = getGameResult(getAllLines());
+                
+        // Checks if the game has been decided
+        if (!gameResult.equals("undecided")) {
+
+            // TODO output game result on gui instead of console
+            // Prints out the game result
+            JOptionPane.showMessageDialog(this, gameResult.equals("draw") ? "It was a draw" : gameResult + " won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            
+            for (int i = 0; i < btnArray.length; i++) {
+                btnArray[i].setEnabled(false);
             }
         }
     }
@@ -207,6 +222,29 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         }
     }
 
+    private void saveGame() {
+        int movesPresent = 0;
+        for (int i = 0; i < board.length; i++) {
+            if (board[i] != null) {
+                movesPresent++;
+            }
+        }
+        
+        if(movesPresent < 2) {
+            return;
+        }
+        
+        if (JOptionPane.showConfirmDialog(this, "Would you like to save your current game?", "Save Game?",JOptionPane.YES_NO_OPTION) == 0) {
+            String boardString = "";
+            for (int i = 0; i < board.length; i++) {
+                boardString += (board[i] == null ? "e" : board[i]) + ":";
+            }
+            SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), player, "normal", "computer", difficulty, player, boardString);
+            CurrentUser.getUser().saveGame(currentGame);
+            System.out.print(currentGame);
+        }
+    }
+    
     // Handles a button click
     public void actionPerformed(ActionEvent ae) {
         
@@ -363,6 +401,11 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         btnHelp.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         btnHelp.setForeground(new java.awt.Color(255, 255, 255));
         btnHelp.setText("Help");
+        btnHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHelpActionPerformed(evt);
+            }
+        });
 
         lblComputerIs.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
         lblComputerIs.setForeground(new java.awt.Color(255, 255, 255));
@@ -429,7 +472,8 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
         // TODO add your handling code here:
-        if (JOptionPane.showConfirmDialog(this, "Going to main menu will discard the current game, are you sure?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {    
+        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {    
+            saveGame();
             MainMenuFrame frmMainMenu = new MainMenuFrame();
             frmMainMenu.setVisible(true);
             this.dispose();
@@ -447,16 +491,14 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        if (JOptionPane.showConfirmDialog(this, "Would you like to save your current game?", "Save Game?",JOptionPane.YES_NO_OPTION) == 0) {
-            String boardString = "";
-            for (int i = 0; i < board.length; i++) {
-                boardString += (board[i] == null ? "e" : board[i]) + "|";
-            }
-            SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), player, "normal", "computer", difficulty, player, boardString);
-            CurrentUser.getUser().saveGame(currentGame);
-            System.out.print(currentGame);
-        }
+        saveGame();
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
+        // TODO add your handling code here:
+        NormalHelpFrame frmNormalHelp = new NormalHelpFrame();
+        frmNormalHelp.setVisible(true);
+    }//GEN-LAST:event_btnHelpActionPerformed
 
     /**
      * @param args the command line arguments
