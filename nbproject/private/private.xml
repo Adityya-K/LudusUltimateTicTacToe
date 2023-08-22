@@ -4,8 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/home/gaudium/CompSci/LudusUltimateTicTacToe/src/authentication_frames/LoginFrame.java</file>
-            <file>file:/home/gaudium/CompSci/LudusUltimateTicTacToe/src/normal_tic_tac_toe/ComputerSelectFrame.java</file>
-            <file>file:/home/gaudium/CompSci/LudusUltimateTicTacToe/src/normal_tic_tac_toe/ModeSelectFrame.java</file>
+            <file>file:/home/gaudium/CompSci/LudusUltimateTicTacToe/src/authentication_frames/RegistrationFrame.java</file>
         </group>
     </open-files>
 </project-private>
