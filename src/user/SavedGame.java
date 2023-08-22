@@ -38,28 +38,28 @@ public class SavedGame {
         this.player1Piece = player1Piece;
     }
 
-    public String getGame_type() {
+    public String getGameType() {
         return gameType;
     }
 
-    public void setGame_type(String game_type) {
-        this.gameType = game_type;
+    public void setGameType(String gameType) {
+        this.gameType = gameType;
     }
 
-    public String getOpponent_type() {
+    public String getOpponentType() {
         return opponentType;
     }
 
-    public void setOpponent_type(String opponent_type) {
-        this.opponentType = opponent_type;
+    public void setOpponentType(String opponentType) {
+        this.opponentType = opponentType;
     }
 
-    public String getAi_difficulty() {
+    public String getAiDifficulty() {
         return aiDifficulty;
     }
 
-    public void setAi_difficulty(String ai_difficulty) {
-        this.aiDifficulty = ai_difficulty;
+    public void setAiDifficulty(String aiDifficulty) {
+        this.aiDifficulty = aiDifficulty;
     }
 
     public String getTurn() {
