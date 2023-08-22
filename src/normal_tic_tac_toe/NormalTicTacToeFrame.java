@@ -179,6 +179,11 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
         btnHelp.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         btnHelp.setForeground(new java.awt.Color(255, 255, 255));
         btnHelp.setText("Help");
+        btnHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHelpActionPerformed(evt);
+            }
+        });
 
         lblTurn.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
         lblTurn.setForeground(new java.awt.Color(255, 255, 255));
@@ -285,6 +290,12 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
         // TODO add your handling code here:
         saveGame();
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
+        // TODO add your handling code here:
+        NormalHelpFrame frmNormalHelp = new NormalHelpFrame();
+        frmNormalHelp.setVisible(true);
+    }//GEN-LAST:event_btnHelpActionPerformed
 
     /**
      * @param args the command line arguments

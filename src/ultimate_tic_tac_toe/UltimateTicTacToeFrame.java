@@ -190,6 +190,11 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         btnHelp.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         btnHelp.setForeground(new java.awt.Color(255, 255, 255));
         btnHelp.setText("Help");
+        btnHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHelpActionPerformed(evt);
+            }
+        });
 
         btnRestart.setBackground(new java.awt.Color(0, 102, 255));
         btnRestart.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -318,6 +323,12 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         // TODO add your handling code here:
         saveGame();
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
+        // TODO add your handling code here:\
+        UltimateHelpFrame frmUltimateHelp = new UltimateHelpFrame();
+        frmUltimateHelp.setVisible(true);
+    }//GEN-LAST:event_btnHelpActionPerformed
 
     private void addButtonsToPanel(JPanel panel, JButton[] btnArray, int index) {
         for (int i = 0; i < 9; i++) {
