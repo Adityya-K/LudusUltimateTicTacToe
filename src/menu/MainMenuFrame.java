@@ -39,6 +39,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnLoginOut = new javax.swing.JButton();
         btnLeaderboard = new javax.swing.JButton();
         btnNTTT = new javax.swing.JButton();
+        btnUserProfile = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -67,7 +68,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnUTTT);
-        btnUTTT.setBounds(260, 360, 430, 40);
+        btnUTTT.setBounds(260, 340, 430, 40);
 
         btnLoginOut.setBackground(new java.awt.Color(0, 102, 255));
         btnLoginOut.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -79,7 +80,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoginOut);
-        btnLoginOut.setBounds(260, 510, 430, 40);
+        btnLoginOut.setBounds(260, 550, 430, 40);
 
         btnLeaderboard.setBackground(new java.awt.Color(0, 102, 255));
         btnLeaderboard.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -91,7 +92,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLeaderboard);
-        btnLeaderboard.setBounds(260, 440, 430, 40);
+        btnLeaderboard.setBounds(260, 480, 430, 40);
 
         btnNTTT.setBackground(new java.awt.Color(0, 102, 255));
         btnNTTT.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -103,7 +104,19 @@ public class MainMenuFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnNTTT);
-        btnNTTT.setBounds(260, 280, 430, 40);
+        btnNTTT.setBounds(260, 270, 430, 40);
+
+        btnUserProfile.setBackground(new java.awt.Color(0, 102, 255));
+        btnUserProfile.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnUserProfile.setForeground(new java.awt.Color(255, 255, 255));
+        btnUserProfile.setText("User Profile");
+        btnUserProfile.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUserProfileActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnUserProfile);
+        btnUserProfile.setBounds(260, 410, 430, 40);
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image_assets/main-menu-background.png"))); // NOI18N
         lblBackground.setText("jLabel1");
@@ -154,6 +167,13 @@ public class MainMenuFrame extends javax.swing.JFrame {
             this.dispose();
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void btnUserProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserProfileActionPerformed
+        // TODO add your handling code here:
+        UserProfileFrame frmUserProfile = new UserProfileFrame();
+        frmUserProfile.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnUserProfileActionPerformed
     
     
     /**
@@ -199,6 +219,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnLoginOut;
     private javax.swing.JButton btnNTTT;
     private javax.swing.JButton btnUTTT;
+    private javax.swing.JButton btnUserProfile;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
