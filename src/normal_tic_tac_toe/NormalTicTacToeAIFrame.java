@@ -450,7 +450,7 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         if (JOptionPane.showConfirmDialog(this, "Would you like to save your current game?", "Save Game?",JOptionPane.YES_NO_OPTION) == 0) {
             String boardString = "";
             for (int i = 0; i < board.length; i++) {
-                boardString += (board[i] == null ? "e" : board[i]) + "|";
+                boardString += (board[i] == null ? "e" : board[i]) + ":";
             }
             SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), player, "normal", "computer", difficulty, player, boardString);
             CurrentUser.getUser().saveGame(currentGame);

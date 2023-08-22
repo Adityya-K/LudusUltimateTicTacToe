@@ -170,7 +170,7 @@ public class SavedGamesFrame extends javax.swing.JFrame {
             String opponentType = gamesPlayed.get(rowSelected).getOpponentType();
             if (gameType.equals("NORMAL")) {
                 if (opponentType.equals("AI")) {
-                    String[] board = gamesPlayed.get(rowSelected).getPosition().split("|");
+                    String[] board = gamesPlayed.get(rowSelected).getPosition().split(":");
                     System.out.println(gamesPlayed.get(rowSelected).getPosition());
                     NormalTicTacToeAIFrame frmTicTacToeAI = new NormalTicTacToeAIFrame();
                     frmTicTacToeAI.setGameProperties(gamesPlayed.get(rowSelected).getAIDifficulty().toLowerCase(), gamesPlayed.get(rowSelected).getPlayer1Piece().equals("X") ? "O" : "X", gamesPlayed.get(rowSelected).getPlayer1Piece(), board);
