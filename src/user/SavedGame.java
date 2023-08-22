@@ -54,11 +54,11 @@ public class SavedGame {
         this.opponentType = opponentType;
     }
 
-    public String getAiDifficulty() {
+    public String getAIDifficulty() {
         return aiDifficulty;
     }
 
-    public void setAiDifficulty(String aiDifficulty) {
+    public void setAIDifficulty(String aiDifficulty) {
         this.aiDifficulty = aiDifficulty;
     }
 
