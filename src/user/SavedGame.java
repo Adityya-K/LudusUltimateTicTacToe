@@ -16,10 +16,75 @@ public class SavedGame {
     // not multiplayer yet
     //private User player2; //
     private String player1Piece; // X, O
-    private String game_type; // ULTIMATE, NORMAL
-    private String opponent_type; // AI, HUMAN
-    private String ai_difficulty; // EASY, MEDIUM, HARD
+    private String gameType; // ULTIMATE, NORMAL
+    private String opponentType; // AI, HUMAN
+    private String aiDifficulty; // EASY, MEDIUM, HARD
     private String turn; // ME, OPPONENT
+    
+    // getters and setters for savedGame
+    public String getPlayer1() {
+        return player1;
+    }
+
+    public void setPlayer1(String player1) {
+        this.player1 = player1;
+    }
+
+    public String getPlayer1Piece() {
+        return player1Piece;
+    }
+
+    public void setPlayer1Piece(String player1Piece) {
+        this.player1Piece = player1Piece;
+    }
+
+    public String getGame_type() {
+        return gameType;
+    }
+
+    public void setGame_type(String game_type) {
+        this.gameType = game_type;
+    }
+
+    public String getOpponent_type() {
+        return opponentType;
+    }
+
+    public void setOpponent_type(String opponent_type) {
+        this.opponentType = opponent_type;
+    }
+
+    public String getAi_difficulty() {
+        return aiDifficulty;
+    }
+
+    public void setAi_difficulty(String ai_difficulty) {
+        this.aiDifficulty = ai_difficulty;
+    }
+
+    public String getTurn() {
+        return turn;
+    }
+
+    public void setTurn(String turn) {
+        this.turn = turn;
+    }
+
+    public String getSavedDate() {
+        return savedDate;
+    }
+
+    public void setSavedDate(String savedDate) {
+        this.savedDate = savedDate;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
     private String savedDate; // date in str 
 
 
@@ -39,9 +104,9 @@ public class SavedGame {
     public SavedGame(String player1, String player1Piece, String game_type, String opponent_type, String ai_difficulty, String turn, String position) {
         this.player1 = player1;
         this.player1Piece = player1Piece;
-        this.game_type = game_type;
-        this.opponent_type = opponent_type;
-        this.ai_difficulty = ai_difficulty;
+        this.gameType = game_type;
+        this.opponentType = opponent_type;
+        this.aiDifficulty = ai_difficulty;
         this.turn = turn;
         this.position = position;
     }
@@ -51,17 +116,17 @@ public class SavedGame {
         this.player1 = player1;
         //this.player2 = player2;
         this.player1Piece = player1Piece;
-        this.game_type = game_type;
-        this.opponent_type = opponent_type;
+        this.gameType = game_type;
+        this.opponentType = opponent_type;
         this.turn = turn;
         this.position = position;
-           // format the current date to string
-           Date date = new Date();
-           DateFormat dateFormat = new SimpleDateFormat(config.gameDateFormat);  
-           // store this information
-           String strDate = dateFormat.format(date);
-           // in a dateJoined field
-           this.savedDate = strDate;
+        // format the current date to string
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat(config.gameDateFormat);  
+        // store this information
+        String strDate = dateFormat.format(date);
+        // in a dateJoined field
+        this.savedDate = strDate;
     }
     
     
@@ -83,9 +148,9 @@ public class SavedGame {
         
         // set the rest of the class fields as the attributes
         this.player1Piece = attributes[1];
-        this.game_type = attributes[2];
-        this.opponent_type = attributes[3];
-        this.ai_difficulty = attributes[4];
+        this.gameType = attributes[2];
+        this.opponentType = attributes[3];
+        this.aiDifficulty = attributes[4];
         this.turn = attributes[5];
         this.position = attributes[6];
         // case where the date isn't in database, save the string
@@ -117,7 +182,7 @@ public class SavedGame {
         }
         */
         // return a database formatted string, with each variable seperated by commas
-        return player1 + "," + player1Piece + "," + game_type + "," + opponent_type + "," + ai_difficulty + "," + turn + "," + position + "," + savedDate;
+        return player1 + "," + player1Piece + "," + gameType + "," + opponentType + "," + aiDifficulty + "," + turn + "," + position + "," + savedDate;
     }
     
     
