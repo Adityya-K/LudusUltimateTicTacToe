@@ -50,6 +50,7 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         ultBoard = new UltTTT(btnArray, player, "None");
         NormalTTT[] gameBoard = ultBoard.getGameBoard();
         ultBoard.setCurrentSectionIndex(currentSectionIndex);
+        gameBoard[currentSectionIndex].highlightButtons();
         ultBoard.setCurrentPlayer(currentPlayer);
         lblTurn.setText(currentPlayer + "'s turn");
         

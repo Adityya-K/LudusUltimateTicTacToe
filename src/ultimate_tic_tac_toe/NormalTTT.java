@@ -80,6 +80,18 @@ public class NormalTTT {
         }
     }
     
+    public void highlightButtons() {
+        for (int i = 0; i < btnArray.length; i++) {
+            btnArray[i].setBackground(new Color(255, 105, 97));
+        }
+    }
+    
+    public void unHighlightButtons() {
+        for (int i = 0; i < btnArray.length; i++) {
+            btnArray[i].setBackground(new Color(128, 176, 247));
+        }
+    }
+    
     public void enableButtons () {
         for (int i = 0; i < btnArray.length; i++) {
             btnArray[i].setEnabled(true);

@@ -44,6 +44,7 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
         ultBoard = new UltTTT(btnArray, player, difficulty);
         NormalTTT[] gameBoard = ultBoard.getGameBoard();
         ultBoard.setCurrentSectionIndex(currentSectionIndex);
+        gameBoard[currentSectionIndex].highlightButtons();
         
         for (int i = 0; i < gameBoard.length; i++) {
             for (int j = 0; j < gameBoard[i].getBoard().length; j++) {
@@ -349,6 +350,8 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
     private void btnRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestartActionPerformed
         // TODO add your handling code here:
         ultBoard.resetBoard();
+        ultBoard.setCurrentPlayer("X");
+        ultBoard.setCurrentSectionIndex(-1);
         enableButtons();
     }//GEN-LAST:event_btnRestartActionPerformed
 
