@@ -1,6 +1,7 @@
 nbproject/private/private.properties
 /nbproject/private/
 build/
+dist/
 # Compiled class file
 *.class
 
