@@ -1,5 +1,8 @@
 package user;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import user.*;
 
 // class for saved game
@@ -17,18 +20,8 @@ public class SavedGame {
     private String opponent_type; // AI, HUMAN
     private String ai_difficulty; // EASY, MEDIUM, HARD
     private String turn; // ME, OPPONENT
+    private String savedDate; // date in str 
 
-    public String getGameType() {
-        return game_type;
-    }
-    
-    public String getOpponentType() {
-        return opponent_type;
-    }
-    
-    public String getAIDifficulty() {
-        return ai_difficulty;
-    }
 
     
     /*
@@ -62,6 +55,13 @@ public class SavedGame {
         this.opponent_type = opponent_type;
         this.turn = turn;
         this.position = position;
+           // format the current date to string
+           Date date = new Date();
+           DateFormat dateFormat = new SimpleDateFormat(config.gameDateFormat);  
+           // store this information
+           String strDate = dateFormat.format(date);
+           // in a dateJoined field
+           this.savedDate = strDate;
     }
     
     
@@ -88,6 +88,18 @@ public class SavedGame {
         this.ai_difficulty = attributes[4];
         this.turn = attributes[5];
         this.position = attributes[6];
+        // case where the date isn't in database, save the string
+        if (attributes.length <= 7) {
+           // format the current date to string
+           Date date = new Date();
+           DateFormat dateFormat = new SimpleDateFormat(config.gameDateFormat);  
+           // store this information
+           String strDate = dateFormat.format(date);
+           // in a dateJoined field
+           this.savedDate = strDate;
+        } else {
+            this.savedDate = attributes[7];
+        }
     }
 
     // override to string
@@ -105,7 +117,7 @@ public class SavedGame {
         }
         */
         // return a database formatted string, with each variable seperated by commas
-        return player1 + "," + player1Piece + "," + game_type + "," + opponent_type + "," + ai_difficulty + "," + turn + "," + position;
+        return player1 + "," + player1Piece + "," + game_type + "," + opponent_type + "," + ai_difficulty + "," + turn + "," + position + "," + savedDate;
     }
     
     

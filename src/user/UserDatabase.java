@@ -55,12 +55,15 @@ public class UserDatabase {
         if(fileData == null || fileData.trim().isEmpty()) {
             return "done";
         }
+
         
         // decrypted database
         String decrypted = decryptDataBase(fileData);
         // spilt the decrypted database into an array of user strings
         String [] usersStrings = decrypted.split("\n");
-        
+        System.out.println("List of users");
+        System.out.println(decrypted);
+
         // databse is stored as comma seperated user strings
         // e.g. user1, rating ...
         // create a new user from this.
@@ -68,10 +71,13 @@ public class UserDatabase {
             // remove any whitespaces
             userString = userString.trim();
             // create a new user from the attributes
+            System.out.println("Adding new user");
+            System.out.println(userString);
             User currentUser = new User(userString);
             // add current user to array list
             users.add(currentUser);
         }
+        System.out.println("Done loading users");
         
         return "done";
     }
