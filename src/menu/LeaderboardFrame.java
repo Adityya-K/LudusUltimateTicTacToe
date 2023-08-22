@@ -1,24 +1,15 @@
 /*
- * Group Name: Ludus 
- * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
- * ICS4UE
- * August 20-22, 2023
- * Mr. Diakoloukas
- * Purpose: to create a leaderboard page
- * 
- */
-
-/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package menu;
 
-// Imports LoginFrame, ArrayList, a few classes from the user package and javax table
 import authentication_frames.LoginFrame;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import user.User;
 import user.UserDatabase;
+import java.awt.*;
 import javax.swing.table.*;
 import user.CurrentUser;
 
@@ -32,23 +23,17 @@ public class LeaderboardFrame extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public LeaderboardFrame() {
-        
-        // Displays the JFrame at the center position of the screen
         setSize(938, 788);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
         UserDatabase.loadDatabase();
         displayTopUsers();
-        
     }
     
     public void displayTopUsers() {
-        
-        // Initializes the ArrayList of top players and the number of players to display
         ArrayList <User> topPlayers = UserDatabase.getTopPlayers();
         final int PLAYERS_TO_DISPLAY = 10;
         
-        // TODO comment and clean the following code (delete the printing of data and useless variables)
         // two columns for username and rating
         String userResult = "";
         String ratingResult = "";
@@ -71,7 +56,8 @@ public class LeaderboardFrame extends javax.swing.JFrame {
             System.out.println(rating);
             model.addRow(new Object[]{rank,username, rating});
         }
-    
+        
+               
     }
 
     /**
@@ -145,24 +131,18 @@ public class LeaderboardFrame extends javax.swing.JFrame {
 
     private void btnGoToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoToMainActionPerformed
         // TODO add your handling code here:
-        
-        // Displays the main menu
         MainMenuFrame frmMainMenu = new MainMenuFrame(); 
         frmMainMenu.setVisible(true);
         this.dispose();
-        
     }//GEN-LAST:event_btnGoToMainActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        
-        // Displays the login page if the current user is null when the window is opened
         if(CurrentUser.getUser() == null) {
             LoginFrame frmLogin = new LoginFrame();
             frmLogin.setVisible(true);
             this.dispose();
         }
-        
     }//GEN-LAST:event_formWindowOpened
 
     /**

@@ -1,28 +1,16 @@
 /*
- * Group Name: Ludus 
- * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
- * ICS4UE
- * August 20-22, 2023
- * Mr. Diakoloukas
- * Purpose: to create a registration page
- * 
- */
-
-/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package authentication_frames;
 
-// Imports JOptionPane
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author gaudium
  */
-
-// Imports everything from the user package
 import user.*;
 
 public class RegistrationFrame extends javax.swing.JFrame {
@@ -31,13 +19,10 @@ public class RegistrationFrame extends javax.swing.JFrame {
      * Creates new form LoginFrame
      */
     public RegistrationFrame() {
-        
-        // Displays the JFrame at the center of the screen
         UserDatabase.loadDatabase();
         setSize(940, 788);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
-        
     }
 
     /**
@@ -129,64 +114,42 @@ public class RegistrationFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
-    // Initializes a string to contain any errors
     String error;
-    
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
-        
-        // Stores the user information in strings
         error = "";
         String username = txtUsername.getText();
         String password = String.valueOf(txtPassword.getPassword());
         String confirmPassword = String.valueOf(txtConfirmPassword.getPassword());
         String email = txtEmail.getText();
         
-        // Uses two methods from the Validation class to validate input
         String userValidation = Validation.validateUserName(username);
         String emailValidation = Validation.validateEmail(email);
-        
-        // Sets the error message if any of the fields are empty
+        // ensure username is OK.
         if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || email.isEmpty()) {
             error = "Some fields are empty";
-        
-        // Sets the error message if the two passwords don't match
         } else if (!password.equals(confirmPassword)) {
             error = "Passwords and confirmation password don't match";
-        
-        // Sets the error message if the username contains commas
         } else if (!userValidation.equals("ok")) {
             error = userValidation;
-        
-        // Sets the error message if the email contains commas
         } else if (!emailValidation.equals("ok")){
             error = emailValidation;
-        
-        // Sets the error message if the username already exists
-        } else if (UserDatabase.existsUser(username) == true) {
+        }
+        else if (UserDatabase.existsUser(username) == true) {
             error = "Username already exists";
-        
-        // Runs if the input is valid
-        } else {
-            
-            // Adds the user to the database
+        }
+        else {
             User currentUser = UserDatabase.addUser(username, password, email);
 
-            // TODO delete this line
-            System.out.println(currentUser.toString());
             
-            // Displays the login page
+            System.out.println(currentUser.toString());
             LoginFrame loginFrame = new LoginFrame();
             loginFrame.setVisible(true);
             this.dispose();
-            
         }    
 
-        // Displays the error if it is not blank
         if (!error.isBlank()) {
             JOptionPane.showMessageDialog(this, error, "Registration Error", JOptionPane.ERROR_MESSAGE);  
         }
-        
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**

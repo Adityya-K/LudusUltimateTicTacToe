@@ -1,21 +1,11 @@
 /*
- * Group Name: Ludus 
- * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
- * ICS4UE
- * August 20-22, 2023
- * Mr. Diakoloukas
- * Purpose: to create a main menu page
- * 
- */
-
-/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package menu;
 
-// Imports LoginFrame, the two ModeSelectFrams and the CurrentUser class from the user package
 import authentication_frames.LoginFrame;
+import javax.swing.JFrame;
 import normal_tic_tac_toe.NormalModeSelectFrame;
 import ultimate_tic_tac_toe.UltimateModeSelectFrame;
 import user.CurrentUser;
@@ -30,12 +20,9 @@ public class MainMenuFrame extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public MainMenuFrame() {
-        
-        // Displays the JFrame at the center position of the screen
         setSize(938, 788);
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
-        
     }
 
     /**
@@ -158,77 +145,54 @@ public class MainMenuFrame extends javax.swing.JFrame {
 
     private void btnNTTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNTTTActionPerformed
         // TODO add your handling code here:
-        
-        // Displays the normal Tic-Tac-Toe select page
         NormalModeSelectFrame frmNTTModeSelect = new NormalModeSelectFrame();
         frmNTTModeSelect.setVisible(true);
         this.dispose();
-        
     }//GEN-LAST:event_btnNTTTActionPerformed
 
     private void btnUTTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUTTTActionPerformed
         // TODO add your handling code here:
-        
-        // Displays the ultimate Tic-Tac-Toe select page
         UltimateModeSelectFrame frmUTTModeSelect = new UltimateModeSelectFrame();
         frmUTTModeSelect.setVisible(true);
         this.dispose();
-        
     }//GEN-LAST:event_btnUTTTActionPerformed
 
     private void btnLeaderboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeaderboardActionPerformed
         // TODO add your handling code here:
-        
-        // Displays the leaderboard
         LeaderboardFrame frmLeaderboard = new LeaderboardFrame();
         frmLeaderboard.setVisible(true);
         this.dispose();
-        
     }//GEN-LAST:event_btnLeaderboardActionPerformed
 
     private void btnLoginOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginOutActionPerformed
         // TODO add your handling code here:
-        
-        // Sets the current user to null
         CurrentUser.setUser(null);
-        
-        // Displays the login page
         LoginFrame frmLogin = new LoginFrame();
         frmLogin.setVisible(true);
         this.dispose();
-        
     }//GEN-LAST:event_btnLoginOutActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
-        
-        // Displays the login page if the current user is null when the window is opened
         if(CurrentUser.getUser() == null) {
             LoginFrame frmLogin = new LoginFrame();
             frmLogin.setVisible(true);
             this.dispose();
         }
-        
     }//GEN-LAST:event_formWindowOpened
 
     private void btnUserProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUserProfileActionPerformed
         // TODO add your handling code here:
-        
-        // Displays the user's profile
         UserProfileFrame frmUserProfile = new UserProfileFrame();
         frmUserProfile.setVisible(true);
         this.dispose();
-        
     }//GEN-LAST:event_btnUserProfileActionPerformed
 
     private void btnSavedGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavedGamesActionPerformed
         // TODO add your handling code here:
-        
-        // Displays the saved games
         SavedGamesFrame frmSavedGames = new SavedGamesFrame();
         frmSavedGames.setVisible(true);
         this.dispose();
-        
     }//GEN-LAST:event_btnSavedGamesActionPerformed
     
     
