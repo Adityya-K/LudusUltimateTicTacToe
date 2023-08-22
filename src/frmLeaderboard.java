@@ -9,9 +9,6 @@ public class frmLeaderboard extends javax.swing.JFrame {
      */
     public frmLeaderboard() {
         initComponents();
-        UserDatabase.loadDatabase();
-        displayTopUsers();
-
     }
 
     /**
@@ -73,28 +70,7 @@ public class frmLeaderboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    public void displayTopUsers() {
-        ArrayList <User> topPlayers = UserDatabase.getTopPlayers();
-        // two columns for username and rating
-        String userResult = "";
-        String ratingResult = "";
-        
-        int numPlayers = 10;
-        
-        System.out.println(topPlayers);
-        
-        if (topPlayers.size() > 0){
-            for (int i = 0;i < Math.min(numPlayers, topPlayers.size()); i ++) {
-                userResult += topPlayers.get(i).getUsername() + "\n";
-                ratingResult += Math.round(topPlayers.get(i).getRating()) + "\n";
-            }
-        }
-        
-        jTextArea1.setText(userResult);
-        jTextArea2.setText(ratingResult);
-        
-    }
-    
+
     /**
      * @param args the command line arguments
      */

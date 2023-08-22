@@ -139,6 +139,8 @@ public class RegistrationFrame extends javax.swing.JFrame {
         }
         else {
             User currentUser = UserDatabase.addUser(username, password, email);
+
+            
             System.out.println(currentUser.toString());
             LoginFrame loginFrame = new LoginFrame();
             loginFrame.setVisible(true);
