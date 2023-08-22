@@ -230,4 +230,8 @@ public class UltTTT {
     public String getCurrentPlayer() {
         return currentPlayer;
     }
+    
+    public NormalTTT[] getGameBoard() {
+        return gameBoard;
+    }
 }

@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import menu.MainMenuFrame;
 import user.CurrentUser;
+import user.SavedGame;
 
 /**
  *
@@ -119,6 +120,9 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(940, 788));
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -228,9 +232,11 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
         // TODO add your handling code here:
-        MainMenuFrame frmMainMenu = new MainMenuFrame();
-        frmMainMenu.setVisible(true);
-        this.dispose();
+        if (JOptionPane.showConfirmDialog(this, "Going to main menu will discard the current game, are you sure?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {    
+            MainMenuFrame frmMainMenu = new MainMenuFrame();
+            frmMainMenu.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnToMainMenuActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -241,6 +247,19 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
             this.dispose();
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(this, "Would you like to save your current game?", "Save Game?",JOptionPane.YES_NO_OPTION) == 0) {
+            String boardString = "";
+            for (int i = 0; i < btnArray.length; i++) {
+                boardString += btnArray[i].getText() + "|";
+            }
+            SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), "X", "normal", "player", turnNumber%2 == 1 ? "X" : "O", boardString);
+            CurrentUser.getUser().saveGame(currentGame);
+            System.out.print(currentGame);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

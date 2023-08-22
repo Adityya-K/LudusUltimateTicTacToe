@@ -15,6 +15,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import menu.MainMenuFrame;
 import user.CurrentUser;
+import user.SavedGame;
 
 /**
  *
@@ -87,6 +88,9 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(940, 788));
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -258,9 +262,11 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
         // TODO add your handling code here:
-        MainMenuFrame frmMainMenu = new MainMenuFrame();
-        frmMainMenu.setVisible(true);
-        this.dispose();
+        if (JOptionPane.showConfirmDialog(this, "Going to main menu will discard the current game, are you sure?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {    
+            MainMenuFrame frmMainMenu = new MainMenuFrame();
+            frmMainMenu.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_btnToMainMenuActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -271,6 +277,21 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
             this.dispose();
         }
     }//GEN-LAST:event_formWindowOpened
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(this, "Would you like to save your current game?", "Save Game?",JOptionPane.YES_NO_OPTION) == 0) {
+            String boardString = "";
+            for (int i = 0; i < ultBoard.getGameBoard().length; i++) {
+                for (int j = 0; j < ultBoard.getGameBoard()[i].getBoard().length; j++) {
+                    boardString += ultBoard.getGameBoard()[i].getBoard()[j] + "|";
+                }
+            }
+            SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), ultBoard.getPlayerPiece(), "ultimate", "computer", ultBoard.getAi(), ultBoard.getPlayerPiece(), boardString);
+            CurrentUser.getUser().saveGame(currentGame);
+            System.out.print(currentGame);
+        }
+    }//GEN-LAST:event_formWindowClosing
 
     private void addButtonsToPanel(JPanel panel, JButton[] btnArray, int index) {
         for (int i = 0; i < 9; i++) {
