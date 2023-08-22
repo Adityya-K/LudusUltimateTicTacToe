@@ -4,7 +4,12 @@
  */
 package menu;
 
+import java.util.ArrayList;
 import javax.swing.JFrame;
+import user.User;
+import user.UserDatabase;
+import java.awt.*;
+import javax.swing.table.*;
 
 /**
  *
@@ -19,6 +24,38 @@ public class LeaderboardFrame extends javax.swing.JFrame {
         setSize(938, 788);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
+        UserDatabase.loadDatabase();
+        displayTopUsers();
+    }
+    
+    public void displayTopUsers() {
+        ArrayList <User> topPlayers = UserDatabase.getTopPlayers();
+        final int PLAYERS_TO_DISPLAY = 10;
+        
+        // two columns for username and rating
+        String userResult = "";
+        String ratingResult = "";
+        
+        // [username,rating]
+        String [] data = new String[3];
+        System.out.println("Top Players:");
+        System.out.println(topPlayers);
+        
+        // new model for the leaderbaord table
+        DefaultTableModel model = (DefaultTableModel) tblLeaderboard.getModel();
+        
+        // display either smaller of the size of the top players arraylist or the PLAYERS_TO_DISPLAY
+        // loop trough each element up until the numbre of playuers to display
+        for (int i = 0;i < Math.min(PLAYERS_TO_DISPLAY, topPlayers.size()); i ++) {
+            String username = topPlayers.get(i).getUsername();
+            String rating = Long.toString(Math.round(topPlayers.get(i).getRating()));
+            String rank = Integer.toString(i + 1);
+            System.out.println(username);
+            System.out.println(rating);
+            model.addRow(new Object[]{rank,username, rating});
+        }
+        
+               
     }
 
     /**
@@ -33,7 +70,7 @@ public class LeaderboardFrame extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         btnGoToMain = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblLeaderboard = new javax.swing.JTable();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -55,18 +92,15 @@ public class LeaderboardFrame extends javax.swing.JFrame {
         getContentPane().add(btnGoToMain);
         btnGoToMain.setBounds(590, 600, 250, 40);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblLeaderboard.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Rank", "Username", "Rating"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblLeaderboard);
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(100, 230, 740, 350);
@@ -128,8 +162,8 @@ public class LeaderboardFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnGoToMain;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JTable tblLeaderboard;
     // End of variables declaration//GEN-END:variables
 }

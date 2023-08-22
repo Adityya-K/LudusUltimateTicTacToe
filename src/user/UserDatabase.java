@@ -30,6 +30,10 @@ public class UserDatabase {
     
     // loads the database from the file, returns done if done
     public static String loadDatabase() {
+        // case where user dtabase is alreayd loaded;
+        if (users.size() > 0){
+            return "done";
+        }
         String fileData = "";
         try{
             BufferedReader reader = new BufferedReader(new FileReader(USER_DATABASE_FILE_PATH));
@@ -57,12 +61,15 @@ public class UserDatabase {
         // spilt the decrypted database into an array of user strings
         String [] usersStrings = decrypted.split("\n");
         
-        System.out.println("Loading Data:");
+        // databse is stored as comma seperated user strings
+        // e.g. user1, rating ...
+        // create a new user from this.
         for (String userString: usersStrings) {
+            // remove any whitespaces
             userString = userString.trim();
-            System.out.println(userString);
+            // create a new user from the attributes
             User currentUser = new User(userString);
-            System.out.println(currentUser.toString());
+            // add current user to array list
             users.add(currentUser);
         }
         
@@ -85,6 +92,20 @@ public class UserDatabase {
         return null;
     }
     
+    // get user with only by username
+    public static User getUser(String userName) {
+        // perform linear search on user database.
+        // todo hash maps instead
+        for (User user: users) {
+            if (user.getUsername().equals(userName)) {
+                return user;
+            }
+        }
+        // otherwise return null.
+        return null;
+    }
+    
+    
     public static boolean existsUser(String userName) {
         // perform linear search on user database.
         // todo hash maps instead
@@ -105,6 +126,13 @@ public class UserDatabase {
     }
 
     public UserDatabase() {
+    }
+    
+    // saves users after change
+    // the user object is already updated
+    // so save the user database with the current users list
+    public static void saveUsers() {
+        saveUserDatabase(users);
     }
     
     public static void saveUserDatabase(ArrayList<User> users) {
@@ -130,7 +158,6 @@ public class UserDatabase {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*
         
         // Saving unencrypted file for debugging purposes:
         try {
@@ -141,7 +168,6 @@ public class UserDatabase {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        */
     }
     
     public static ArrayList<User> getTopPlayers() {

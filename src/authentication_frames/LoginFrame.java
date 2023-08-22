@@ -127,6 +127,8 @@ public class LoginFrame extends javax.swing.JFrame {
     
     String error;
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        // before logging in user is null
+        CurrentUser.setUser(null);
         String username = txtUsername.getText();
         String password = String.valueOf(txtPassword.getPassword());
         User currentUser = UserDatabase.getUser(username, password);
@@ -135,6 +137,9 @@ public class LoginFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Invalid username or invalid password. Try again!", "Login Error", JOptionPane.ERROR_MESSAGE);
         } else {
             System.out.println(currentUser.toString());
+            // set the current user as the user
+            CurrentUser.setUser(currentUser);
+            //currentUser.saveGame(new SavedGame(currentUser.getUsername(), "X", "NORMAL", "AI", "HARD", "xxxoooxxx", "ME"));
             MainMenuFrame frmMainMenu = new MainMenuFrame(); 
             frmMainMenu.setVisible(true);
             this.dispose();
