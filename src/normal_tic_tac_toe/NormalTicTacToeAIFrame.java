@@ -54,6 +54,7 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         this.board = board;
         
         for (int i = 0; i < btnArray.length; i++) {
+            btnArray[i].setForeground(new Color(0,102,255));
             btnArray[i].setText(board[i].equals("e") ? " " : board[i]);
             this.board[i] = board[i].equals("e") ? null : board[i];
         }
@@ -68,6 +69,20 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                 moveMediumComputer();
             } else if (difficulty.equals("hard")) {
                 moveAI();
+            }
+        }
+        
+        String gameResult = getGameResult(getAllLines());
+                
+        // Checks if the game has been decided
+        if (!gameResult.equals("undecided")) {
+
+            // TODO output game result on gui instead of console
+            // Prints out the game result
+            JOptionPane.showMessageDialog(this, gameResult.equals("draw") ? "It was a draw" : gameResult + " won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            
+            for (int i = 0; i < btnArray.length; i++) {
+                btnArray[i].setEnabled(false);
             }
         }
     }

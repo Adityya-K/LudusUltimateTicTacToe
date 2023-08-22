@@ -28,6 +28,15 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
     String[] playerArray = {"X", "O"};
     
     
+     public void setGameProperties (String currentTurn, String[] board) {
+        turnNumber = Integer.parseInt(currentTurn);
+        for (int i = 0; i < btnArray.length; i++) {
+            btnArray[i].setForeground(new Color(0,102,255));
+            btnArray[i].setText(board[i].equals("e") ? " " : board[i]);
+        }
+     }
+    
+    
     /**
      * Creates new form NormalTicTacToeFrame
      */
@@ -253,9 +262,9 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
         if (JOptionPane.showConfirmDialog(this, "Would you like to save your current game?", "Save Game?",JOptionPane.YES_NO_OPTION) == 0) {
             String boardString = "";
             for (int i = 0; i < btnArray.length; i++) {
-                boardString += btnArray[i].getText() + "|";
+                boardString += btnArray[i].getText() + ":";
             }
-            SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), "X", "normal", "player", turnNumber%2 == 1 ? "X" : "O", boardString);
+            SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), "X", "normal", "player", Integer.toString(turnNumber), boardString);
             CurrentUser.getUser().saveGame(currentGame);
             System.out.print(currentGame);
         }

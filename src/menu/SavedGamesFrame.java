@@ -14,6 +14,7 @@ import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.table.*;
 import normal_tic_tac_toe.NormalTicTacToeAIFrame;
+import normal_tic_tac_toe.NormalTicTacToeFrame;
 import user.CurrentUser;
 import user.SavedGame;
 
@@ -37,6 +38,8 @@ public class SavedGamesFrame extends javax.swing.JFrame {
         
         // new model for the leaderbaord table
         DefaultTableModel model = (DefaultTableModel) tblSavedGames.getModel();
+        
+        model.setRowCount(0);
         
         // display either smaller of the size of the top players arraylist or the PLAYERS_TO_DISPLAY
         // loop trough each element up until the numbre of playuers to display
@@ -168,21 +171,26 @@ public class SavedGamesFrame extends javax.swing.JFrame {
             ArrayList <SavedGame> gamesPlayed = CurrentUser.getUser().getGames();
             String gameType = gamesPlayed.get(rowSelected).getGameType();
             String opponentType = gamesPlayed.get(rowSelected).getOpponentType();
-            if (gameType.equals("NORMAL")) {
-                if (opponentType.equals("AI")) {
+            if (gameType.equals("normal")) {
+                if (opponentType.equals("computer")) {
                     String[] board = gamesPlayed.get(rowSelected).getPosition().split(":");
-                    System.out.println(gamesPlayed.get(rowSelected).getPosition());
                     NormalTicTacToeAIFrame frmTicTacToeAI = new NormalTicTacToeAIFrame();
-                    frmTicTacToeAI.setGameProperties(gamesPlayed.get(rowSelected).getAIDifficulty().toLowerCase(), gamesPlayed.get(rowSelected).getPlayer1Piece().equals("X") ? "O" : "X", gamesPlayed.get(rowSelected).getPlayer1Piece(), board);
+                    System.out.println(gamesPlayed.get(rowSelected).getPosition());
+                    frmTicTacToeAI.setGameProperties(gamesPlayed.get(rowSelected).getAIDifficulty(), gamesPlayed.get(rowSelected).getPlayer1Piece().equals("X") ? "O" : "X", gamesPlayed.get(rowSelected).getPlayer1Piece(), board);
                     frmTicTacToeAI.setVisible(true);
                     this.dispose();
                 }
                 else {
-
+                    String[] board = gamesPlayed.get(rowSelected).getPosition().split(":");
+                    NormalTicTacToeFrame frmTicTacToe = new NormalTicTacToeFrame();
+                    System.out.println(gamesPlayed.get(rowSelected).getPosition());
+                    frmTicTacToe.setGameProperties(gamesPlayed.get(rowSelected).getTurn(), board);
+                    frmTicTacToe.setVisible(true);
+                    this.dispose();
                 }
             }
             else {
-                if (opponentType.equals("AI")) {
+                if (opponentType.equals("ai")) {
 
                 }
                 else {
