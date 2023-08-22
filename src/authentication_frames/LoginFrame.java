@@ -1,20 +1,10 @@
 /*
- * Group Name: Ludus 
- * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
- * ICS4UE
- * August 20-22, 2023
- * Mr. Diakoloukas
- * Purpose: to create a login page
- * 
- */
-
-/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package authentication_frames;
 
-// Imports JOptionPane and MainMenuFrame
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import menu.MainMenuFrame;
 
@@ -22,8 +12,6 @@ import menu.MainMenuFrame;
  *
  * @author gaudium
  */
-
-// Imports everything from the user package
 import user.*;
 
 public class LoginFrame extends javax.swing.JFrame {
@@ -35,17 +23,12 @@ public class LoginFrame extends javax.swing.JFrame {
         UserDatabase.loadDatabase();
 
         setSize(938, 820);
-        
-        // Displays the JFrame to center position of a screen
-        setLocationRelativeTo(null);
+        setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
-        
-        // Displays two text labels
         String createAccount = "<HTML>Don't have an account? <u>Create one!</u></HTML>";
         String forgotPassword = "<HTML><u>Forgot Password?</u></HTML>";
         lblForgotPassword.setText(forgotPassword);
         lblCreateAccount.setText(createAccount);
-        
     }
 
     /**
@@ -142,47 +125,33 @@ public class LoginFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+    String error;
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        
-        // Initializes the current user using the text labels and the getUser method from the UserDatabase class
-        // Before logging in user is null
+        // before logging in user is null
         CurrentUser.setUser(null);
         String username = txtUsername.getText();
         String password = String.valueOf(txtPassword.getPassword());
         User currentUser = UserDatabase.getUser(username, password);
         
-        // The if statement runs if the user was not found, the else statement runs if the user was found
         if (currentUser == null) {
-            
-            // Informs the user of the login error
             JOptionPane.showMessageDialog(this, "Invalid username or invalid password. Try again!", "Login Error", JOptionPane.ERROR_MESSAGE);
-            
         } else {
-            
-            // TODO delete this line
             System.out.println(currentUser.toString());
-            
-            // Sets the current user as the user
+            // set the current user as the user
             CurrentUser.setUser(currentUser);
             CurrentUser.getUser().setRating(1000);
             
-            // Displays the main menu
             MainMenuFrame frmMainMenu = new MainMenuFrame(); 
             frmMainMenu.setVisible(true);
             this.dispose();
-            
         }
-        
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblCreateAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCreateAccountMouseClicked
         // TODO add your handling code here:
-        
-        // Displays the registration page
         RegistrationFrame frmRegistration = new RegistrationFrame();
         frmRegistration.setVisible(true);
         this.dispose();
-        
     }//GEN-LAST:event_lblCreateAccountMouseClicked
 
     /**
