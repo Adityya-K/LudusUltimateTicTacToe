@@ -10,7 +10,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import menu.MainMenuFrame;
 
@@ -18,14 +17,26 @@ import menu.MainMenuFrame;
  *
  * @author gaudium
  */
-public class UltimateTicTacToeFrame extends javax.swing.JFrame implements ActionListener {
+public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements ActionListener {
 
     UltTTT ultBoard;
+    
+    public void setGameProperties (String difficulty, String ai, String player) {
+        lblComputerIs.setText("Computer is: " + ai + " ( " + difficulty.toUpperCase() + " difficulty )");
+        lblPlayerIs.setText("You are: " + player);
+        
+        ultBoard = new UltTTT(btnArray, player, difficulty);
+        
+        if (ultBoard.getPlayerPiece().equals("O")) // ai goes first
+        {
+            ultBoard.moveAI();
+        }
+    }
     
     /**
      * Creates new form UltimateTicTacToeFrame
      */
-    public UltimateTicTacToeFrame() {
+    public UltimateTicTacToeAIFrame() {
         setSize(940, 820);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
@@ -39,8 +50,6 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         addButtonsToPanel(panTTTB7, btnArray[6], 6);
         addButtonsToPanel(panTTTB8, btnArray[7], 7);
         addButtonsToPanel(panTTTB9, btnArray[8], 8);
-        
-        ultBoard = new UltTTT(btnArray, "X", "None");
     }
     
     
@@ -54,10 +63,10 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panRootBackground = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        lblTurn = new javax.swing.JLabel();
-        panBackground = new javax.swing.JPanel();
+        lblComputerIs = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         panButtons = new javax.swing.JPanel();
         panTTTB1 = new javax.swing.JPanel();
         panTTTB2 = new javax.swing.JPanel();
@@ -71,27 +80,27 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         btnHelp = new javax.swing.JButton();
         btnRestart = new javax.swing.JButton();
         btnToMainMenu = new javax.swing.JButton();
+        lblPlayerIs = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(940, 788));
         setMinimumSize(new java.awt.Dimension(940, 788));
 
-        panRootBackground.setBackground(new java.awt.Color(0, 35, 82));
-        panRootBackground.setMaximumSize(new java.awt.Dimension(940, 788));
-        panRootBackground.setMinimumSize(new java.awt.Dimension(940, 788));
-        panRootBackground.setPreferredSize(new java.awt.Dimension(940, 788));
+        jPanel1.setBackground(new java.awt.Color(0, 35, 82));
+        jPanel1.setMaximumSize(new java.awt.Dimension(940, 788));
+        jPanel1.setMinimumSize(new java.awt.Dimension(940, 788));
+        jPanel1.setPreferredSize(new java.awt.Dimension(940, 788));
 
         jLabel1.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("ULTIMATE TIC TAC TOE");
 
-        lblTurn.setFont(new java.awt.Font("Roboto", 1, 24)); // NOI18N
-        lblTurn.setForeground(new java.awt.Color(255, 255, 255));
-        lblTurn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTurn.setText("X's turn");
+        lblComputerIs.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        lblComputerIs.setForeground(new java.awt.Color(255, 255, 255));
+        lblComputerIs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblComputerIs.setText("Computer is: X ( HARD difficulty )");
 
-        panBackground.setBackground(new java.awt.Color(0, 35, 82));
+        jPanel2.setBackground(new java.awt.Color(0, 35, 82));
 
         panButtons.setBackground(new java.awt.Color(0, 35, 82));
         panButtons.setMaximumSize(new java.awt.Dimension(550, 550));
@@ -150,7 +159,7 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         panTTTB9.setLayout(new java.awt.GridLayout(3, 3));
         panButtons.add(panTTTB9);
 
-        panBackground.add(panButtons);
+        jPanel2.add(panButtons);
 
         btnHelp.setBackground(new java.awt.Color(0, 102, 255));
         btnHelp.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -177,14 +186,18 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
             }
         });
 
-        javax.swing.GroupLayout panRootBackgroundLayout = new javax.swing.GroupLayout(panRootBackground);
-        panRootBackground.setLayout(panRootBackgroundLayout);
-        panRootBackgroundLayout.setHorizontalGroup(
-            panRootBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        lblPlayerIs.setFont(new java.awt.Font("Roboto", 0, 24)); // NOI18N
+        lblPlayerIs.setForeground(new java.awt.Color(255, 255, 255));
+        lblPlayerIs.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblPlayerIs.setText("You are: O");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 940, Short.MAX_VALUE)
-            .addComponent(panBackground, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(lblTurn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(panRootBackgroundLayout.createSequentialGroup()
+            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(btnHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -192,18 +205,24 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
                 .addGap(18, 18, 18)
                 .addComponent(btnToMainMenu, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(lblComputerIs, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblPlayerIs, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        panRootBackgroundLayout.setVerticalGroup(
-            panRootBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panRootBackgroundLayout.createSequentialGroup()
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(lblTurn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblComputerIs, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPlayerIs, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panBackground, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(panRootBackgroundLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnRestart)
                     .addComponent(btnToMainMenu)
                     .addComponent(btnHelp))
@@ -214,11 +233,11 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panRootBackground, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panRootBackground, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -227,8 +246,6 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
     private void btnRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestartActionPerformed
         // TODO add your handling code here:
         ultBoard.resetBoard();
-        enableButtons();
-        lblTurn.setText("X's turn");
     }//GEN-LAST:event_btnRestartActionPerformed
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
@@ -254,22 +271,6 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
             panel.add(btnArray[i]);
         }
     }
-    
-    private void disableButtons() {
-        for (int i = 0; i < btnArray.length; i++) {
-            for (int j = 0; j < btnArray[i].length; j++) {
-                btnArray[i][j].setEnabled(false);
-            }
-        }
-    }
-    
-    private void enableButtons() {
-        for (int i = 0; i < btnArray.length; i++) {
-            for (int j = 0; j < btnArray[i].length; j++) {
-                btnArray[i][j].setEnabled(true);
-            }
-        }
-    }
         
     // Handles a button click
     public void actionPerformed(ActionEvent ae) {
@@ -279,19 +280,20 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
             for (int j = 0; j < btnArray[i].length; j++) {
                 if (ae.getActionCommand().equals(i + "" + j)) {
                     result = ultBoard.movePlayer(i, j);
-                    lblTurn.setText(ultBoard.getCurrentPlayer().equals("X") ? "X's Turn" : "O's Turn");
                     break;
                 }
             }
-            if (!result.equals("")) {
+            if (!result.equals(""))
+            {
                 break;
             }
         }
         
-        if (!(result.equals("MoveMade") || result.equals("Invalid"))) {
-            JOptionPane.showMessageDialog(this, result.equals("draw") ? "It was a draw" : result + " won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
-            lblTurn.setText(result.equals("draw") ? "It was a draw" : result + " won!");
-            disableButtons();
+        System.out.println(result);
+        
+        if (result.equals("MoveMade"))
+        {
+            ultBoard.moveAI();
         }
     }
     
@@ -312,20 +314,21 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UltimateTicTacToeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UltimateTicTacToeAIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UltimateTicTacToeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UltimateTicTacToeAIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UltimateTicTacToeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UltimateTicTacToeAIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UltimateTicTacToeFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(UltimateTicTacToeAIFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UltimateTicTacToeFrame().setVisible(true);
+                new UltimateTicTacToeAIFrame().setVisible(true);
             }
         });
     }
@@ -334,10 +337,11 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
     private javax.swing.JButton btnRestart;
     private javax.swing.JButton btnToMainMenu;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel lblTurn;
-    private javax.swing.JPanel panBackground;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblComputerIs;
+    private javax.swing.JLabel lblPlayerIs;
     private javax.swing.JPanel panButtons;
-    private javax.swing.JPanel panRootBackground;
     private javax.swing.JPanel panTTTB1;
     private javax.swing.JPanel panTTTB2;
     private javax.swing.JPanel panTTTB3;

@@ -32,6 +32,16 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         
         lblComputerIs.setText("Computer is: " + ai + " ( " + difficulty.toUpperCase() + " difficulty )");
         lblPlayerIs.setText("You are: " + player);
+        
+        if (ai.equals("X")) {
+            if (difficulty.equals("easy")) {
+                    moveEasyComputer();
+            } else if (difficulty.equals("medium")) {
+                moveMediumComputer();
+            } else if (difficulty.equals("hard")) {
+                moveAI();
+            }
+        }
     }
     
     /**
@@ -50,16 +60,6 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
             btnArray[i].setActionCommand("" + i);
             btnArray[i].addActionListener(this);
             panButtons.add(btnArray[i]);
-        }
-        
-        if (ai.equals("X")) {
-            if (difficulty.equals("easy")) {
-                    moveEasyComputer();
-            } else if (difficulty.equals("medium")) {
-                moveMediumComputer();
-            } else if (difficulty.equals("hard")) {
-                moveAI();
-            }
         }
     }
     
@@ -215,7 +215,7 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                     // TODO output game result on gui instead of console
                     // Prints out the game result
                     JOptionPane.showMessageDialog(this, gameResult.equals("draw") ? "It was a draw" : gameResult + " won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
-                    
+
                     for (int j = 0; j < btnArray.length; j++) {
                         btnArray[j].setEnabled(false);
                     }

@@ -11,12 +11,12 @@ import javax.swing.JFrame;
  *
  * @author gaudium
  */
-public class ModeSelectFrame extends javax.swing.JFrame {
+public class NormalModeSelectFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form frmLogin
      */
-    public ModeSelectFrame() {
+    public NormalModeSelectFrame() {
         setSize(938, 788);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
@@ -99,7 +99,7 @@ public class ModeSelectFrame extends javax.swing.JFrame {
 
     private void btnPVEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPVEActionPerformed
         // TODO add your handling code here:
-        ComputerSelectFrame frmComputerSelect = new ComputerSelectFrame();
+        NormalComputerSelectFrame frmComputerSelect = new NormalComputerSelectFrame();
         frmComputerSelect.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnPVEActionPerformed
@@ -135,14 +135,30 @@ public class ModeSelectFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ModeSelectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NormalModeSelectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ModeSelectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NormalModeSelectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ModeSelectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NormalModeSelectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ModeSelectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NormalModeSelectFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -163,7 +179,7 @@ public class ModeSelectFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ModeSelectFrame().setVisible(true);
+                new NormalModeSelectFrame().setVisible(true);
             }
         });
     }

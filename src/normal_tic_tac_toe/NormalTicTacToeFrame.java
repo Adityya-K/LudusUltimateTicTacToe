@@ -79,6 +79,7 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
                     // TODO output game result on gui instead of console
                     // Prints out the game result
                     JOptionPane.showMessageDialog(this, gameResult, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+                    lblTurn.setText(gameResult);
                     
                     for (int j = 0; j < btnArray.length; j++) {
                         btnArray[j].setEnabled(false);

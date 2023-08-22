@@ -5,7 +5,8 @@
 package menu;
 
 import javax.swing.JFrame;
-import normal_tic_tac_toe.ModeSelectFrame;
+import normal_tic_tac_toe.NormalModeSelectFrame;
+import ultimate_tic_tac_toe.UltimateModeSelectFrame;
 
 /**
  *
@@ -54,6 +55,11 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnUTTT.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         btnUTTT.setForeground(new java.awt.Color(255, 255, 255));
         btnUTTT.setText("Play Ultimate Tic Tac Toe");
+        btnUTTT.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUTTTActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnUTTT);
         btnUTTT.setBounds(260, 360, 430, 40);
 
@@ -68,6 +74,11 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnLeaderboard.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         btnLeaderboard.setForeground(new java.awt.Color(255, 255, 255));
         btnLeaderboard.setText("Leaderboard");
+        btnLeaderboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLeaderboardActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnLeaderboard);
         btnLeaderboard.setBounds(260, 440, 430, 40);
 
@@ -97,10 +108,24 @@ public class MainMenuFrame extends javax.swing.JFrame {
 
     private void btnNTTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNTTTActionPerformed
         // TODO add your handling code here:
-        ModeSelectFrame frmNTTModeSelect = new ModeSelectFrame();
+        NormalModeSelectFrame frmNTTModeSelect = new NormalModeSelectFrame();
         frmNTTModeSelect.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnNTTTActionPerformed
+
+    private void btnUTTTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUTTTActionPerformed
+        // TODO add your handling code here:
+        UltimateModeSelectFrame frmUTTModeSelect = new UltimateModeSelectFrame();
+        frmUTTModeSelect.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnUTTTActionPerformed
+
+    private void btnLeaderboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeaderboardActionPerformed
+        // TODO add your handling code here:
+        LeaderboardFrame frmLeaderboard = new LeaderboardFrame();
+        frmLeaderboard.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLeaderboardActionPerformed
 
     /**
      * @param args the command line arguments

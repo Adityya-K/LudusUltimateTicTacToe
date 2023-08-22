@@ -15,6 +15,7 @@ public class NormalTTT {
 
     private JButton[] btnArray = new JButton[9];
     private String[] board = new String[9];
+    private Color winColor = new Color(51, 136, 0);
     
     
     public NormalTTT(JButton[] btnArray)
@@ -25,7 +26,19 @@ public class NormalTTT {
     public boolean setMove(int index, String player) {
         if (board[index] == null && getGameResult().equals("undecided")) {
             board[index] = player;
+            btnArray[index].setForeground(player.equals("X") ? Color.black : Color.white);
             btnArray[index].setText(player);
+            if (!getGameResult().equals("undecided")) {
+                if (getGameResult().equals("X")) {
+                    setButtonsX();
+                }
+                else if (getGameResult().equals("O")) {
+                    setButtonsO();
+                }
+                else {
+                    setButtonsDraw();
+                }
+            }
             return true;
         }
         else {
@@ -38,27 +51,38 @@ public class NormalTTT {
         for (int i = 0; i < btnArray.length; i++) {
             board[i] = null;
             btnArray[i].setText("");
+            btnArray[i].setBackground(new Color(128, 176, 247));
         }
     }
     
-    public void highlight(String piece)
-    {        
-        if (piece.equals("X"))
-        {
-            for (int i = 0; i < 9; i += 2)
-            {
-                btnArray[i].setBackground(Color.black);
-            }
+    public void setButtonsO () {
+        btnArray[0].setBackground(winColor);
+        btnArray[1].setBackground(winColor);
+        btnArray[2].setBackground(winColor);
+        btnArray[3].setBackground(winColor);
+        btnArray[5].setBackground(winColor);
+        btnArray[6].setBackground(winColor);
+        btnArray[7].setBackground(winColor);
+        btnArray[8].setBackground(winColor);
+    }
+    
+    public void setButtonsX () {
+        btnArray[0].setBackground(winColor);
+        btnArray[2].setBackground(winColor);
+        btnArray[4].setBackground(winColor);
+        btnArray[6].setBackground(winColor);
+        btnArray[8].setBackground(winColor);
+    }
+    
+    public void setButtonsDraw() {
+        for (int i = 0; i < btnArray.length; i++) {
+            btnArray[i].setBackground(winColor);
         }
-        else if (piece.equals("O"))
-        {
-            for (int i = 0; i < 9; i++)
-            {
-                if (i != 4)
-                {
-                    btnArray[i].setBackground(Color.black);
-                }
-            }
+    }
+    
+    public void enableButtons () {
+        for (int i = 0; i < btnArray.length; i++) {
+            btnArray[i].setEnabled(true);
         }
     }
 

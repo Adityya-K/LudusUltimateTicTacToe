@@ -89,6 +89,11 @@ public class LeaderboardFrame extends javax.swing.JFrame {
         btnGoToMain.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         btnGoToMain.setForeground(new java.awt.Color(255, 255, 255));
         btnGoToMain.setText("Go To Main Menu");
+        btnGoToMain.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGoToMainActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnGoToMain);
         btnGoToMain.setBounds(590, 600, 250, 40);
 
@@ -116,6 +121,13 @@ public class LeaderboardFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGoToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoToMainActionPerformed
+        // TODO add your handling code here:
+        MainMenuFrame frmMainMenu = new MainMenuFrame(); 
+        frmMainMenu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnGoToMainActionPerformed
 
     /**
      * @param args the command line arguments

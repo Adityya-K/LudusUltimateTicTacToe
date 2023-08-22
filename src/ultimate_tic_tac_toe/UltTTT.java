@@ -143,7 +143,7 @@ public class UltTTT {
             currentSectionIndex = boardIndex;
             System.out.println(currentSectionIndex);
             if (!getGameResult().equals("undecided")) {
-                return getGameResult() + "Won";
+                return getGameResult();
             }
             return "MoveMade";
         } 
@@ -215,6 +215,7 @@ public class UltTTT {
         // Iterates through every index in the array and resets the text
         for (int i = 0; i < gameBoard.length; i++) {
             gameBoard[i].resetBoard();
+            gameBoard[i].enableButtons();
         }
     }
     
@@ -224,5 +225,9 @@ public class UltTTT {
 
     public String getPlayerPiece() {
         return playerPiece;
+    }
+    
+    public String getCurrentPlayer() {
+        return currentPlayer;
     }
 }
