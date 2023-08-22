@@ -36,7 +36,13 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         addButtonsToPanel(panTTTB7, btnArray[6], 6);
         addButtonsToPanel(panTTTB8, btnArray[7], 7);
         addButtonsToPanel(panTTTB9, btnArray[8], 8);
-        ultBoard = new UltTTT(btnArray);
+        
+        ultBoard = new UltTTT(btnArray, "X", "Easy");
+        
+        if (ultBoard.getPlayerPiece().equals("O")) // ai goes first
+        {
+            ultBoard.moveAI();
+        }
     }
     
     
@@ -159,16 +165,29 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
             panel.add(btnArray[i]);
         }
     }
-    
-    
+        
     // Handles a button click
     public void actionPerformed(ActionEvent ae) {
+        String result = "";
+        
         for (int i = 0; i < btnArray.length; i++) {
             for (int j = 0; j < btnArray[i].length; j++) {
                 if (ae.getActionCommand().equals(i + "" + j)) {
-                    System.out.println(ultBoard.movePlayer(i, j));
+                    result = ultBoard.movePlayer(i, j);
+                    break;
                 }
             }
+            if (!result.equals(""))
+            {
+                break;
+            }
+        }
+        
+        System.out.println(result);
+        
+        if (result.equals("MoveMade"))
+        {
+            ultBoard.moveAI();
         }
     }
     
