@@ -133,7 +133,7 @@ public class LoginFrame extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Invalid username or invalid password. Try again!", "Login Error", JOptionPane.ERROR_MESSAGE);
         } else {
             System.out.println(currentUser.toString());
-            MainMenuFrame frmMainMenu = new MainMenuFrame();
+            MainMenuFrame frmMainMenu = new MainMenuFrame(); 
             frmMainMenu.setVisible(true);
             this.dispose();
         }
