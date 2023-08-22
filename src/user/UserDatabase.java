@@ -157,7 +157,6 @@ public class UserDatabase {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        /*
         // Saving unencrypted file for debugging purposes:
         try {
             System.out.println("Saving file");
@@ -167,7 +166,6 @@ public class UserDatabase {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        */
     }
     
     public static ArrayList<User> getTopPlayers() {

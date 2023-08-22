@@ -31,6 +31,14 @@ public class User {
     private ArrayList<SavedGame> games; // array list of saved games    
     
     private String email;
+
+    public ArrayList<SavedGame> getGames() {
+        return games;
+    }
+
+    public void setGames(ArrayList<SavedGame> games) {
+        this.games = games;
+    }
     
     // getters and setters for each of the fields
     public String getEmail() {
