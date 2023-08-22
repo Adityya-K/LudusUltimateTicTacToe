@@ -40,6 +40,10 @@ public class User {
         this.games = games;
     }
     
+    public void clearGames() {
+        games.clear();
+    }
+    
     // getters and setters for each of the fields
     public String getEmail() {
         return email;

@@ -18,6 +18,17 @@ public class SavedGame {
     private String ai_difficulty; // EASY, MEDIUM, HARD
     private String turn; // ME, OPPONENT
 
+    public String getGameType() {
+        return game_type;
+    }
+    
+    public String getOpponentType() {
+        return opponent_type;
+    }
+    
+    public String getAIDifficulty() {
+        return ai_difficulty;
+    }
 
     
     /*

@@ -37,9 +37,10 @@ public class MainMenuFrame extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         btnUTTT = new javax.swing.JButton();
         btnLoginOut = new javax.swing.JButton();
-        btnLeaderboard = new javax.swing.JButton();
         btnNTTT = new javax.swing.JButton();
         btnUserProfile = new javax.swing.JButton();
+        btnSavedGames = new javax.swing.JButton();
+        btnLeaderboard = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -56,7 +57,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("MENU");
         getContentPane().add(lblTitle);
-        lblTitle.setBounds(0, 180, 940, 50);
+        lblTitle.setBounds(0, 140, 940, 50);
 
         btnUTTT.setBackground(new java.awt.Color(0, 102, 255));
         btnUTTT.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -68,7 +69,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnUTTT);
-        btnUTTT.setBounds(260, 340, 430, 40);
+        btnUTTT.setBounds(260, 300, 430, 40);
 
         btnLoginOut.setBackground(new java.awt.Color(0, 102, 255));
         btnLoginOut.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -80,19 +81,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLoginOut);
-        btnLoginOut.setBounds(260, 550, 430, 40);
-
-        btnLeaderboard.setBackground(new java.awt.Color(0, 102, 255));
-        btnLeaderboard.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        btnLeaderboard.setForeground(new java.awt.Color(255, 255, 255));
-        btnLeaderboard.setText("Leaderboard");
-        btnLeaderboard.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLeaderboardActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnLeaderboard);
-        btnLeaderboard.setBounds(260, 480, 430, 40);
+        btnLoginOut.setBounds(260, 580, 430, 40);
 
         btnNTTT.setBackground(new java.awt.Color(0, 102, 255));
         btnNTTT.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -104,7 +93,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnNTTT);
-        btnNTTT.setBounds(260, 270, 430, 40);
+        btnNTTT.setBounds(260, 230, 430, 40);
 
         btnUserProfile.setBackground(new java.awt.Color(0, 102, 255));
         btnUserProfile.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -116,7 +105,31 @@ public class MainMenuFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnUserProfile);
-        btnUserProfile.setBounds(260, 410, 430, 40);
+        btnUserProfile.setBounds(260, 370, 430, 40);
+
+        btnSavedGames.setBackground(new java.awt.Color(0, 102, 255));
+        btnSavedGames.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnSavedGames.setForeground(new java.awt.Color(255, 255, 255));
+        btnSavedGames.setText("Saved Games");
+        btnSavedGames.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSavedGamesActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSavedGames);
+        btnSavedGames.setBounds(260, 510, 430, 40);
+
+        btnLeaderboard.setBackground(new java.awt.Color(0, 102, 255));
+        btnLeaderboard.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnLeaderboard.setForeground(new java.awt.Color(255, 255, 255));
+        btnLeaderboard.setText("Leaderboard");
+        btnLeaderboard.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLeaderboardActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnLeaderboard);
+        btnLeaderboard.setBounds(260, 440, 430, 40);
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image_assets/main-menu-background.png"))); // NOI18N
         lblBackground.setText("jLabel1");
@@ -174,6 +187,13 @@ public class MainMenuFrame extends javax.swing.JFrame {
         frmUserProfile.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnUserProfileActionPerformed
+
+    private void btnSavedGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSavedGamesActionPerformed
+        // TODO add your handling code here:
+        SavedGamesFrame frmSavedGames = new SavedGamesFrame();
+        frmSavedGames.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnSavedGamesActionPerformed
     
     
     /**
@@ -218,6 +238,7 @@ public class MainMenuFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnLeaderboard;
     private javax.swing.JButton btnLoginOut;
     private javax.swing.JButton btnNTTT;
+    private javax.swing.JButton btnSavedGames;
     private javax.swing.JButton btnUTTT;
     private javax.swing.JButton btnUserProfile;
     private javax.swing.JLabel lblBackground;
