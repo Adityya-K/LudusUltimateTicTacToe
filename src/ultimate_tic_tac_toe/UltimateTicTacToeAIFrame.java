@@ -354,9 +354,25 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
             disableButtons();
             if (result.equals(ultBoard.getPlayerPiece()) && !result.equals("draw")) {
                 CurrentUser.getUser().addWin();
+                switch (ultBoard.getAi()) {
+                    case "Easy":
+                        CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() + 10);
+                        break;
+                    case "Medium":
+                        CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() + 20);
+                        break;
+                }
             }
-            else {
+            else if (!result.equals(ultBoard.getPlayerPiece()) && !result.equals("draw")) {
                 CurrentUser.getUser().addLoss();
+                switch (ultBoard.getAi()) {
+                    case "Easy":
+                        CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() >= 20 ? CurrentUser.getUser().getRating() - 20 : 0);
+                        break;
+                    case "Medium":
+                        CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() >= 10 ? CurrentUser.getUser().getRating() - 10 : 0);
+                        break;
+                }
             }
             
             System.out.println(CurrentUser.getUser().getWins() + " " + CurrentUser.getUser().getLosses());

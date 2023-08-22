@@ -221,9 +221,31 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                     
                     if (gameResult.equals(player)) {
                         CurrentUser.getUser().addWin();
+                        switch (difficulty) {
+                            case "easy":
+                                CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() + 5);
+                                break;
+                            case "medium":
+                                CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() + 10);
+                                break;
+                            case "hard":
+                                CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() + 20);
+                                break;
+                        }
                     }
                     else if (gameResult.equals(ai)) {
                         CurrentUser.getUser().addLoss();
+                        switch (difficulty) {
+                            case "easy":
+                                CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() >= 20 ? CurrentUser.getUser().getRating() - 20 : 0);
+                                break;
+                            case "medium":
+                                CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() >= 10 ? CurrentUser.getUser().getRating() - 10 : 0);
+                                break;
+                            case "hard":
+                                CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() >= 5 ? CurrentUser.getUser().getRating() - 5 : 0);
+                                break;
+                        }
                     }
                     
                     for (int j = 0; j < btnArray.length; j++) {

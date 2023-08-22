@@ -31,6 +31,7 @@ public class UserProfileFrame extends javax.swing.JFrame {
             lblWins.setText("Wins: " + CurrentUser.getUser().getWins());
             lblLosses.setText("Losses: " + CurrentUser.getUser().getLosses());
             lblStartDate.setText("Date Joined: " + CurrentUser.getUser().getDateJoined());
+            lblRating.setText("Rating: " + (int)(CurrentUser.getUser().getRating()));
         }
     }
 
@@ -47,8 +48,9 @@ public class UserProfileFrame extends javax.swing.JFrame {
         btnGoToMain = new javax.swing.JButton();
         lblWins = new javax.swing.JLabel();
         lblLosses = new javax.swing.JLabel();
-        lblStartDate = new javax.swing.JLabel();
+        lblRating = new javax.swing.JLabel();
         lblUsername = new javax.swing.JLabel();
+        lblStartDate = new javax.swing.JLabel();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -84,25 +86,31 @@ public class UserProfileFrame extends javax.swing.JFrame {
         lblWins.setForeground(new java.awt.Color(255, 255, 255));
         lblWins.setText("Wins:");
         getContentPane().add(lblWins);
-        lblWins.setBounds(260, 310, 430, 33);
+        lblWins.setBounds(260, 290, 430, 33);
 
         lblLosses.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         lblLosses.setForeground(new java.awt.Color(255, 255, 255));
         lblLosses.setText("Losses:");
         getContentPane().add(lblLosses);
-        lblLosses.setBounds(260, 400, 430, 33);
+        lblLosses.setBounds(260, 360, 430, 33);
 
-        lblStartDate.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
-        lblStartDate.setForeground(new java.awt.Color(255, 255, 255));
-        lblStartDate.setText("Date Joined: ");
-        getContentPane().add(lblStartDate);
-        lblStartDate.setBounds(260, 490, 430, 33);
+        lblRating.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        lblRating.setForeground(new java.awt.Color(255, 255, 255));
+        lblRating.setText("Rating: ");
+        getContentPane().add(lblRating);
+        lblRating.setBounds(260, 500, 430, 33);
 
         lblUsername.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         lblUsername.setForeground(new java.awt.Color(255, 255, 255));
         lblUsername.setText("Username:");
         getContentPane().add(lblUsername);
         lblUsername.setBounds(260, 220, 430, 33);
+
+        lblStartDate.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
+        lblStartDate.setForeground(new java.awt.Color(255, 255, 255));
+        lblStartDate.setText("Date Joined: ");
+        getContentPane().add(lblStartDate);
+        lblStartDate.setBounds(260, 430, 430, 33);
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image_assets/user-profile-background.png"))); // NOI18N
         lblBackground.setText("jLabel1");
@@ -186,6 +194,7 @@ public class UserProfileFrame extends javax.swing.JFrame {
     private javax.swing.JButton btnGoToMain;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblLosses;
+    private javax.swing.JLabel lblRating;
     private javax.swing.JLabel lblStartDate;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUsername;
