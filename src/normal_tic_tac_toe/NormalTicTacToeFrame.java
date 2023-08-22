@@ -4,6 +4,7 @@
  */
 package normal_tic_tac_toe;
 
+import authentication_frames.LoginFrame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -11,6 +12,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import menu.MainMenuFrame;
+import user.CurrentUser;
 
 /**
  *
@@ -116,6 +118,11 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(940, 788));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         jPanel2.setBackground(new java.awt.Color(0, 35, 82));
         jPanel2.setMinimumSize(new java.awt.Dimension(940, 788));
@@ -225,6 +232,15 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
         frmMainMenu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnToMainMenuActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        if(CurrentUser.getUser() == null) {
+            LoginFrame frmLogin = new LoginFrame();
+            frmLogin.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

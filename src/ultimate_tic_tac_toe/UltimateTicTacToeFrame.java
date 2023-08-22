@@ -4,6 +4,7 @@
  */
 package ultimate_tic_tac_toe;
 
+import authentication_frames.LoginFrame;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -13,6 +14,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import menu.MainMenuFrame;
+import user.CurrentUser;
 
 /**
  *
@@ -27,7 +29,6 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
      */
     public UltimateTicTacToeFrame() {
         setSize(940, 820);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
         addButtonsToPanel(panTTTB1, btnArray[0], 0);
@@ -75,6 +76,11 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(940, 788));
         setMinimumSize(new java.awt.Dimension(940, 788));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         panRootBackground.setBackground(new java.awt.Color(0, 35, 82));
         panRootBackground.setMaximumSize(new java.awt.Dimension(940, 788));
@@ -237,6 +243,15 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         frmMainMenu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnToMainMenuActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        if(CurrentUser.getUser() == null) {
+            LoginFrame frmLogin = new LoginFrame();
+            frmLogin.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     private void addButtonsToPanel(JPanel panel, JButton[] btnArray, int index) {
         for (int i = 0; i < 9; i++) {

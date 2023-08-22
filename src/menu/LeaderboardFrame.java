@@ -4,12 +4,14 @@
  */
 package menu;
 
+import authentication_frames.LoginFrame;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import user.User;
 import user.UserDatabase;
 import java.awt.*;
 import javax.swing.table.*;
+import user.CurrentUser;
 
 /**
  *
@@ -76,6 +78,11 @@ public class LeaderboardFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(938, 788));
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         lblTitle.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
@@ -128,6 +135,15 @@ public class LeaderboardFrame extends javax.swing.JFrame {
         frmMainMenu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGoToMainActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        if(CurrentUser.getUser() == null) {
+            LoginFrame frmLogin = new LoginFrame();
+            frmLogin.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

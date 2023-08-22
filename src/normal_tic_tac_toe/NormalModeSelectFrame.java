@@ -4,8 +4,10 @@
  */
 package normal_tic_tac_toe;
 
+import authentication_frames.LoginFrame;
 import menu.*;
 import javax.swing.JFrame;
+import user.CurrentUser;
 
 /**
  *
@@ -18,7 +20,6 @@ public class NormalModeSelectFrame extends javax.swing.JFrame {
      */
     public NormalModeSelectFrame() {
         setSize(938, 788);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
     }
@@ -40,6 +41,11 @@ public class NormalModeSelectFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(938, 788));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         lblTitle.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
@@ -117,6 +123,15 @@ public class NormalModeSelectFrame extends javax.swing.JFrame {
         frmNormalTicTacToe.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnPVPActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        if(CurrentUser.getUser() == null) {
+            LoginFrame frmLogin = new LoginFrame();
+            frmLogin.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

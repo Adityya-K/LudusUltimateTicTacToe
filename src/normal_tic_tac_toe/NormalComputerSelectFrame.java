@@ -8,6 +8,7 @@ package normal_tic_tac_toe;
  *
  * @author gaudium
  */
+import authentication_frames.LoginFrame;
 import javax.swing.JFrame;
 import user.*;
 
@@ -18,7 +19,6 @@ public class NormalComputerSelectFrame extends javax.swing.JFrame {
      */
     public NormalComputerSelectFrame() {
         setSize(938, 788);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
     }
@@ -42,6 +42,11 @@ public class NormalComputerSelectFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(938, 788));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         lblPassword.setBackground(new java.awt.Color(255, 255, 255));
@@ -137,6 +142,15 @@ public class NormalComputerSelectFrame extends javax.swing.JFrame {
         this.dispose();
         
     }//GEN-LAST:event_btnGoToGameActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        if(CurrentUser.getUser() == null) {
+            LoginFrame frmLogin = new LoginFrame();
+            frmLogin.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_formWindowOpened
     
     String error;
     /**

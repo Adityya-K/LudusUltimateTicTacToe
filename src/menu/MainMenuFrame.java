@@ -4,9 +4,11 @@
  */
 package menu;
 
+import authentication_frames.LoginFrame;
 import javax.swing.JFrame;
 import normal_tic_tac_toe.NormalModeSelectFrame;
 import ultimate_tic_tac_toe.UltimateModeSelectFrame;
+import user.CurrentUser;
 
 /**
  *
@@ -19,7 +21,6 @@ public class MainMenuFrame extends javax.swing.JFrame {
      */
     public MainMenuFrame() {
         setSize(938, 788);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
     }
@@ -42,6 +43,11 @@ public class MainMenuFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(938, 788));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
         getContentPane().setLayout(null);
 
         lblTitle.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
@@ -67,6 +73,11 @@ public class MainMenuFrame extends javax.swing.JFrame {
         btnLoginOut.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         btnLoginOut.setForeground(new java.awt.Color(255, 255, 255));
         btnLoginOut.setText("Log Out");
+        btnLoginOut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginOutActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnLoginOut);
         btnLoginOut.setBounds(260, 510, 430, 40);
 
@@ -127,6 +138,24 @@ public class MainMenuFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnLeaderboardActionPerformed
 
+    private void btnLoginOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginOutActionPerformed
+        // TODO add your handling code here:
+        CurrentUser.setUser(null);
+        LoginFrame frmLogin = new LoginFrame();
+        frmLogin.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnLoginOutActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        // TODO add your handling code here:
+        if(CurrentUser.getUser() == null) {
+            LoginFrame frmLogin = new LoginFrame();
+            frmLogin.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_formWindowOpened
+    
+    
     /**
      * @param args the command line arguments
      */
