@@ -6,6 +6,7 @@ import user.config;
 import java.util.*;
 import java.text.DateFormat;  
 import java.text.SimpleDateFormat;  
+import menu.*;
 
 /**
  *
@@ -68,13 +69,7 @@ public class User {
         this.losses = losses;
     }
 
-//    public Board getCurrentGame() {
-//        return currentGame;
-//    }
-//
-//    public void setCurrentGame(Board currentGame) {
-//        this.currentGame = currentGame;
-//    }
+
 
     public int getGamesPlayed() {
         return gamesPlayed;
@@ -99,7 +94,7 @@ public class User {
     private int losses;
     private int gamesPlayed;
     private String dateJoined;
-    // private Board currentGame; // TODO
+    //private ArrayList<Game> games; // TODO
     
     // Basic user when regristering.
     public User(String username, String password, String email) {
@@ -109,7 +104,8 @@ public class User {
         this.wins = 0;
         this.losses = 0;
         this.gamesPlayed = 0;
-        
+        this.rating = 1000;
+        this.email = email;
         Date date = new Date();
         DateFormat dateFormat = new SimpleDateFormat(config.dateFormat);  
         String strDate = dateFormat.format(date);  
@@ -136,6 +132,7 @@ public class User {
 
     public User(String userString) {
         String [] attributes = userString.split(",");
+        System.out.println(userString);
         this.username = attributes[0];
         this.encryptedPassword = attributes[1];
         this.rating = Double.parseDouble(attributes[2]);
@@ -151,5 +148,6 @@ public class User {
         // escape commas if user decides to enter commas as part of their username
         return username + "," + encryptedPassword + "," + rating + "," + wins + "," + losses + "," + gamesPlayed + "," + dateJoined + "," + email;
     }
+    
     
 }

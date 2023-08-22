@@ -18,6 +18,7 @@ public class frmRegistration extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public frmRegistration() {
+        UserDatabase.loadDatabase();
         setSize(940, 788);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
@@ -146,9 +147,11 @@ public class frmRegistration extends javax.swing.JFrame {
 
 // TODO add your handling code here:
         // Switching window code
+        /*
         frmLogin loginFrame = new frmLogin();
         loginFrame.setVisible(true);
         this.dispose();
+        */
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
