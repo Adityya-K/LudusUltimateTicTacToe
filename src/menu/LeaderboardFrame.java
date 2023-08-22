@@ -2,23 +2,21 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
-package normal_tic_tac_toe;
+package menu;
 
-import menu.*;
 import javax.swing.JFrame;
 
 /**
  *
  * @author gaudium
  */
-public class frmModeSelect extends javax.swing.JFrame {
+public class LeaderboardFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form frmLogin
      */
-    public frmModeSelect() {
-        setSize(930, 788);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public LeaderboardFrame() {
+        setSize(938, 788);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
     }
@@ -33,55 +31,54 @@ public class frmModeSelect extends javax.swing.JFrame {
     private void initComponents() {
 
         lblTitle = new javax.swing.JLabel();
-        btnToMainMenu = new javax.swing.JButton();
-        btnPVP = new javax.swing.JButton();
-        btnPVE = new javax.swing.JButton();
+        btnGoToMain = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(938, 788));
         setMinimumSize(new java.awt.Dimension(938, 788));
-        setPreferredSize(new java.awt.Dimension(938, 788));
         setResizable(false);
         getContentPane().setLayout(null);
 
         lblTitle.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblTitle.setText("SELECT MODE (NORMAL)");
+        lblTitle.setText("LEADERBOARD");
         getContentPane().add(lblTitle);
-        lblTitle.setBounds(0, 210, 940, 50);
+        lblTitle.setBounds(0, 150, 940, 50);
 
-        btnToMainMenu.setBackground(new java.awt.Color(0, 102, 255));
-        btnToMainMenu.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        btnToMainMenu.setForeground(new java.awt.Color(255, 255, 255));
-        btnToMainMenu.setText("Go Back To Main Menu");
-        btnToMainMenu.setToolTipText("");
-        getContentPane().add(btnToMainMenu);
-        btnToMainMenu.setBounds(260, 500, 430, 60);
+        btnGoToMain.setBackground(new java.awt.Color(0, 102, 255));
+        btnGoToMain.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnGoToMain.setForeground(new java.awt.Color(255, 255, 255));
+        btnGoToMain.setText("Go To Main Menu");
+        getContentPane().add(btnGoToMain);
+        btnGoToMain.setBounds(590, 600, 250, 40);
 
-        btnPVP.setBackground(new java.awt.Color(0, 102, 255));
-        btnPVP.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        btnPVP.setForeground(new java.awt.Color(255, 255, 255));
-        btnPVP.setText("Player vs Player (Local Game)");
-        getContentPane().add(btnPVP);
-        btnPVP.setBounds(260, 300, 430, 60);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
 
-        btnPVE.setBackground(new java.awt.Color(0, 102, 255));
-        btnPVE.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        btnPVE.setForeground(new java.awt.Color(255, 255, 255));
-        btnPVE.setText("Player vs Computer");
-        getContentPane().add(btnPVE);
-        btnPVE.setBounds(260, 400, 430, 60);
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(100, 230, 740, 350);
 
-        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image_assets/normal-select-mode-background.png"))); // NOI18N
+        lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image_assets/leaderboard-background.png"))); // NOI18N
         lblBackground.setText("jLabel1");
         lblBackground.setMaximumSize(new java.awt.Dimension(940, 788));
         lblBackground.setMinimumSize(new java.awt.Dimension(940, 788));
         lblBackground.setName(""); // NOI18N
-        lblBackground.setPreferredSize(new java.awt.Dimension(940, 788));
+        lblBackground.setPreferredSize(new java.awt.Dimension(940, 850));
         getContentPane().add(lblBackground);
-        lblBackground.setBounds(-2, -10, 950, 800);
+        lblBackground.setBounds(0, 0, 940, 788);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -103,14 +100,18 @@ public class frmModeSelect extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmModeSelect.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LeaderboardFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmModeSelect.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LeaderboardFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmModeSelect.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LeaderboardFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmModeSelect.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LeaderboardFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -119,15 +120,15 @@ public class frmModeSelect extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmModeSelect().setVisible(true);
+                new LeaderboardFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPVE;
-    private javax.swing.JButton btnPVP;
-    private javax.swing.JButton btnToMainMenu;
+    private javax.swing.JButton btnGoToMain;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables

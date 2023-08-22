@@ -5,6 +5,7 @@
 package authentication_frames;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -12,12 +13,12 @@ import javax.swing.JFrame;
  */
 import user.*;
 
-public class frmRegistration extends javax.swing.JFrame {
+public class RegistrationFrame extends javax.swing.JFrame {
  
     /**
-     * Creates new form frmLogin
+     * Creates new form LoginFrame
      */
-    public frmRegistration() {
+    public RegistrationFrame() {
         setSize(938, 788);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
@@ -39,15 +40,13 @@ public class frmRegistration extends javax.swing.JFrame {
         lblTitle = new javax.swing.JLabel();
         btnRegister = new javax.swing.JButton();
         lblPassword = new javax.swing.JLabel();
-        txtPassword = new javax.swing.JTextField();
         lblConfirmPassword = new javax.swing.JLabel();
-        txtConfirmPassword = new javax.swing.JTextField();
+        txtConfirmPassword = new javax.swing.JPasswordField();
+        txtPassword = new javax.swing.JPasswordField();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMaximumSize(new java.awt.Dimension(938, 788));
         setMinimumSize(new java.awt.Dimension(938, 788));
-        setPreferredSize(new java.awt.Dimension(938, 788));
         getContentPane().setLayout(null);
         getContentPane().add(txtEmail);
         txtEmail.setBounds(260, 280, 430, 50);
@@ -92,8 +91,6 @@ public class frmRegistration extends javax.swing.JFrame {
         lblPassword.setText("Password:");
         getContentPane().add(lblPassword);
         lblPassword.setBounds(260, 350, 150, 33);
-        getContentPane().add(txtPassword);
-        txtPassword.setBounds(260, 390, 430, 50);
 
         lblConfirmPassword.setBackground(new java.awt.Color(255, 255, 255));
         lblConfirmPassword.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
@@ -103,6 +100,8 @@ public class frmRegistration extends javax.swing.JFrame {
         lblConfirmPassword.setBounds(260, 460, 250, 33);
         getContentPane().add(txtConfirmPassword);
         txtConfirmPassword.setBounds(260, 500, 430, 50);
+        getContentPane().add(txtPassword);
+        txtPassword.setBounds(260, 390, 430, 50);
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image_assets/registration-background.png"))); // NOI18N
         lblBackground.setText("jLabel2");
@@ -118,8 +117,8 @@ public class frmRegistration extends javax.swing.JFrame {
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         error = "";
         String username = txtUsername.getText();
-        String password = txtPassword.getText();
-        String confirmPassword = txtConfirmPassword.getText();
+        String password = String.valueOf(txtPassword.getPassword());
+        String confirmPassword = String.valueOf(txtConfirmPassword.getPassword());
         String email = txtEmail.getText();
         
         String userValidation = Validation.validateUserName(username);
@@ -140,15 +139,14 @@ public class frmRegistration extends javax.swing.JFrame {
         else {
             User currentUser = UserDatabase.addUser(username, password, email);
             System.out.println(currentUser.toString());
-            // open game jframe
-        }
-        //lblErrors.setText(error);        
+            LoginFrame loginFrame = new LoginFrame();
+            loginFrame.setVisible(true);
+            this.dispose();
+        }    
 
-// TODO add your handling code here:
-        // Switching window code
-        frmLogin loginFrame = new frmLogin();
-        loginFrame.setVisible(true);
-        this.dispose();
+        if (!error.isBlank()) {
+            JOptionPane.showMessageDialog(this, error, "Registration Error", JOptionPane.ERROR_MESSAGE);  
+        }
     }//GEN-LAST:event_btnRegisterActionPerformed
 
     /**
@@ -168,21 +166,23 @@ public class frmRegistration extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(frmRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrationFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(frmRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrationFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(frmRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrationFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(frmRegistration.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RegistrationFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new frmRegistration().setVisible(true);
+                new RegistrationFrame().setVisible(true);
             }
         });
     }
@@ -195,9 +195,9 @@ public class frmRegistration extends javax.swing.JFrame {
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUsername;
-    private javax.swing.JTextField txtConfirmPassword;
+    private javax.swing.JPasswordField txtConfirmPassword;
     private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtPassword;
+    private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
