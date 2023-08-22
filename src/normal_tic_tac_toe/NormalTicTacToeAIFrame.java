@@ -217,7 +217,14 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                     // TODO output game result on gui instead of console
                     // Prints out the game result
                     JOptionPane.showMessageDialog(this, gameResult.equals("draw") ? "It was a draw" : gameResult + " won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
-
+                    
+                    if (gameResult.equals(player)) {
+                        CurrentUser.getUser().addWin();
+                    }
+                    else if (gameResult.equals(ai)) {
+                        CurrentUser.getUser().addLoss();
+                    }
+                    
                     for (int j = 0; j < btnArray.length; j++) {
                         btnArray[j].setEnabled(false);
                     }

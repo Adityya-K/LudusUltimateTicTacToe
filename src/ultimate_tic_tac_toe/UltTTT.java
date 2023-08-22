@@ -153,7 +153,7 @@ public class UltTTT {
     }
     
     // Returns a string with the winner, if there is a draw or if the game is undecided
-    private String getGameResult() {
+    public String getGameResult() {
         String[] lines = getAllLines();
         String gameResult = "undecided";
         

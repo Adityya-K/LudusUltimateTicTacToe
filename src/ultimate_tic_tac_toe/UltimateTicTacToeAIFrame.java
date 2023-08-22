@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import menu.MainMenuFrame;
 import user.CurrentUser;
@@ -252,6 +253,7 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
     private void btnRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestartActionPerformed
         // TODO add your handling code here:
         ultBoard.resetBoard();
+        enableButtons();
     }//GEN-LAST:event_btnRestartActionPerformed
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
@@ -286,6 +288,22 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
             panel.add(btnArray[i]);
         }
     }
+    
+    private void disableButtons() {
+        for (int i = 0; i < btnArray.length; i++) {
+            for (int j = 0; j < btnArray[i].length; j++) {
+                btnArray[i][j].setEnabled(false);
+            }
+        }
+    }
+    
+    private void enableButtons() {
+        for (int i = 0; i < btnArray.length; i++) {
+            for (int j = 0; j < btnArray[i].length; j++) {
+                btnArray[i][j].setEnabled(true);
+            }
+        }
+    }
         
     // Handles a button click
     public void actionPerformed(ActionEvent ae) {
@@ -304,11 +322,23 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
             }
         }
         
-        System.out.println(result);
-        
         if (result.equals("MoveMade"))
         {
             ultBoard.moveAI();
+            result = ultBoard.getGameResult();
+        }
+        
+        if (!(result.equals("MoveMade") || result.equals("Invalid") || result.equals("undecided"))) {
+            JOptionPane.showMessageDialog(this, result.equals("draw") ? "It was a draw" : result + " won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            disableButtons();
+            if (result.equals(ultBoard.getPlayerPiece()) && !result.equals("draw")) {
+                CurrentUser.getUser().addWin();
+            }
+            else {
+                CurrentUser.getUser().addLoss();
+            }
+            
+            System.out.println(CurrentUser.getUser().getWins() + " " + CurrentUser.getUser().getLosses());
         }
     }
     
