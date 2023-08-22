@@ -1,6 +1,11 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: to create a login page
+ * 
  */
 package authentication_frames;
 
@@ -8,16 +13,13 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import menu.MainMenuFrame;
 
-/**
- *
- * @author gaudium
- */
+// Imports everything from the user package
 import user.*;
 
 public class LoginFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form frmLogin
+     * Creates new form LoginFrame
      */
     public LoginFrame() {
         UserDatabase.loadDatabase();
@@ -127,20 +129,24 @@ public class LoginFrame extends javax.swing.JFrame {
     
     String error;
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-        // before logging in user is null
+        // Initializes the current user using the text labels and the getUser method from the UserDatabase class
+        // Before logging in user is null
         CurrentUser.setUser(null);
         String username = txtUsername.getText();
         String password = String.valueOf(txtPassword.getPassword());
         User currentUser = UserDatabase.getUser(username, password);
         
+        // The if statement runs if the user was not found, the else statement runs if the user was found
         if (currentUser == null) {
+            // Informs the user of the login error
             JOptionPane.showMessageDialog(this, "Invalid username or invalid password. Try again!", "Login Error", JOptionPane.ERROR_MESSAGE);
         } else {
             System.out.println(currentUser.toString());
-            // set the current user as the user
+            // Sets the current user as the user
             CurrentUser.setUser(currentUser);
             CurrentUser.getUser().setRating(1000);
             
+            // Displays the main menu
             MainMenuFrame frmMainMenu = new MainMenuFrame(); 
             frmMainMenu.setVisible(true);
             this.dispose();
@@ -148,7 +154,7 @@ public class LoginFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnLoginActionPerformed
 
     private void lblCreateAccountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCreateAccountMouseClicked
-        // TODO add your handling code here:
+        // Displays the registration page
         RegistrationFrame frmRegistration = new RegistrationFrame();
         frmRegistration.setVisible(true);
         this.dispose();
