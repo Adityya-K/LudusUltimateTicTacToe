@@ -20,6 +20,8 @@ public class LoginFrame extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public LoginFrame() {
+        UserDatabase.loadDatabase();
+
         setSize(938, 820);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
@@ -47,6 +49,7 @@ public class LoginFrame extends javax.swing.JFrame {
         btnLogin = new javax.swing.JButton();
         txtPassword = new javax.swing.JPasswordField();
         lblBackground = new javax.swing.JLabel();
+        lblForgotPassword1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(938, 788));
@@ -59,7 +62,7 @@ public class LoginFrame extends javax.swing.JFrame {
         lblForgotPassword.setText("Forgot Password?");
         lblForgotPassword.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(lblForgotPassword);
-        lblForgotPassword.setBounds(0, 580, 940, 26);
+        lblForgotPassword.setBounds(0, 580, 940, 24);
 
         lblCreateAccount.setBackground(new java.awt.Color(255, 255, 255));
         lblCreateAccount.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
@@ -73,6 +76,8 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(lblCreateAccount);
+        getContentPane().add(txtPassword);
+        txtPassword.setBounds(260, 400, 430, 50);
         lblCreateAccount.setBounds(0, 540, 940, 26);
         getContentPane().add(txtUsername);
         txtUsername.setBounds(260, 270, 430, 50);
@@ -82,13 +87,13 @@ public class LoginFrame extends javax.swing.JFrame {
         lblPassword.setForeground(new java.awt.Color(255, 255, 255));
         lblPassword.setText("Password:");
         getContentPane().add(lblPassword);
-        lblPassword.setBounds(260, 340, 150, 33);
+        lblPassword.setBounds(260, 340, 150, 32);
 
         lblUsername.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         lblUsername.setForeground(new java.awt.Color(255, 255, 255));
         lblUsername.setText("Username:");
         getContentPane().add(lblUsername);
-        lblUsername.setBounds(260, 220, 150, 33);
+        lblUsername.setBounds(260, 220, 150, 32);
 
         lblTitle.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
@@ -119,6 +124,15 @@ public class LoginFrame extends javax.swing.JFrame {
         lblBackground.setPreferredSize(new java.awt.Dimension(940, 788));
         getContentPane().add(lblBackground);
         lblBackground.setBounds(-2, -10, 940, 800);
+
+        lblForgotPassword1.setBackground(new java.awt.Color(255, 255, 255));
+        lblForgotPassword1.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
+        lblForgotPassword1.setForeground(new java.awt.Color(255, 255, 255));
+        lblForgotPassword1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblForgotPassword1.setText("Forgot Password?");
+        lblForgotPassword1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().add(lblForgotPassword1);
+        lblForgotPassword1.setBounds(0, 580, 940, 24);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -188,6 +202,7 @@ public class LoginFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblCreateAccount;
     private javax.swing.JLabel lblForgotPassword;
+    private javax.swing.JLabel lblForgotPassword1;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JLabel lblUsername;

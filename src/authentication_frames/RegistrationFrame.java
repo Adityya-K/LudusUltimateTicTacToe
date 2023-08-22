@@ -19,7 +19,8 @@ public class RegistrationFrame extends javax.swing.JFrame {
      * Creates new form LoginFrame
      */
     public RegistrationFrame() {
-        setSize(938, 788);
+        UserDatabase.loadDatabase();
+        setSize(940, 788);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
     }
