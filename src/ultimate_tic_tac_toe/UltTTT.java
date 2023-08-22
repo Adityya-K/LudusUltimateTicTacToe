@@ -231,7 +231,20 @@ public class UltTTT {
         return currentPlayer;
     }
     
+    public void setCurrentPlayer(String a) {
+        this.currentPlayer = a;
+    }
+    
     public NormalTTT[] getGameBoard() {
         return gameBoard;
     }
+    
+    public int getCurrentSectionIndex() {
+        return currentSectionIndex;
+    } 
+    
+    public void setCurrentSectionIndex (int a) {
+        this.currentSectionIndex = a;
+    }
+            
 }

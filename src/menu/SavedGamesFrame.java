@@ -15,6 +15,8 @@ import javax.swing.JOptionPane;
 import javax.swing.table.*;
 import normal_tic_tac_toe.NormalTicTacToeAIFrame;
 import normal_tic_tac_toe.NormalTicTacToeFrame;
+import ultimate_tic_tac_toe.UltimateTicTacToeAIFrame;
+import ultimate_tic_tac_toe.UltimateTicTacToeFrame;
 import user.CurrentUser;
 import user.SavedGame;
 
@@ -45,7 +47,7 @@ public class SavedGamesFrame extends javax.swing.JFrame {
         // loop trough each element up until the numbre of playuers to display
         for (int i = 0; i < gamesPlayed.size(); i++) {
             System.out.println(gamesPlayed.get(i).getPosition());
-            model.addRow(new Object[]{gamesPlayed.get(i).getGameType(), gamesPlayed.get(i).getOpponentType(), gamesPlayed.get(i).getAIDifficulty() == null ? " " : gamesPlayed.get(i).getAIDifficulty()});
+            model.addRow(new Object[]{gamesPlayed.get(i).getGameType(), gamesPlayed.get(i).getOpponentType(), gamesPlayed.get(i).getAIDifficulty().equals("null") ? "N/A" : gamesPlayed.get(i).getAIDifficulty()});
         }
         
                
@@ -190,11 +192,42 @@ public class SavedGamesFrame extends javax.swing.JFrame {
                 }
             }
             else {
-                if (opponentType.equals("ai")) {
-
+                if (opponentType.equals("computer")) {
+                    String[] board1D = gamesPlayed.get(rowSelected).getPosition().split(":");
+                    String[][] board = new String[9][9];
+                    int iterator = 0;
+                    for (int i = 0; i < 9; i++) {
+                        for (int j = 0; j < 9; j++) {
+                            board[i][j] = board1D[iterator];
+                            iterator++;
+                        }
+                    }
+                    
+                    int currentSectionIndex = Integer.parseInt(board1D[81]);
+                    UltimateTicTacToeAIFrame frmUltimateTicTacToeAI = new UltimateTicTacToeAIFrame();
+                    System.out.println(gamesPlayed.get(rowSelected).getPosition());
+                    frmUltimateTicTacToeAI.setGameProperties(gamesPlayed.get(rowSelected).getAIDifficulty(), gamesPlayed.get(rowSelected).getPlayer1Piece(),  gamesPlayed.get(rowSelected).getPlayer1Piece().equals("X") ? "O" : "X", board, currentSectionIndex);
+                    frmUltimateTicTacToeAI.setVisible(true);
+                    this.dispose();
+                    
                 }
                 else {
-
+                    String[] board1D = gamesPlayed.get(rowSelected).getPosition().split(":");
+                    String[][] board = new String[9][9];
+                    int iterator = 0;
+                    for (int i = 0; i < 9; i++) {
+                        for (int j = 0; j < 9; j++) {
+                            board[i][j] = board1D[iterator];
+                            iterator++;
+                        }
+                    }
+                    
+                    int currentSectionIndex = Integer.parseInt(board1D[81]);
+                    UltimateTicTacToeFrame frmUltimateTicTacToe = new UltimateTicTacToeFrame();
+                    System.out.println(gamesPlayed.get(rowSelected).getPosition());
+                    frmUltimateTicTacToe.setGameProperties( gamesPlayed.get(rowSelected).getPlayer1Piece(), board, currentSectionIndex, gamesPlayed.get(rowSelected).getTurn());
+                    frmUltimateTicTacToe.setVisible(true);
+                    this.dispose();
                 }
             } 
         }

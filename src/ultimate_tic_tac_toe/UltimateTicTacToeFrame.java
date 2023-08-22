@@ -45,6 +45,30 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         ultBoard = new UltTTT(btnArray, "X", "None");
     }
     
+    public void setGameProperties ( String player, String[][] board, int currentSectionIndex, String currentPlayer) {
+        
+        ultBoard = new UltTTT(btnArray, player, "None");
+        NormalTTT[] gameBoard = ultBoard.getGameBoard();
+        ultBoard.setCurrentSectionIndex(currentSectionIndex);
+        ultBoard.setCurrentPlayer(currentPlayer);
+        lblTurn.setText(currentPlayer + "'s turn");
+        
+        for (int i = 0; i < gameBoard.length; i++) {
+            for (int j = 0; j < gameBoard[i].getBoard().length; j++) {
+                gameBoard[i].getBoard()[j] = board[i][j].equals("e") ? null : board[i][j];
+                btnArray[i][j].setForeground(new Color(0,102,255));
+                btnArray[i][j].setText(board[i][j].equals("e") ? " " : board[i][j]);
+            }
+        }
+        
+        String result = ultBoard.getGameResult();
+        
+        if (!result.equals("undecided")) {
+            JOptionPane.showMessageDialog(this, result.equals("draw") ? "It was a draw" : result + " won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            disableButtons();
+        }
+    }
+    
     
 
     /**
@@ -265,9 +289,10 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
             String boardString = "";
             for (int i = 0; i < ultBoard.getGameBoard().length; i++) {
                 for (int j = 0; j < ultBoard.getGameBoard()[i].getBoard().length; j++) {
-                    boardString += ultBoard.getGameBoard()[i].getBoard()[j] + "|";
+                    boardString += (ultBoard.getGameBoard()[i].getBoard()[j] == null ? "e" : ultBoard.getGameBoard()[i].getBoard()[j]) + ":";
                 }
             }
+            boardString += Integer.toString(ultBoard.getCurrentSectionIndex());
             SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), "X", "ultimate", "player", ultBoard.getCurrentPlayer(), boardString);
             CurrentUser.getUser().saveGame(currentGame);
             System.out.print(currentGame);
