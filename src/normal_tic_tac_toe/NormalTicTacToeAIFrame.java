@@ -47,6 +47,31 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         }
     }
     
+    public void setGameProperties (String difficulty, String ai, String player, String[] board) {
+        this.ai = ai;
+        this.player = player;
+        this.difficulty = difficulty;
+        this.board = board;
+        
+        for (int i = 0; i < btnArray.length; i++) {
+            btnArray[i].setText(board[i].equals("e") ? " " : board[i]);
+            this.board[i] = board[i].equals("e") ? null : board[i];
+        }
+        
+        lblComputerIs.setText("Computer is: " + ai + " ( " + difficulty.toUpperCase() + " difficulty )");
+        lblPlayerIs.setText("You are: " + player);
+        
+        if (ai.equals("X")) {
+            if (difficulty.equals("easy")) {
+                    moveEasyComputer();
+            } else if (difficulty.equals("medium")) {
+                moveMediumComputer();
+            } else if (difficulty.equals("hard")) {
+                moveAI();
+            }
+        }
+    }
+    
     /**
      * Creates new form NormalTicTacToeFrame
      */
@@ -425,7 +450,7 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         if (JOptionPane.showConfirmDialog(this, "Would you like to save your current game?", "Save Game?",JOptionPane.YES_NO_OPTION) == 0) {
             String boardString = "";
             for (int i = 0; i < board.length; i++) {
-                boardString += board[i] + "|";
+                boardString += (board[i] == null ? "e" : board[i]) + "|";
             }
             SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), player, "normal", "computer", difficulty, player, boardString);
             CurrentUser.getUser().saveGame(currentGame);

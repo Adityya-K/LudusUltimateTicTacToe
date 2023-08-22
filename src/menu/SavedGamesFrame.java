@@ -10,7 +10,10 @@ import javax.swing.JFrame;
 import user.User;
 import user.UserDatabase;
 import java.awt.*;
+import java.util.Arrays;
+import javax.swing.JOptionPane;
 import javax.swing.table.*;
+import normal_tic_tac_toe.NormalTicTacToeAIFrame;
 import user.CurrentUser;
 import user.SavedGame;
 
@@ -158,26 +161,38 @@ public class SavedGamesFrame extends javax.swing.JFrame {
 
     private void btnLoadGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadGameActionPerformed
         // TODO add your handling code here:
-        ArrayList <SavedGame> gamesPlayed = CurrentUser.getUser().getGames();
         int rowSelected = tblSavedGames.getSelectedRow();
-        String gameType = gamesPlayed.get(rowSelected).getGameType();
-        String opponentType = gamesPlayed.get(rowSelected).getOpponentType();
-        if (gameType.equals("NORMAL")) {
-            if (opponentType.equals("AI")) {
-                
+        
+        if (rowSelected != -1) {
+            ArrayList <SavedGame> gamesPlayed = CurrentUser.getUser().getGames();
+            String gameType = gamesPlayed.get(rowSelected).getGameType();
+            String opponentType = gamesPlayed.get(rowSelected).getOpponentType();
+            if (gameType.equals("NORMAL")) {
+                if (opponentType.equals("AI")) {
+                    String[] board = gamesPlayed.get(rowSelected).getPosition().split("|");
+                    System.out.println(gamesPlayed.get(rowSelected).getPosition());
+                    NormalTicTacToeAIFrame frmTicTacToeAI = new NormalTicTacToeAIFrame();
+                    frmTicTacToeAI.setGameProperties(gamesPlayed.get(rowSelected).getAIDifficulty().toLowerCase(), gamesPlayed.get(rowSelected).getPlayer1Piece().equals("X") ? "O" : "X", gamesPlayed.get(rowSelected).getPlayer1Piece(), board);
+                    frmTicTacToeAI.setVisible(true);
+                    this.dispose();
+                }
+                else {
+
+                }
             }
             else {
-                
-            }
+                if (opponentType.equals("AI")) {
+
+                }
+                else {
+
+                }
+            } 
         }
         else {
-            if (opponentType.equals("AI")) {
-                
-            }
-            else {
-                
-            }
+            JOptionPane.showMessageDialog(this, "Select a single row", "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_btnLoadGameActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -203,6 +218,7 @@ public class SavedGamesFrame extends javax.swing.JFrame {
     private void btnClearSavedGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearSavedGamesActionPerformed
         // TODO add your handling code here:
         CurrentUser.getUser().clearGames();
+        displaySavedGames();
     }//GEN-LAST:event_btnClearSavedGamesActionPerformed
 
     /**
