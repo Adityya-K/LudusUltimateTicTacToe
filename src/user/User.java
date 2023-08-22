@@ -106,7 +106,18 @@ public class User {
         UserDatabase.saveUsers();
     }
     
-
+    // increase and add inws/losses, ratings
+    public void addWin() {
+        this.wins += 1;
+    }
+    
+    public void addLoss() {
+        this.losses += 1;
+    }
+    
+    public void increaseRating(int points) {
+        this.rating += points;
+    }
     
     // Basic user when regristering.
     public User(String username, String password, String email) {
