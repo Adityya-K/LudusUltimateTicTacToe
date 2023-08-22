@@ -1,36 +1,40 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: to create a user profile page
+ * 
  */
 package menu;
 
+// Imports LoginFrame and CurrentUser
 import authentication_frames.LoginFrame;
-import java.util.ArrayList;
-import javax.swing.JFrame;
-import user.User;
-import user.UserDatabase;
-import java.awt.*;
-import javax.swing.table.*;
 import user.CurrentUser;
 
-/**
- *
- * @author gaudium
- */
 public class UserProfileFrame extends javax.swing.JFrame {
 
     /**
-     * Creates new form frmLogin
+     * Creates new form UserProfileFrame
      */
     public UserProfileFrame() {
+        // Displays the JFrame at the center position of the screen
         setSize(938, 788);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
+        
+         // Gets the current user if it is not null
         if (CurrentUser.getUser() != null) {
+            // Displays the user's username
             lblUsername.setText("Username: " + CurrentUser.getUser().getUsername());
+            // Displays the user's wins
             lblWins.setText("Wins: " + CurrentUser.getUser().getWins());
+            // Displays the user's losses
             lblLosses.setText("Losses: " + CurrentUser.getUser().getLosses());
+            // Displays the user's join date
             lblStartDate.setText("Date Joined: " + CurrentUser.getUser().getDateJoined());
+            // Displays the user's rating
             lblRating.setText("Rating: " + (int)(CurrentUser.getUser().getRating()));
         }
     }
@@ -125,14 +129,14 @@ public class UserProfileFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGoToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoToMainActionPerformed
-        // TODO add your handling code here:
+        // Displays the main menu the disposes the current frame
         MainMenuFrame frmMainMenu = new MainMenuFrame(); 
         frmMainMenu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGoToMainActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
+        // Displays the login page if the current user is null when the window is opened
         if(CurrentUser.getUser() == null) {
             LoginFrame frmLogin = new LoginFrame();
             frmLogin.setVisible(true);

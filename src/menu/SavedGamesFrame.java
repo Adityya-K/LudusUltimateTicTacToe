@@ -1,16 +1,17 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: to create a page with the saved games
+ * 
  */
 package menu;
 
 import authentication_frames.LoginFrame;
 import java.util.ArrayList;
-import javax.swing.JFrame;
-import user.User;
 import user.UserDatabase;
-import java.awt.*;
-import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.table.*;
 import normal_tic_tac_toe.NormalTicTacToeAIFrame;
@@ -30,23 +31,31 @@ public class SavedGamesFrame extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public SavedGamesFrame() {
+        // Displays the JFrame at the center position of the screen
         setSize(938, 788);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
     }
     
+    /**
+     * A method that displays saved games
+     */
     public void displaySavedGames() {
+        // Get saved games from a database and store it as an arrayList
         ArrayList <SavedGame> gamesPlayed = CurrentUser.getUser().getGames();
         
-        // new model for the leaderbaord table
+        // Create a new model for the output table so that we can manipulate
+        // how many rows it has
         DefaultTableModel model = (DefaultTableModel) tblSavedGames.getModel();
         
+        // Reset the row count to zero
         model.setRowCount(0);
         
-        // display either smaller of the size of the top players arraylist or the PLAYERS_TO_DISPLAY
-        // loop trough each element up until the numbre of playuers to display
+        // Loop through the total amount of saved games from that user
         for (int i = 0; i < gamesPlayed.size(); i++) {
-            System.out.println(gamesPlayed.get(i).getPosition());
+            // Add a row for each game with the type of game (i.e. normal or ultimate),
+            // the opponent (i.e. AI or player) and the difficulty of the AI
+            // if the opponent if it is AI (decided by ternary operator)
             model.addRow(new Object[]{gamesPlayed.get(i).getGameType(), gamesPlayed.get(i).getOpponentType(), gamesPlayed.get(i).getAIDifficulty().equals("null") ? "N/A" : gamesPlayed.get(i).getAIDifficulty()});
         }
         
@@ -166,84 +175,181 @@ public class SavedGamesFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoadGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadGameActionPerformed
-        // TODO add your handling code here:
+        // Store the row that the user selected, since the indexing of the table
+        // starts from 0, no further operations are needed
         int rowSelected = tblSavedGames.getSelectedRow();
         
+        // Check if it didn't return negative 1, if it did, no row is selected
         if (rowSelected != -1) {
+            // Get the gamesPlay from the user and store it as an ArrayList
             ArrayList <SavedGame> gamesPlayed = CurrentUser.getUser().getGames();
+            // Get the type of game of the game the user pressed using the
+            // row they selected
             String gameType = gamesPlayed.get(rowSelected).getGameType();
+            // Get the type of opponent of the game the user pressed using the
+            // row they selected
             String opponentType = gamesPlayed.get(rowSelected).getOpponentType();
+            
+            // Check if the game type is normal
             if (gameType.equals("normal")) {
+                // Check if the opponent is a computer
                 if (opponentType.equals("computer")) {
+                    // Get the board from the game and store it as an array of
+                    // Strings to be passed as a parameter. We seperate the
+                    // letters from the database using ":"
                     String[] board = gamesPlayed.get(rowSelected).getPosition().split(":");
+                    
+                    // Create the normal tic tac toe AI frame
                     NormalTicTacToeAIFrame frmTicTacToeAI = new NormalTicTacToeAIFrame();
-                    System.out.println(gamesPlayed.get(rowSelected).getPosition());
+                    
+                    // Set the game properties to the corresponding ones from the
+                    // database so that the user loads in to a game with played
+                    // moves
                     frmTicTacToeAI.setGameProperties(gamesPlayed.get(rowSelected).getAIDifficulty(), gamesPlayed.get(rowSelected).getPlayer1Piece().equals("X") ? "O" : "X", gamesPlayed.get(rowSelected).getPlayer1Piece(), board);
+                    
+                    // Make the normal tic tac toe AI frame visible
                     frmTicTacToeAI.setVisible(true);
+                    
+                    // Dispose the current frame
                     this.dispose();
                 }
+                // If it isn't a computer then it is human
                 else {
+                    // Get the board from the game and store it as an array of
+                    // Strings to be passed as a parameter. We seperate the
+                    // letters from the database using ":"
                     String[] board = gamesPlayed.get(rowSelected).getPosition().split(":");
+                    
+                    // Create the normal tic tac toe without AI frame
                     NormalTicTacToeFrame frmTicTacToe = new NormalTicTacToeFrame();
-                    System.out.println(gamesPlayed.get(rowSelected).getPosition());
+                    
+                    // Set the game properties to the corresponding ones from the
+                    // database so that the user loads in to a game with played
+                    // moves
                     frmTicTacToe.setGameProperties(gamesPlayed.get(rowSelected).getTurn(), board);
+                    
+                    // Make the normal tic tac toe without AI frame visible
                     frmTicTacToe.setVisible(true);
+                    
+                    // Dispose the current frame
                     this.dispose();
                 }
             }
+            // If it is not normal tic tac toe, then it is ultimate
             else {
+                // Check if the opponent is a computer
                 if (opponentType.equals("computer")) {
+                    // Parse the board from the data base using the seperator,
+                    // the colon, ":". We store this as a 1D array to be
+                    // converted into a 2D array
                     String[] board1D = gamesPlayed.get(rowSelected).getPosition().split(":");
+                    
+                    // Declare a 2D array to be passed as a parameter to create
+                    // the board of the ultimate TicTacToe game
                     String[][] board = new String[9][9];
+                    
+                    // Get an iterator to iterate through the 1D array
                     int iterator = 0;
+                    
+                    // Loop through the 9 arrays in board
                     for (int i = 0; i < 9; i++) {
+                        // Loop through the 9 elements of each array
                         for (int j = 0; j < 9; j++) {
+                            // Set the element to its corresponding element
+                            // on the 1D array
                             board[i][j] = board1D[iterator];
+                            
+                            // Add one to the iterator to keep iterating
                             iterator++;
                         }
                     }
                     
+                    // The last elemtn of the 1D board is actually the index
+                    // of the current Section (which one of 9 mini TicTacToe 
+                    // boards) that was last left off on in the game so we store
+                    // it
                     int currentSectionIndex = Integer.parseInt(board1D[81]);
+                    
+                    // Create the ultimate tic tac toe with AI frame
                     UltimateTicTacToeAIFrame frmUltimateTicTacToeAI = new UltimateTicTacToeAIFrame();
-                    System.out.println(gamesPlayed.get(rowSelected).getPosition());
+                    
+                    // Set the game properties to the corresponding ones from the
+                    // database so that the user loads in to a game with played
+                    // moves
                     frmUltimateTicTacToeAI.setGameProperties(gamesPlayed.get(rowSelected).getAIDifficulty(), gamesPlayed.get(rowSelected).getPlayer1Piece(),  gamesPlayed.get(rowSelected).getPlayer1Piece().equals("X") ? "O" : "X", board, currentSectionIndex);
+                    
+                    // Make the ultimate tic tac toe with AI frame visible
                     frmUltimateTicTacToeAI.setVisible(true);
+                    
+                    // Dispose the current frame
                     this.dispose();
                     
                 }
+                // If it isn't a computer then it is human
                 else {
+                    // Parse the board from the data base using the seperator,
+                    // the colon, ":". We store this as a 1D array to be
+                    // converted into a 2D array
                     String[] board1D = gamesPlayed.get(rowSelected).getPosition().split(":");
+                    
+                    // Declare a 2D array to be passed as a parameter to create
+                    // the board of the ultimate TicTacToe game
                     String[][] board = new String[9][9];
+                    
+                    // Get an iterator to iterate through the 1D array
                     int iterator = 0;
+                    
+                    // Loop through the 9 arrays in board
                     for (int i = 0; i < 9; i++) {
+                        // Loop through the 9 elements of each array
                         for (int j = 0; j < 9; j++) {
+                            // Set the element to its corresponding element
+                            // on the 1D array
                             board[i][j] = board1D[iterator];
+                            
+                            // Add one to the iterator to keep iterating
                             iterator++;
                         }
                     }
                     
+                    // The last elemtn of the 1D board is actually the index
+                    // of the current Section (which one of 9 mini TicTacToe 
+                    // boards) that was last left off on in the game so we store
+                    // it
                     int currentSectionIndex = Integer.parseInt(board1D[81]);
+                    
+                    // Create the ultimate tic tac toe without AI frame
                     UltimateTicTacToeFrame frmUltimateTicTacToe = new UltimateTicTacToeFrame();
-                    System.out.println(gamesPlayed.get(rowSelected).getPosition());
+                    
+                    // Set the game properties to the corresponding ones from the
+                    // database so that the user loads in to a game with played
+                    // moves
                     frmUltimateTicTacToe.setGameProperties( gamesPlayed.get(rowSelected).getPlayer1Piece(), board, currentSectionIndex, gamesPlayed.get(rowSelected).getTurn());
+                    
+                    // Make the ultimate tic tac toe without AI frame visible
                     frmUltimateTicTacToe.setVisible(true);
+                    
+                    // Dispose the current frame
                     this.dispose();
                 }
             } 
         }
+        // If the user did not select a row
         else {
+            // Tell the user to select a row
             JOptionPane.showMessageDialog(this, "Select a single row", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_btnLoadGameActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
+        // Displays the login page if the current user is null when the window is opened
         if(CurrentUser.getUser() == null) {
             LoginFrame frmLogin = new LoginFrame();
             frmLogin.setVisible(true);
             this.dispose();
         }
+        // Loads the database and displays the saved games
         else {
             UserDatabase.loadDatabase();
             displaySavedGames();
@@ -251,14 +357,14 @@ public class SavedGamesFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnGoToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoToMainActionPerformed
-        // TODO add your handling code here:
+        // Displays the main menu
         MainMenuFrame frmMainMenu = new MainMenuFrame(); 
         frmMainMenu.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnGoToMainActionPerformed
 
     private void btnClearSavedGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearSavedGamesActionPerformed
-        // TODO add your handling code here:
+        // Clears the games and displays an empty list
         CurrentUser.getUser().clearGames();
         displaySavedGames();
     }//GEN-LAST:event_btnClearSavedGamesActionPerformed
