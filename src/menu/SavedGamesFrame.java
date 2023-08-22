@@ -1,16 +1,23 @@
 /*
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: to create a page with the saved games
+ * 
+ */
+
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package menu;
 
+// Imports LoginFrame, ArrayList, UserDatabase, JOptionPane, javax table, the normal Tic-Tac-Toe frame, and two classes from the user package
 import authentication_frames.LoginFrame;
 import java.util.ArrayList;
-import javax.swing.JFrame;
-import user.User;
 import user.UserDatabase;
-import java.awt.*;
-import java.util.Arrays;
 import javax.swing.JOptionPane;
 import javax.swing.table.*;
 import normal_tic_tac_toe.NormalTicTacToeAIFrame;
@@ -27,23 +34,27 @@ public class SavedGamesFrame extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public SavedGamesFrame() {
+        
+        // Displays the JFrame at the center position of the screen
         setSize(938, 788);
-        setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
+        setLocationRelativeTo(null);
         initComponents();
+        
     }
     
     public void displaySavedGames() {
+        
+        // Initializes an ArrayList of games played
         ArrayList <SavedGame> gamesPlayed = CurrentUser.getUser().getGames();
         
         // new model for the leaderbaord table
         DefaultTableModel model = (DefaultTableModel) tblSavedGames.getModel();
         
         // display either smaller of the size of the top players arraylist or the PLAYERS_TO_DISPLAY
-        // loop trough each element up until the numbre of playuers to display
+        // loop trough each element up until the number of players to display
         for (int i = 0; i < gamesPlayed.size(); i++) {
             model.addRow(new Object[]{gamesPlayed.get(i).getGameType(), gamesPlayed.get(i).getOpponentType(), gamesPlayed.get(i).getAIDifficulty() == null ? " " : gamesPlayed.get(i).getAIDifficulty()});
         }
-        
                
     }
 
@@ -161,9 +172,14 @@ public class SavedGamesFrame extends javax.swing.JFrame {
 
     private void btnLoadGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadGameActionPerformed
         // TODO add your handling code here:
+        
+        // Initializes an integer indicating the row selected
         int rowSelected = tblSavedGames.getSelectedRow();
         
+        // Runs if a row was selected
         if (rowSelected != -1) {
+            
+            // TODO fix and comment the following code
             ArrayList <SavedGame> gamesPlayed = CurrentUser.getUser().getGames();
             String gameType = gamesPlayed.get(rowSelected).getGameType();
             String opponentType = gamesPlayed.get(rowSelected).getOpponentType();
@@ -197,28 +213,38 @@ public class SavedGamesFrame extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        
+        // Displays the login page if the current user is null when the window is opened
         if(CurrentUser.getUser() == null) {
             LoginFrame frmLogin = new LoginFrame();
             frmLogin.setVisible(true);
             this.dispose();
-        }
-        else {
+        
+        // Loads the database and displays the saved games
+        } else {
             UserDatabase.loadDatabase();
             displaySavedGames();
         }
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void btnGoToMainActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoToMainActionPerformed
         // TODO add your handling code here:
+        
+        // Displays the main menu
         MainMenuFrame frmMainMenu = new MainMenuFrame(); 
         frmMainMenu.setVisible(true);
         this.dispose();
+        
     }//GEN-LAST:event_btnGoToMainActionPerformed
 
     private void btnClearSavedGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearSavedGamesActionPerformed
         // TODO add your handling code here:
+        
+        // Clears the games and displays an empty list
         CurrentUser.getUser().clearGames();
         displaySavedGames();
+        
     }//GEN-LAST:event_btnClearSavedGamesActionPerformed
 
     /**
