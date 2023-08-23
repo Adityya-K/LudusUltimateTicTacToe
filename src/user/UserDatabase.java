@@ -73,6 +73,7 @@ public class UserDatabase {
         // print list of users
         // print decoded
 
+
         // databse is stored as comma seperated user strings
         // e.g. user1, rating ...
         // create a new user from this.
@@ -175,7 +176,7 @@ public class UserDatabase {
             fileData += user.toString() + "\n";
         }
         // output debug message
-        // use regext to remove the final newline
+
         fileData = fileData.trim();
         
         // encrypt the database with base64
@@ -197,6 +198,7 @@ public class UserDatabase {
             // print saving file
             // buffered write on the un encoded database
             BufferedWriter writer = new BufferedWriter(new FileWriter("unencodedDatabase.txt"));
+
             // write on the filedata
             writer.write(fileData);
             // close writer
