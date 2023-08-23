@@ -4,7 +4,7 @@
  * ICS4UE
  * August 20-22, 2023
  * Mr. Diakoloukas
- * Purpose: to create a selection page for normal Tic-Tac-Toe
+ * Purpose: to allow the user to play the 2-player version of Ultimate Tic-Tac-Toe
  * 
  */
 

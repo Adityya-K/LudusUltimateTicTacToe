@@ -4,7 +4,7 @@
  * ICS4UE
  * August 20-22, 2023
  * Mr. Diakoloukas
- * Purpose: to create a selection page for normal Tic-Tac-Toe
+ * Purpose: to create a help page for Ultimate Tic-Tac-Toe
  * 
  */
 package ultimate_tic_tac_toe;

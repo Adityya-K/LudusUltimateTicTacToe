@@ -4,7 +4,7 @@
  * ICS4UE
  * August 20-22, 2023
  * Mr. Diakoloukas
- * Purpose: to store information about you
+ * Purpose: to create a User class
  * 
  */
 

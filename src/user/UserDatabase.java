@@ -1,10 +1,3 @@
-package user;
-
-import user.config;
-import java.io.*;
-import java.util.*;
-
-
 /*
  * Group Name: Ludus 
  * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
@@ -14,6 +7,12 @@ import java.util.*;
  * Purpose: store info about user database information
  * 
  */
+
+package user;
+
+import user.config;
+import java.io.*;
+import java.util.*;
 
 /*
 Database file:

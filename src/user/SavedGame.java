@@ -4,7 +4,7 @@
  * ICS4UE
  * August 20-22, 2023
  * Mr. Diakoloukas
- * Purpose: 
+ * Purpose: to create a SavedGame class
  * 
  */
 
@@ -17,7 +17,7 @@ import user.*;
 
 
 public class SavedGame {
-    // declare vairables, player1, player1 piece, game_type, opponent_type, ai_difficulty, turn
+    // declare variables, player1, player1 piece, game_type, opponent_type, ai_difficulty, turn
     private String player1;
     // not multiplayer yet
     //private User player2; //
