@@ -67,11 +67,8 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
             }
         }
         
-        if (ultBoard.getPlayerPiece().equals("O")) // ai goes first
+        if (!ultBoard.getPlayerPiece().equals("O")) // ai goes first
         {
-            ultBoard.moveAI(); // ai move
-        }
-        else {
             gameBoard[currentSectionIndex].highlightButtons(); // highlight the current section
         }
         
