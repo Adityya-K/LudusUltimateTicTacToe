@@ -66,29 +66,29 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(lblCreateAccount);
-        lblCreateAccount.setBounds(0, 560, 940, 26);
+        lblCreateAccount.setBounds(0, 580, 940, 26);
         getContentPane().add(txtUsername);
-        txtUsername.setBounds(260, 270, 430, 50);
+        txtUsername.setBounds(260, 290, 430, 50);
 
         lblPassword.setBackground(new java.awt.Color(255, 255, 255));
         lblPassword.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         lblPassword.setForeground(new java.awt.Color(255, 255, 255));
         lblPassword.setText("Password:");
         getContentPane().add(lblPassword);
-        lblPassword.setBounds(260, 340, 150, 33);
+        lblPassword.setBounds(260, 360, 150, 33);
 
         lblUsername.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         lblUsername.setForeground(new java.awt.Color(255, 255, 255));
         lblUsername.setText("Username:");
         getContentPane().add(lblUsername);
-        lblUsername.setBounds(260, 220, 150, 33);
+        lblUsername.setBounds(260, 240, 150, 33);
 
         lblTitle.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
         lblTitle.setForeground(new java.awt.Color(255, 255, 255));
         lblTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblTitle.setText("LOGIN");
         getContentPane().add(lblTitle);
-        lblTitle.setBounds(0, 150, 940, 50);
+        lblTitle.setBounds(0, 170, 940, 50);
 
         btnLogin.setBackground(new java.awt.Color(0, 102, 255));
         btnLogin.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -100,9 +100,9 @@ public class LoginFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnLogin);
-        btnLogin.setBounds(260, 480, 430, 40);
+        btnLogin.setBounds(260, 500, 430, 40);
         getContentPane().add(txtPassword);
-        txtPassword.setBounds(260, 390, 430, 50);
+        txtPassword.setBounds(260, 410, 430, 50);
 
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image_assets/login-background.png"))); // NOI18N
         lblBackground.setText("jLabel1");
