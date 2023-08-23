@@ -11,6 +11,7 @@ package authentication_frames;
 
 // Imports JOptionPane
 import javax.swing.JOptionPane;
+import menu.MainMenuFrame;
 
 
 import user.*;
@@ -42,11 +43,12 @@ public class RegistrationFrame extends javax.swing.JFrame {
         lblEmail = new javax.swing.JLabel();
         lblUsername = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
-        btnRegister = new javax.swing.JButton();
         lblPassword = new javax.swing.JLabel();
         lblConfirmPassword = new javax.swing.JLabel();
         txtConfirmPassword = new javax.swing.JPasswordField();
         txtPassword = new javax.swing.JPasswordField();
+        btnBackToLogin = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -77,18 +79,6 @@ public class RegistrationFrame extends javax.swing.JFrame {
         getContentPane().add(lblTitle);
         lblTitle.setBounds(0, 50, 940, 50);
 
-        btnRegister.setBackground(new java.awt.Color(0, 102, 255));
-        btnRegister.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        btnRegister.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegister.setText("Register new account");
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnRegister);
-        btnRegister.setBounds(250, 600, 430, 40);
-
         lblPassword.setBackground(new java.awt.Color(255, 255, 255));
         lblPassword.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         lblPassword.setForeground(new java.awt.Color(255, 255, 255));
@@ -107,6 +97,30 @@ public class RegistrationFrame extends javax.swing.JFrame {
         getContentPane().add(txtPassword);
         txtPassword.setBounds(260, 390, 430, 50);
 
+        btnBackToLogin.setBackground(new java.awt.Color(0, 102, 255));
+        btnBackToLogin.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnBackToLogin.setForeground(new java.awt.Color(255, 255, 255));
+        btnBackToLogin.setText("Go To Login");
+        btnBackToLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackToLoginActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBackToLogin);
+        btnBackToLogin.setBounds(260, 620, 430, 40);
+
+        btnRegister.setBackground(new java.awt.Color(0, 102, 255));
+        btnRegister.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnRegister.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegister.setText("Register new account");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRegister);
+        btnRegister.setBounds(260, 560, 430, 40);
+
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image_assets/registration-background.png"))); // NOI18N
         lblBackground.setText("jLabel2");
         lblBackground.setMaximumSize(new java.awt.Dimension(940, 788));
@@ -117,6 +131,7 @@ public class RegistrationFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
     String error;
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
         // Stores the user information in strings
@@ -164,6 +179,13 @@ public class RegistrationFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
 
+    private void btnBackToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToLoginActionPerformed
+        // TODO add your handling code here:
+        MainMenuFrame frmMainMenu = new MainMenuFrame();
+        frmMainMenu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackToLoginActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -203,6 +225,7 @@ public class RegistrationFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBackToLogin;
     private javax.swing.JButton btnRegister;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblConfirmPassword;

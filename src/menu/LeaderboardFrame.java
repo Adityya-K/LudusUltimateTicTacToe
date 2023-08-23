@@ -118,7 +118,15 @@ public class LeaderboardFrame extends javax.swing.JFrame {
             new String [] {
                 "Rank", "Username", "Rating"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(tblLeaderboard);
 
         getContentPane().add(jScrollPane1);

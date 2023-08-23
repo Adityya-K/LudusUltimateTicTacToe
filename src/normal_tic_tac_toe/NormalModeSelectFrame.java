@@ -12,7 +12,6 @@ package normal_tic_tac_toe;
 // Imports LoginFrame, everything from the menu package and CurrentUser
 import authentication_frames.LoginFrame;
 import menu.*;
-import javax.swing.JFrame; // DELETE
 import user.CurrentUser;
 
 public class NormalModeSelectFrame extends javax.swing.JFrame {
