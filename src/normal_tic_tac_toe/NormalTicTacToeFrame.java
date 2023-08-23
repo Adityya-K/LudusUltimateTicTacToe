@@ -1,17 +1,36 @@
 /*
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: to allow the user to play the 2-player version of normal Tic-Tac-Toe
+ * 
+ */
+
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package normal_tic_tac_toe;
 
+// Imports LoginFrame
 import authentication_frames.LoginFrame;
+
+// Imports Color, Font, ActionEvent and ActionListener from java.awt
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+// Imports JButton and JOptionPane from javax.swing
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+
+// Imports MainMenuFrame from the menu package
 import menu.MainMenuFrame;
+
+// Imports the CurrentUser and SavedGames classes from the user package
 import user.CurrentUser;
 import user.SavedGame;
 
@@ -27,32 +46,59 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
     // Array that stores the X and O characters. Used with turnNumber to reflect player change
     String[] playerArray = {"X", "O"};
     
-    
-     public void setGameProperties (String currentTurn, String[] board) {
+    // Sets the turn number and board if the game has been loaded
+    public void setGameProperties (String currentTurn, String[] board) {
+        
+        // Sets the turn number
         turnNumber = Integer.parseInt(currentTurn);
+        
+        // Iterates through all of the indices in the button array
         for (int i = 0; i < btnArray.length; i++) {
+            
+            // Sets the color
             btnArray[i].setForeground(new Color(0,102,255));
+            
+            // Sets the text
             btnArray[i].setText(board[i].equals("e") ? " " : board[i]);
+            
         }
-     }
+        
+    }
     
     
     /**
      * Creates new form NormalTicTacToeFrame
      */
     public NormalTicTacToeFrame() {
+        
+        // Displays the JFrame at the center position of the screen
         setSize(940, 788);
         setLocationRelativeTo(null);
         initComponents();
+        
         // Creates all the buttons
         for (int i = 0; i < btnArray.length; i++) {
+            
+            // Sets the text
             btnArray[i] = new JButton(" ");
+            
+            // Sets the background color
             btnArray[i].setBackground(new Color(128, 176, 247));
+            
+            // Sets the font
             btnArray[i].setFont(new Font("SansSerif", Font.BOLD, 50));
+            
+            // Sets the action command
             btnArray[i].setActionCommand("" + i);
+            
+            // Sets the action listener
             btnArray[i].addActionListener(this);
+            
+            // Adds the button to the panel
             panButtons.add(btnArray[i]);
+            
         }
+        
     }
     
     // Handles a button click
@@ -72,11 +118,13 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
                     break;
                 }
                 
+                // Sets the color
                 btnArray[i].setForeground(turnNumber%2 == 1 ? Color.white : Color.black);
                 
                 // Sets the button text to the correct player using the parity of the turn number
                 btnArray[i].setText("" + playerArray[turnNumber%2]);
                 
+                // Displays the appropriate player's turn
                 lblTurn.setText(turnNumber%2 == 1 ? "X's Turn" : "O's Turn");
                 
                 // Increments the turn number
@@ -88,11 +136,11 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
                 // Checks if the game has been decided
                 if (gameResult.equals("undecided") == false) {
                     
-                    // TODO output game result on gui instead of console
-                    // Prints out the game result
+                    // Outputs the game result
                     JOptionPane.showMessageDialog(this, gameResult, "Game Over", JOptionPane.INFORMATION_MESSAGE);
                     lblTurn.setText(gameResult);
                     
+                    // Disables all of the buttons
                     for (int j = 0; j < btnArray.length; j++) {
                         btnArray[j].setEnabled(false);
                     }
@@ -104,8 +152,11 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
                 
                 // Stops the search for a button click
                 break;
+                
             }
+            
         }
+        
     }
     
     /**
@@ -239,62 +290,95 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    // Saves the game
     private void saveGame() {
+        
+        // Initializes a counter for the amount of moves
         int movesPresent = 0;
+        
+        // Increments the move conuter accordingly
         for (int i = 0; i < btnArray.length; i++) {
             if (!btnArray[i].getText().isBlank()) {
                 movesPresent++;
             }
         }
         
+        // Returns nothing if there are no moves
         if(movesPresent < 1) {
             return;
         }
         
+        // Asks the user to confirm
         if (JOptionPane.showConfirmDialog(this, "Would you like to save your current game?", "Save Game?",JOptionPane.YES_NO_OPTION) == 0) {
+            
+            // Reads the board into a string
             String boardString = "";
             for (int i = 0; i < btnArray.length; i++) {
                 boardString += btnArray[i].getText() + ":";
             }
+            
+            // Saves the game, passing information about the game
             SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), "X", "normal", "player", Integer.toString(turnNumber), boardString);
             CurrentUser.getUser().saveGame(currentGame);
-            System.out.print(currentGame);
+            System.out.print(currentGame); // DELETE
+            
         }
+        
     }
     
     private void btnRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestartActionPerformed
         // TODO add your handling code here:
+        
+        // Resets the board to an empty one
         resetBoard();
+        
     }//GEN-LAST:event_btnRestartActionPerformed
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
         // TODO add your handling code here:
-        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {    
+        
+        // Asks the user to confirm
+        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit Mid-Game?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {    
+            
+            // Saves the game and displays the main menu
             saveGame();
             MainMenuFrame frmMainMenu = new MainMenuFrame();
             frmMainMenu.setVisible(true);
             this.dispose();
+            
         }
+        
     }//GEN-LAST:event_btnToMainMenuActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        
+        // Displays the login page if the current user is null when the window is opened
         if(CurrentUser.getUser() == null) {
+            
             LoginFrame frmLogin = new LoginFrame();
             frmLogin.setVisible(true);
             this.dispose();
+            
         }
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
+        
+        // Saves the game
         saveGame();
+        
     }//GEN-LAST:event_formWindowClosing
 
     private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
         // TODO add your handling code here:
+        
+        // Displays the help page
         NormalHelpFrame frmNormalHelp = new NormalHelpFrame();
         frmNormalHelp.setVisible(true);
+        
     }//GEN-LAST:event_btnHelpActionPerformed
 
     /**
@@ -349,15 +433,19 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
     private javax.swing.JLabel lblTurn;
     private javax.swing.JPanel panButtons;
     // End of variables declaration//GEN-END:variables
+    
+    // Creates an array of 9 buttons
     private JButton[] btnArray = new JButton[9];
 
     // Resets the board
     private void resetBoard() {
+        
         // Iterates through every index in the array and resets the text
         for (int i = 0; i < btnArray.length; i++) {
             btnArray[i].setText(" "); 
             btnArray[i].setEnabled(true);
         }
+        
     }
 
     // Returns a string with the winner, if there is a draw or if the game is undecided
@@ -399,11 +487,14 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
             }
         }
         
+        // Sets the game result to a draw if the board is full and there are no 3-in-a-rows
         if (draw == true && turnNumber == 9) {
             gameResult = "It's a draw!";
         }
         
+        // Returns the game result
         return gameResult;
+        
     }
 
     // Returns an array of strings that represent all the lines on the board

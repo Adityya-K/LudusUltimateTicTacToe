@@ -1,4 +1,14 @@
 /*
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: to create a selection page for normal Tic-Tac-Toe
+ * 
+ */
+
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
@@ -8,8 +18,10 @@ package normal_tic_tac_toe;
  *
  * @author gaudium
  */
+
+// Imports LoginFrame and everything in the user package
 import authentication_frames.LoginFrame;
-import javax.swing.JFrame;
+import javax.swing.JFrame; // DELETE
 import user.*;
 
 public class NormalComputerSelectFrame extends javax.swing.JFrame {
@@ -18,9 +30,12 @@ public class NormalComputerSelectFrame extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public NormalComputerSelectFrame() {
+        
+        // Displays the JFrame at the center position of the screen
         setSize(938, 788);
-        setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
+        setLocationRelativeTo(null);
         initComponents();
+        
     }
 
     /**
@@ -109,10 +124,13 @@ public class NormalComputerSelectFrame extends javax.swing.JFrame {
 
     private void btnGoToGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoToGameActionPerformed
         // TODO add your handling code here:
+        
+        // Initializes the difficulty and the letters that represent the player/computer
         String difficulty = "";
         String playerLetter = "";
         String computerLetter = "";
-                
+        
+        // Sets the difficulty according to the combobox
         switch (cmbDifficulty.getSelectedIndex()) {
             case 0:
                 difficulty = "easy";
@@ -125,6 +143,7 @@ public class NormalComputerSelectFrame extends javax.swing.JFrame {
                 break;
         }
         
+        // Sets the player and computer letters according to the combobox
         switch (cmbXOrO.getSelectedIndex()) {
             case 0:
                 playerLetter = "X";
@@ -136,6 +155,7 @@ public class NormalComputerSelectFrame extends javax.swing.JFrame {
                 break;
         }
         
+        // Displays the 1-player version of normal Tic-Tac-Toe
         NormalTicTacToeAIFrame frmTicTacToeAI = new NormalTicTacToeAIFrame();
         frmTicTacToeAI.setGameProperties(difficulty, computerLetter, playerLetter);
         frmTicTacToeAI.setVisible(true);
@@ -145,14 +165,17 @@ public class NormalComputerSelectFrame extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        
+        // Displays the login page if the current user is null when the window is opened
         if(CurrentUser.getUser() == null) {
             LoginFrame frmLogin = new LoginFrame();
             frmLogin.setVisible(true);
             this.dispose();
         }
+        
     }//GEN-LAST:event_formWindowOpened
     
-    String error;
+    String error; // DELETE
     /**
      * @param args the command line arguments
      */

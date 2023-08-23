@@ -1,12 +1,23 @@
 /*
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: to create a mode select page for normal Tic-Tac-Toe
+ * 
+ */
+
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package normal_tic_tac_toe;
 
+// Imports LoginFrame, everything from the menu package and CurrentUser
 import authentication_frames.LoginFrame;
 import menu.*;
-import javax.swing.JFrame;
+import javax.swing.JFrame; // DELETE
 import user.CurrentUser;
 
 /**
@@ -19,9 +30,12 @@ public class NormalModeSelectFrame extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public NormalModeSelectFrame() {
+        
+        // Displays the JFrame at the center position of the screen
         setSize(938, 788);
-        setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
+        setLocationRelativeTo(null);
         initComponents();
+        
     }
 
     /**
@@ -105,32 +119,44 @@ public class NormalModeSelectFrame extends javax.swing.JFrame {
 
     private void btnPVEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPVEActionPerformed
         // TODO add your handling code here:
+        
+        // Displays the selection page for difficulty of computer
         NormalComputerSelectFrame frmComputerSelect = new NormalComputerSelectFrame();
         frmComputerSelect.setVisible(true);
         this.dispose();
+        
     }//GEN-LAST:event_btnPVEActionPerformed
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
         // TODO add your handling code here:
+        
+        // Displays the main menu
         MainMenuFrame frmMainMenu = new MainMenuFrame();
         frmMainMenu.setVisible(true);
         this.dispose();
+        
     }//GEN-LAST:event_btnToMainMenuActionPerformed
 
     private void btnPVPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPVPActionPerformed
         // TODO add your handling code here:
+        
+        // Displays the 2-player version of Tic-Tac-Toe
         NormalTicTacToeFrame frmNormalTicTacToe = new NormalTicTacToeFrame();
         frmNormalTicTacToe.setVisible(true);
         this.dispose();
+        
     }//GEN-LAST:event_btnPVPActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        
+        // Displays the login page if the current user is null when the window is opened
         if(CurrentUser.getUser() == null) {
             LoginFrame frmLogin = new LoginFrame();
             frmLogin.setVisible(true);
             this.dispose();
         }
+        
     }//GEN-LAST:event_formWindowOpened
 
     /**

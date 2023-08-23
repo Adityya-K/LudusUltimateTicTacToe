@@ -1,12 +1,14 @@
+// import user package
 package user;
 
-
+// import security packages for encryption
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Base64;
 
+// cipher packages
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -57,19 +59,5 @@ public class AESEncryption {
         }
         return null;
     }
-/*
-    public static void main(String[] args) {
-        final String secretKey = "secrete";
 
-        String originalString = "javaguides";
-
-        AESEncryptionDecryption aesEncryptionDecryption = new AESEncryptionDecryption();
-        String encryptedString = aesEncryptionDecryption.encrypt(originalString, secretKey);
-        String decryptedString = aesEncryptionDecryption.decrypt(encryptedString, secretKey);
-
-        System.out.println(originalString);
-        System.out.println(encryptedString);
-        System.out.println(decryptedString);
-    }
-    */
 }

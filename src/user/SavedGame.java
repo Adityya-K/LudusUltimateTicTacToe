@@ -20,109 +20,126 @@ public class SavedGame {
     private String opponentType; // AI, HUMAN
     private String aiDifficulty; // EASY, MEDIUM, HARD
     private String turn; // ME, OPPONENT
-    
-    // getters and setters for savedGame
-    public String getPlayer1() {
-        return player1;
-    }
-
-    public void setPlayer1(String player1) {
-        this.player1 = player1;
-    }
-
-    public String getPlayer1Piece() {
-        return player1Piece;
-    }
-
-    public void setPlayer1Piece(String player1Piece) {
-        this.player1Piece = player1Piece;
-    }
-
-    public String getGameType() {
-        return gameType;
-    }
-
-    public void setGameType(String gameType) {
-        this.gameType = gameType;
-    }
-
-    public String getOpponentType() {
-        return opponentType;
-    }
-
-    public void setOpponentType(String opponentType) {
-        this.opponentType = opponentType;
-    }
-
-    public String getAIDifficulty() {
-        return aiDifficulty;
-    }
-
-    public void setAIDifficulty(String aiDifficulty) {
-        this.aiDifficulty = aiDifficulty;
-    }
-
-    public String getTurn() {
-        return turn;
-    }
-
-    public void setTurn(String turn) {
-        this.turn = turn;
-    }
-
-    public String getSavedDate() {
-        return savedDate;
-    }
-
-    public void setSavedDate(String savedDate) {
-        this.savedDate = savedDate;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
     private String savedDate; // date in str 
-
-
-    
     /*
     e --> empty
     x --> x
+    o --> o
     
     For regular this is: xexxooxxx
-    Ultimate is xeexxx,eee
-                ... ... ...
-                ... ... ...
+    Ultimate is xeexxxea...
     */
     private String position; 
+    // getters and setters for savedGame
+    // getter for player1
+    public String getPlayer1() {
+        return player1;
+    }
+    // setter for player1
+    public void setPlayer1(String player1) {
+        // set player1 username
+        this.player1 = player1;
+    }
+    // getter for player1 piece
+    public String getPlayer1Piece() {
+        return player1Piece;
+    }
+    // setter for player1piece
+    public void setPlayer1Piece(String player1Piece) {
+        this.player1Piece = player1Piece;
+    }
+    // getter for gametype
+    public String getGameType() {
+        return gameType;
+    }
+    // setter for gametype
+    public void setGameType(String gameType) {
+        this.gameType = gameType;
+    }
+    // getter for opponent type
+    public String getOpponentType() {
+        return opponentType;
+    }
+    // setter for opponenttype
+    public void setOpponentType(String opponentType) {
+        this.opponentType = opponentType;
+    }
+    // getter for ai difficulty
+    public String getAIDifficulty() {
+        return aiDifficulty;
+    }
+    // setter for ai difficulty
+    public void setAIDifficulty(String aiDifficulty) {
+        this.aiDifficulty = aiDifficulty;
+    }
+    // getter for turn
+    public String getTurn() {
+        return turn;
+    }
+    // setter for turn
+    public void setTurn(String turn) {
+        this.turn = turn;
+    }
+    // getter for saved date
+    public String getSavedDate() {
+        return savedDate;
+    }
+    // sette for saved date
+    public void setSavedDate(String savedDate) {
+        this.savedDate = savedDate;
+    }
+    // getter for position
+    public String getPosition() {
+        return position;
+    }
+    // setter for position
+    public void setPosition(String position) {
+        this.position = position;
+    }
     
     // constructo for saved game with ai opponent
     public SavedGame(String player1, String player1Piece, String game_type, String opponent_type, String ai_difficulty, String turn, String position) {
+        // player
         this.player1 = player1;
+        // piece
         this.player1Piece = player1Piece;
+        // game_tpe
         this.gameType = game_type;
+        // opponentType
         this.opponentType = opponent_type;
+        // ai difficulty
         this.aiDifficulty = ai_difficulty;
+        // variable for turn
         this.turn = turn;
+        // variable for position
         this.position = position;
+        // format the current date to string
+        Date date = new Date();
+        DateFormat dateFormat = new SimpleDateFormat(config.GAME_DATE_FORMAT);  
+        // store this information
+        String strDate = dateFormat.format(date);
+        // in a dateJoined field
+        this.savedDate = strDate;
     }
 
     // constructor for human opponent
     public SavedGame(String player1, String player1Piece, String game_type, String opponent_type, String turn, String position) {
+        // player1 username
         this.player1 = player1;
         //this.player2 = player2;
+        // player1 piece
         this.player1Piece = player1Piece;
+        // game ytpe
         this.gameType = game_type;
+        // opponent type
         this.opponentType = opponent_type;
+        // turn
         this.turn = turn;
+        // position
         this.position = position;
         // format the current date to string
         Date date = new Date();
-        DateFormat dateFormat = new SimpleDateFormat(config.gameDateFormat);  
+        DateFormat dateFormat = new SimpleDateFormat(config.GAME_DATE_FORMAT);  
         // store this information
         String strDate = dateFormat.format(date);
         // in a dateJoined field
@@ -157,7 +174,7 @@ public class SavedGame {
         if (attributes.length <= 7) {
            // format the current date to string
            Date date = new Date();
-           DateFormat dateFormat = new SimpleDateFormat(config.gameDateFormat);  
+           DateFormat dateFormat = new SimpleDateFormat(config.GAME_DATE_FORMAT);  
            // store this information
            String strDate = dateFormat.format(date);
            // in a dateJoined field
