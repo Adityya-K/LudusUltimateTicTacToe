@@ -56,6 +56,26 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
             
         }
         
+        // Stores the game result
+        String gameResult = getGameResult(getAllLines());
+
+        // Checks if the game has been decided
+        if (gameResult.equals("undecided") == false) {
+
+            // Outputs the game result
+            JOptionPane.showMessageDialog(this, gameResult, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            lblTurn.setText(gameResult);
+
+            // Disables all of the buttons
+            for (int j = 0; j < btnArray.length; j++) {
+                btnArray[j].setEnabled(false);
+            }
+
+            // Resets the turn number
+            turnNumber = 0;
+
+        }
+        
     }
     
     

@@ -1,4 +1,13 @@
 /*
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: to allow the user to play the 2-player version of normal Tic-Tac-Toe
+ * 
+ */
+/*
 Static Class for current user
 Is set after logging in, stores the current user.
  */

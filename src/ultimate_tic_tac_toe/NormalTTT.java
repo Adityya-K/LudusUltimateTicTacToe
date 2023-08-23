@@ -1,16 +1,18 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: to allow the user to play the 2-player version of normal Tic-Tac-Toe
+ * 
  */
+
 package ultimate_tic_tac_toe;
 
 import java.awt.Color;
 import javax.swing.JButton;
 
-/**
- *
- * @author oweny
- */
 public class NormalTTT {
     private JButton[] btnArray = new JButton[9]; // all the buttons in the board
     private String[] board = new String[9]; // current board state

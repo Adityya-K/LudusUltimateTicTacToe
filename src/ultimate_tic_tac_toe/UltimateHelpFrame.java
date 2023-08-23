@@ -1,23 +1,17 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: to allow the user to play the 2-player version of normal Tic-Tac-Toe
+ * 
  */
 package ultimate_tic_tac_toe;
 
-import menu.*;
 import authentication_frames.LoginFrame;
-import java.util.ArrayList;
-import javax.swing.JFrame;
-import user.User;
-import user.UserDatabase;
-import java.awt.*;
-import javax.swing.table.*;
 import user.CurrentUser;
 
-/**
- *
- * @author gaudium
- */
 public class UltimateHelpFrame extends javax.swing.JFrame {
 
     /**

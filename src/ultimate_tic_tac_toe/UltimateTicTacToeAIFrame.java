@@ -1,7 +1,13 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: to allow the user to play the 2-player version of normal Tic-Tac-Toe
+ * 
  */
+
 package ultimate_tic_tac_toe;
 
 import authentication_frames.LoginFrame;
@@ -10,17 +16,12 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import menu.MainMenuFrame;
 import user.CurrentUser;
 import user.SavedGame;
 
-/**
- *
- * @author gaudium
- */
 public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements ActionListener {
     UltTTT ultBoard; // create new ult board
     final Color SAVE_COLOR = new Color(0,102,255);
