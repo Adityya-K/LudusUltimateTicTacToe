@@ -388,6 +388,10 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
         ultBoard.setCurrentPlayer("X"); // make the current player x
         ultBoard.setCurrentSectionIndex(-1); // go anywhere
         enableButtons(); // enable the buttons
+        if (ultBoard.getPlayerPiece().equals("O")) // ai goes first
+        {
+            ultBoard.moveAI(); // ai move
+        }
     }//GEN-LAST:event_btnRestartActionPerformed
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
