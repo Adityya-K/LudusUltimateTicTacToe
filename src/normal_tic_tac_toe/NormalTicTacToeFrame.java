@@ -56,6 +56,26 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
             
         }
         
+        // Stores the game result
+        String gameResult = getGameResult(getAllLines());
+
+        // Checks if the game has been decided
+        if (gameResult.equals("undecided") == false) {
+
+            // Outputs the game result
+            JOptionPane.showMessageDialog(this, gameResult, "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            lblTurn.setText(gameResult);
+
+            // Disables all of the buttons
+            for (int j = 0; j < btnArray.length; j++) {
+                btnArray[j].setEnabled(false);
+            }
+
+            // Resets the turn number
+            turnNumber = 0;
+
+        }
+        
     }
     
     
@@ -324,6 +344,9 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
         // Resets the board to an empty one
         resetBoard();
         
+        // Set it to X's Turn
+        lblTurn.setText("X's Turn");
+        
     }//GEN-LAST:event_btnRestartActionPerformed
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
@@ -437,6 +460,9 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
             btnArray[i].setText(" "); 
             btnArray[i].setEnabled(true);
         }
+        
+        // Turn number to zero
+        turnNumber = 0;
         
     }
 

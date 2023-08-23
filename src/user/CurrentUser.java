@@ -1,6 +1,11 @@
 /*
-Static Class for current user
-Is set after logging in, stores the current user.
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: to create a selection page for normal Tic-Tac-Toe
+ * 
  */
 package user;
 
