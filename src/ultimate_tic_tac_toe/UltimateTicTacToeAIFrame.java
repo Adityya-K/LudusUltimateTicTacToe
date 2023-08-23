@@ -27,7 +27,7 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
     final Color DEFAULT_COLOR = new Color(128, 176, 247);
     
     // edit game's difficulty, ai and player piece
-    public void setGameProperties (String difficulty, String ai, String player) {
+    public void setGameProperties (String difficulty, String player, String ai) {
         // update ui to give game info
         lblComputerIs.setText("Computer is: " + ai + " ( " + difficulty.toUpperCase() + " difficulty )");
         lblPlayerIs.setText("You are: " + player);
