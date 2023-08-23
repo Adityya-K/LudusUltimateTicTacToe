@@ -290,7 +290,6 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
             boardString += Integer.toString(ultBoard.getCurrentSectionIndex());
             SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), "X", "ultimate", "player", ultBoard.getCurrentPlayer(), boardString);
             CurrentUser.getUser().saveGame(currentGame);
-            System.out.print(currentGame);
         }
     }
     
@@ -303,7 +302,7 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
         // TODO add your handling code here:
-        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit Mid-Game?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {    
+        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {    
             saveGame();
             MainMenuFrame frmMainMenu = new MainMenuFrame();
             frmMainMenu.setVisible(true);

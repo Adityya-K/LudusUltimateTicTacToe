@@ -8,10 +8,6 @@
  * 
  */
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package normal_tic_tac_toe;
 
 // Imports LoginFrame from the authentication_frames package
@@ -32,10 +28,7 @@ import menu.MainMenuFrame;
 import user.CurrentUser;
 import user.SavedGame;
 
-/**
- *
- * @author Eks and Adityya
- */
+
 public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements ActionListener{
 
     // Initializes the board, difficulty and player/computer letters
@@ -255,95 +248,217 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         
     }
     
-    // TODO comment this
+    /**
+     * A method that calls minimax on each of the available positions to find 
+     * the best possible outcome and return the move to reach that outcome
+     */
     private void moveAI() {
+        // Set the most min value possible, negative inifinty
         Double bestMoveScore = Double.NEGATIVE_INFINITY;
+        
+        // Set the move index ot an impossible number to diagnose problems
         int moveIndex = -1;
+        
+        // Loop through the entire board
         for (int i = 0; i < board.length; i++) {
+            
+            // Check if the spot if null by passing in its respective parameters
             if (board[i] == null) {
+                // Play the move at the avaliable spot
                 board[i] = ai;
+                
+                // Call on minimax to evaluate the position with initial call 
+                // parameters. In this case since we are maximzing in this
+                // function we call minimax to minimize. The depth is zero
+                // as this is the first call. Alpha and Beta are small values
+                // so that they can be used to prune recursion branches
                 double moveScore = minimax(board, 0, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, false);
+                
+                // After getting the evaluation reset the board
                 board[i] = null;
+                
+                // Check if the evaluation returns a greater score than the besScore
+                // that was found so far
                 if (moveScore > bestMoveScore) {
+                    // Set the best Score to the current evaluation as that is
+                    // the new mark to beat
                     bestMoveScore = moveScore;
+                    
+                    // Set the current move index to the current value i as
+                    // at this index is a higher evaluation than best socre
                     moveIndex = i;
                 }
             }
         }
         
+        // After the for loop has run, it will have found the move with the
+        // highest evalulation
+        
+        // We move to the index with the highest score
         board[moveIndex] = ai;
+        
+        // We change color of the text of the button based on what the ai piece is
         btnArray[moveIndex].setForeground(ai.equals("X") ? Color.black : Color.white);
+        
+        // Set the text at the button to reflect the ai move
         btnArray[moveIndex].setText(ai);
         
     }
     
-    // TODO comment this
+    /**
+     * The minimax algorithm, using the idea that the opponent will minimize your
+     * chances to win while you are trying to maximize your chances
+     * @param board The current state of the borad
+     * @param depth How many recursions the algorithm has done
+     * @param alpha Used to prune by maximizing
+     * @param beta Used to prune by minimizing
+     * @param isMaximizing A boolean that stores whether the function is maximizing
+     * @return The evaluation of the position at the initial call of the function
+     */
     private double minimax(String[] board, int depth, double alpha, double beta, boolean isMaximizing) {
+        // A string that stores the result of the game which will be used for
+        // the base case of this recursion tree
         String gameResult = getGameResult(getAllLines());
+        
+        // Check if the AI won
         if (gameResult.equals(ai)) {
-            return 10;
+            // Return 10 minus the depth as we want to advantage positions
+            // that give us a faster win
+            return 10 - depth;
         }
+        // If the player won
         if (gameResult.equals(player)) {
-            return -10;
+            // Return -10 plus the depth as we assume that opponent will play the
+            // best move so we account for that during minimization
+            return -10 + depth;
         }
+        // If it is a draw
         if (gameResult.equals("draw")) {
+            // We turn a neutral score of zero
             return 0;
         }
+        
+        // Check if the function is called to maximize
         if (isMaximizing) {
-            double maxEval = Double.NEGATIVE_INFINITY; 
+            // Set the maxEval to the smallest possible value to be changed
+            // later, this also could have been -10000, but infinity is chosen
+            // to keep in line with general implementation strategies.
+            double maxEval = Double.NEGATIVE_INFINITY;
+            
+            // Loop through the entire position
             for (int i = 0; i < board.length; i++) {
+                
+                // Check if the position is avaliable
                 if (board[i] == null) {
+                    
+                    // Make a move by the AI
                     board[i] = ai;
+                    
+                    // Recursively call minimax and see if the method returns
+                    // a larger eval than current maxEval and set it
                     maxEval = Math.max(maxEval, minimax(board, depth + 1, alpha, beta, false));
+                    
+                    // Reset the board and undo the move
                     board[i] = null;
+                    
+                    // Check between alpha and maxEval to see which one is
+                    // greater and set Alpha
                     alpha = Math.max(alpha, maxEval);
+                    
+                    // Check if alpha is larger than beta as if it is
+                    // we already know the algorithm has found a better option
+                    // so this entire branch can be pruned
                     if (beta <= alpha) {
+                        // break out of the loop
                         break;
                     }
                 }
 
             }
+            // Return the maxEval that the function got if maximizing
             return maxEval;
         }
+        // If it is not maximizing, it is minimizing.
         else  {
+            // Set the maxEval to the largest possible value to be changed
+            // later, this also could have been 10000, but infinity is chosen
+            // to keep in line with general implementation strategies.
             double minEval = Double.POSITIVE_INFINITY;
+            
+            // Loop through the entire array
             for (int i = 0; i < board.length; i++) {
+                
+                // Check if the position is available
                 if (board[i] == null) {
+                    
+                    // Make a move by the AI
                     board[i] = player;
+                    
+                    // Recursively call minimax and see if the method returns
+                    // a smaller eval than current minEval and set it
                     minEval = Math.min(minEval, minimax(board, depth + 1, alpha, beta, true));
+                    
+                    // Reset the board and undo the move
                     board [i] = null;
+                    
+                    // Check between beta and minEval to see which one is
+                    // lesser and set beta
                     beta = Math.min(beta, minEval);
+                    
+                    // Check if alpha is larger than beta as if it is
+                    // we already know the algorithm has found a better option
+                    // so this entire branch can be pruned
                     if (beta <= alpha) {
+                        // break out of the loop
                         break;
                     }
                 }
 
             }
+            // Return the min that the function got if maximizing
             return minEval;
         }
     }
 
-    // TODO comment this
+    /**
+     * A method that saves the game
+     */
     private void saveGame() {
+        // Declare a variable that stores the moves that the user made
         int movesPresent = 0;
+        
+        // Loop through the entire board
         for (int i = 0; i < board.length; i++) {
+            // Check of the current element if not null
             if (board[i] != null) {
+                // Add one to the moves counter as a move was made on this square
                 movesPresent++;
             }
         }
         
+        // If the moves made was less than two
         if(movesPresent < 2) {
+            // Return out of the function as the user just started the game, so
+            // there is no point in asking them to save
             return;
         }
         
+        // If more than 2 moves were made, ask the user if they want to save
         if (JOptionPane.showConfirmDialog(this, "Would you like to save your current game?", "Save Game?",JOptionPane.YES_NO_OPTION) == 0) {
+            // Define a string that will store the board
             String boardString = "";
+            
+            // Loop through the board
             for (int i = 0; i < board.length; i++) {
+                // Store null positions as "e" with colon as seperator
                 boardString += (board[i] == null ? "e" : board[i]) + ":";
             }
+            
+            // Create a new savedGame object with the proper parameters
             SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), player, "normal", "computer", difficulty, player, boardString);
+            
+            // Save the game
             CurrentUser.getUser().saveGame(currentGame);
-            System.out.print(currentGame);
         }
     }
     

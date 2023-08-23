@@ -79,15 +79,23 @@ public class NormalTTT {
             {
                 btnArray[i].setBackground(WIN_COLOR); // set win color
             }
+            else {
+                btnArray[i].setBackground(DEFAULT_COLOR); // set default color
+            }
         }
     }
     
     // set all buttons in board to display a big o
     public void setButtonsX () {
         // loop through every other button to make an x
-        for (int i = 0; i < btnArray.length; i+=2)
+        for (int i = 0; i < btnArray.length; i++)
         {
-            btnArray[i].setBackground(WIN_COLOR); // set win color
+            if (i % 2 == 0) {
+                btnArray[i].setBackground(WIN_COLOR); // set win color
+            }
+            else {
+                btnArray[i].setBackground(DEFAULT_COLOR); // set default color
+            }
         }
     }
     

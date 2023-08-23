@@ -126,7 +126,6 @@ public class UltTTT {
         if (ai.equals("Medium")) // if medium ai
         {
             boardAndIndex = findWinningIndex(); // see if there's winning index
-            System.out.println("Winning board " + boardAndIndex[0]);
         }
         
         // if there's no winning index or difficulty is easy
@@ -193,7 +192,6 @@ public class UltTTT {
                 gameBoard[currentSectionIndex].highlightButtons();
             }
             
-            System.out.println(currentSectionIndex);
             
             // check if anyone has won on the main board
             if (!getGameResult().equals("undecided")) {

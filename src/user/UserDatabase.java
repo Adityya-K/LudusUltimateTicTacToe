@@ -71,9 +71,7 @@ public class UserDatabase {
         // spilt the decoded database into an array of user strings
         String [] usersStrings = decoded.split("\n");
         // print list of users
-        System.out.println("List of users");
         // print decoded
-        System.out.println(decoded);
 
         // databse is stored as comma seperated user strings
         // e.g. user1, rating ...
@@ -82,13 +80,10 @@ public class UserDatabase {
             // remove any whitespaces
             userString = userString.trim();
             // create a new user from the attributes
-            System.out.println("Adding new user");
-            System.out.println(userString);
             User currentUser = new User(userString);
             // add current user to array list
             users.add(currentUser);
         }
-        System.out.println("Done loading users");
         
         return "done";
     }
@@ -176,13 +171,10 @@ public class UserDatabase {
         String fileData = "";
         // loop through each user
         for (User user: users) {
-            System.out.println(user.toString());
             // add user with newline
             fileData += user.toString() + "\n";
         }
         // output debug message
-        System.out.println("Saving");
-        System.out.println(fileData);
         // use regext to remove the final newline
         fileData = fileData.trim();
         
@@ -190,7 +182,6 @@ public class UserDatabase {
         String encodedFile = encodeDatabase(fileData);
         // attempt ot save file
         try {
-            System.out.println("Saving file");
             // user buffered writer on the DATABASE_FILE_PATH
             BufferedWriter writer = new BufferedWriter(new FileWriter(USER_DATABASE_FILE_PATH));
             // write to file with encoded file contents
@@ -204,11 +195,9 @@ public class UserDatabase {
         // Saving unencoded file for debugging purposes:
         try {
             // print saving file
-            System.out.println("Saving file");
             // buffered write on the un encoded database
             BufferedWriter writer = new BufferedWriter(new FileWriter("unencodedDatabase.txt"));
             // write on the filedata
-            System.out.println(fileData);
             writer.write(fileData);
             // close writer
             writer.close();

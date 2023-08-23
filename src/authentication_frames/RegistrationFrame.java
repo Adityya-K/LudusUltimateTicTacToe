@@ -1,27 +1,31 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: to create a registration page
+ * 
  */
 package authentication_frames;
 
-import javax.swing.JFrame;
+// Imports JOptionPane
 import javax.swing.JOptionPane;
+import menu.MainMenuFrame;
 
-/**
- *
- * @author gaudium
- */
+
 import user.*;
 
 public class RegistrationFrame extends javax.swing.JFrame {
  
     /**
-     * Creates new form LoginFrame
+     * Creates new form RegistrationFrame
      */
     public RegistrationFrame() {
         UserDatabase.loadDatabase();
+        // Displays the JFrame at the center of the screen
         setSize(940, 788);
-        setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
+        setLocationRelativeTo(null);
         initComponents();
     }
 
@@ -39,11 +43,12 @@ public class RegistrationFrame extends javax.swing.JFrame {
         lblEmail = new javax.swing.JLabel();
         lblUsername = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
-        btnRegister = new javax.swing.JButton();
         lblPassword = new javax.swing.JLabel();
         lblConfirmPassword = new javax.swing.JLabel();
         txtConfirmPassword = new javax.swing.JPasswordField();
         txtPassword = new javax.swing.JPasswordField();
+        btnBackToLogin = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -74,18 +79,6 @@ public class RegistrationFrame extends javax.swing.JFrame {
         getContentPane().add(lblTitle);
         lblTitle.setBounds(0, 50, 940, 50);
 
-        btnRegister.setBackground(new java.awt.Color(0, 102, 255));
-        btnRegister.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        btnRegister.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegister.setText("Register new account");
-        btnRegister.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRegisterActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnRegister);
-        btnRegister.setBounds(250, 600, 430, 40);
-
         lblPassword.setBackground(new java.awt.Color(255, 255, 255));
         lblPassword.setFont(new java.awt.Font("SansSerif", 0, 24)); // NOI18N
         lblPassword.setForeground(new java.awt.Color(255, 255, 255));
@@ -104,6 +97,30 @@ public class RegistrationFrame extends javax.swing.JFrame {
         getContentPane().add(txtPassword);
         txtPassword.setBounds(260, 390, 430, 50);
 
+        btnBackToLogin.setBackground(new java.awt.Color(0, 102, 255));
+        btnBackToLogin.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnBackToLogin.setForeground(new java.awt.Color(255, 255, 255));
+        btnBackToLogin.setText("Go To Login");
+        btnBackToLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackToLoginActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnBackToLogin);
+        btnBackToLogin.setBounds(260, 620, 430, 40);
+
+        btnRegister.setBackground(new java.awt.Color(0, 102, 255));
+        btnRegister.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnRegister.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegister.setText("Register new account");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnRegister);
+        btnRegister.setBounds(260, 560, 430, 40);
+
         lblBackground.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image_assets/registration-background.png"))); // NOI18N
         lblBackground.setText("jLabel2");
         lblBackground.setMaximumSize(new java.awt.Dimension(940, 788));
@@ -114,8 +131,10 @@ public class RegistrationFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
     String error;
     private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        // Stores the user information in strings
         error = "";
         String username = txtUsername.getText();
         String password = String.valueOf(txtPassword.getPassword());
@@ -124,33 +143,47 @@ public class RegistrationFrame extends javax.swing.JFrame {
         
         String userValidation = Validation.validateUserName(username);
         String emailValidation = Validation.validateEmail(email);
-        // ensure username is OK.
+        
+        // Uses two methods from the Validation class to validate input
         if (username.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || email.isEmpty()) {
             error = "Some fields are empty";
+        // Sets the error message if the two passwords don't match
         } else if (!password.equals(confirmPassword)) {
             error = "Passwords and confirmation password don't match";
+        // Sets the error message if the username contains commas
         } else if (!userValidation.equals("ok")) {
             error = userValidation;
+        // Sets the error message if the email contains commas
         } else if (!emailValidation.equals("ok")){
             error = emailValidation;
         }
+        // Sets the error message if the username already exists
         else if (UserDatabase.existsUser(username) == true) {
             error = "Username already exists";
         }
+        // Runs if the input is valid
         else {
+            // Adds the user to the database
             User currentUser = UserDatabase.addUser(username, password, email);
 
             
-            System.out.println(currentUser.toString());
+            // Displays the login page
             LoginFrame loginFrame = new LoginFrame();
             loginFrame.setVisible(true);
             this.dispose();
         }    
-
+        // Displays the error if it is not blank (intially set value)
         if (!error.isBlank()) {
             JOptionPane.showMessageDialog(this, error, "Registration Error", JOptionPane.ERROR_MESSAGE);  
         }
     }//GEN-LAST:event_btnRegisterActionPerformed
+
+    private void btnBackToLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackToLoginActionPerformed
+        // TODO add your handling code here:
+        MainMenuFrame frmMainMenu = new MainMenuFrame();
+        frmMainMenu.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBackToLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -191,6 +224,7 @@ public class RegistrationFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBackToLogin;
     private javax.swing.JButton btnRegister;
     private javax.swing.JLabel lblBackground;
     private javax.swing.JLabel lblConfirmPassword;

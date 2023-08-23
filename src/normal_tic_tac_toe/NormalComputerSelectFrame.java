@@ -7,21 +7,10 @@
  * Purpose: to create a selection page for normal Tic-Tac-Toe
  * 
  */
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package normal_tic_tac_toe;
-
-/**
- *
- * @author gaudium
- */
 
 // Imports LoginFrame and everything in the user package
 import authentication_frames.LoginFrame;
-import javax.swing.JFrame; // DELETE
 import user.*;
 
 public class NormalComputerSelectFrame extends javax.swing.JFrame {
@@ -175,7 +164,6 @@ public class NormalComputerSelectFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_formWindowOpened
     
-    String error; // DELETE
     /**
      * @param args the command line arguments
      */

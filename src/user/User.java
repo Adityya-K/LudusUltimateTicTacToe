@@ -219,7 +219,6 @@ public class User {
     public User(String userString) {
         // split the userdatabase string into attrbutes. limit=-1 to allow for empyt attributes
         String [] attributes = userString.split(",", -1);
-        System.out.println(userString);
         this.username = attributes[0];
         this.password = attributes[1];
         this.rating = Double.parseDouble(attributes[2]);
