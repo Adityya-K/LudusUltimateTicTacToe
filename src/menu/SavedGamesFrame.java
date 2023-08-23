@@ -366,6 +366,7 @@ public class SavedGamesFrame extends javax.swing.JFrame {
     private void btnClearSavedGamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearSavedGamesActionPerformed
         // Clears the games and displays an empty list
         CurrentUser.getUser().clearGames();
+        UserDatabase.saveUsers();
         displaySavedGames();
     }//GEN-LAST:event_btnClearSavedGamesActionPerformed
 
