@@ -349,7 +349,7 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
     
     private void btnRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestartActionPerformed
         // Reset the ultimate tic tac toe board
-        ultBoard.resetBoard();
+        ultBoard = new UltTTT(btnArray, "X", "None");
         // Enable the buttons if they were disabled from the win
         enableButtons();
         // Set the turn so that X goes first
