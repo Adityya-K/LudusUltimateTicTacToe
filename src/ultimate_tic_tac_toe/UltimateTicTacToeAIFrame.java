@@ -27,7 +27,7 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
     final Color DEFAULT_COLOR = new Color(128, 176, 247);
     
     // edit game's difficulty, ai and player piece
-    public void setGameProperties (String difficulty, String player, String ai) {
+    public void setGameProperties (String difficulty, String ai, String player) {
         // update ui to give game info
         lblComputerIs.setText("Computer is: " + ai + " ( " + difficulty.toUpperCase() + " difficulty )");
         lblPlayerIs.setText("You are: " + player);
@@ -42,7 +42,7 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
     }
     
     // method overload and edit game's difficulty, ai, player piece, board and current section 
-    public void setGameProperties (String difficulty, String ai, String player, String[][] board, int currentSectionIndex) {
+    public void setGameProperties (String difficulty, String player, String ai, String[][] board, int currentSectionIndex) {
         // update ui to give game info
         lblComputerIs.setText("Computer is: " + ai + " ( " + difficulty.toUpperCase() + " difficulty )");
         lblPlayerIs.setText("You are: " + player);
