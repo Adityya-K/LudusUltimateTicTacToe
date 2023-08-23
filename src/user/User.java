@@ -178,7 +178,7 @@ public class User {
         this.losses = 0;
         this.gamesPlayed = 0;
         //defaut rating of 500, gamesPlayed =0, wins is 0, losses is 0
-        this.rating = 500;
+        this.rating = 1000;
         this.email = email;
         // format the current date to string
         Date date = new Date();
