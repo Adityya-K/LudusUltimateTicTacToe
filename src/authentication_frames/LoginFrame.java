@@ -9,7 +9,6 @@
  */
 package authentication_frames;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import menu.MainMenuFrame;
 
@@ -130,7 +129,6 @@ public class LoginFrame extends javax.swing.JFrame {
             // Informs the user of the login error
             JOptionPane.showMessageDialog(this, "Invalid username or invalid password. Try again!", "Login Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            System.out.println(currentUser.toString());
             // Sets the current user as the user
             CurrentUser.setUser(currentUser);
             CurrentUser.getUser().setRating(1000);

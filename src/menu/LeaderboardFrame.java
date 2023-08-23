@@ -47,8 +47,6 @@ public class LeaderboardFrame extends javax.swing.JFrame {
         
         // [username,rating]
         String [] data = new String[3];
-        System.out.println("Top Players:");
-        System.out.println(topPlayers);
         
         // new model for the leaderbaord table
         DefaultTableModel model = (DefaultTableModel) tblLeaderboard.getModel();
@@ -59,8 +57,6 @@ public class LeaderboardFrame extends javax.swing.JFrame {
             String username = topPlayers.get(i).getUsername();
             String rating = Long.toString(Math.round(topPlayers.get(i).getRating()));
             String rank = Integer.toString(i + 1);
-            System.out.println(username);
-            System.out.println(rating);
             model.addRow(new Object[]{rank,username, rating});
         }
         

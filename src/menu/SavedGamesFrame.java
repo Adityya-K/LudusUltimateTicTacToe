@@ -134,7 +134,7 @@ public class SavedGamesFrame extends javax.swing.JFrame {
         lblDescription.setFont(new java.awt.Font("SansSerif", 0, 18)); // NOI18N
         lblDescription.setForeground(new java.awt.Color(255, 255, 255));
         lblDescription.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblDescription.setText("Select a game an press \"Load Game\" to resume play!");
+        lblDescription.setText("Select a game and press \"Load Game\" to resume play!");
         getContentPane().add(lblDescription);
         lblDescription.setBounds(0, 200, 940, 26);
 

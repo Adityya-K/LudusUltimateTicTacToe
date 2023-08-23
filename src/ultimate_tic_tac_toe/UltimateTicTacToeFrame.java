@@ -290,7 +290,6 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
             boardString += Integer.toString(ultBoard.getCurrentSectionIndex());
             SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), "X", "ultimate", "player", ultBoard.getCurrentPlayer(), boardString);
             CurrentUser.getUser().saveGame(currentGame);
-            System.out.print(currentGame);
         }
     }
     

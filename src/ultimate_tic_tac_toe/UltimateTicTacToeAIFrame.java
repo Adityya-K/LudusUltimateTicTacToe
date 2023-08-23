@@ -313,7 +313,6 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
                 }
             }
             
-            System.out.println(CurrentUser.getUser().getWins() + " " + CurrentUser.getUser().getLosses());
         }
     }
     
@@ -343,7 +342,6 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
             boardString += Integer.toString(ultBoard.getCurrentSectionIndex());
             SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), ultBoard.getPlayerPiece(), "ultimate", "computer", ultBoard.getAi(), ultBoard.getPlayerPiece(), boardString);
             CurrentUser.getUser().saveGame(currentGame);
-            System.out.print(currentGame);
         }
     }
     
