@@ -167,7 +167,6 @@ public class RegistrationFrame extends javax.swing.JFrame {
             User currentUser = UserDatabase.addUser(username, password, email);
 
             
-            System.out.println(currentUser.toString());
             // Displays the login page
             LoginFrame loginFrame = new LoginFrame();
             loginFrame.setVisible(true);
