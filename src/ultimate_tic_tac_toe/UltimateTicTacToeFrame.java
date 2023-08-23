@@ -40,7 +40,7 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         for (int i = 0; i < panels.length; i++) {
             // Use the add function to add the panel to the main panel with all
             // the buttons
-            addButtonsToPanel(panels[i], btnArray[i], 0);
+            addButtonsToPanel(panels[i], btnArray[i], i);
         }
         
         // Create a new ultBoard that represents the ultimate Tic Tac Toe with
@@ -348,8 +348,18 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
     
     
     private void btnRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestartActionPerformed
-        // Reset the ultimate tic tac toe board
+        // Reset the ultimate tic tac toe board by creating a new one
         ultBoard = new UltTTT(btnArray, "X", "None");
+        
+        // Loop through the 2D array of buttons using a nested for loop
+        for (int i = 0; i < btnArray.length; i++) {
+            for (int j = 0; j < btnArray[i].length; j++) {
+                // Reset text
+                btnArray[i][j].setText(" ");
+                // Reset background
+                btnArray[i][j].setBackground(new Color(128, 176, 247));
+            }
+        }
         // Enable the buttons if they were disabled from the win
         enableButtons();
         // Set the turn so that X goes first
