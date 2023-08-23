@@ -8,10 +8,6 @@
  * 
  */
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package normal_tic_tac_toe;
 
 // Imports LoginFrame
@@ -34,10 +30,7 @@ import menu.MainMenuFrame;
 import user.CurrentUser;
 import user.SavedGame;
 
-/**
- *
- * @author Eks and Adityya
- */
+
 public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionListener{
 
     // Turn number variable that is incremented every time a button is pressed
@@ -338,7 +331,7 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
         // TODO add your handling code here:
         
         // Asks the user to confirm
-        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit Mid-Game?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {    
+        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {    
             
             // Saves the game and displays the main menu
             saveGame();

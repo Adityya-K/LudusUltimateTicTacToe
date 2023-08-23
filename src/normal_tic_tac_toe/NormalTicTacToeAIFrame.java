@@ -8,10 +8,6 @@
  * 
  */
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package normal_tic_tac_toe;
 
 // Imports LoginFrame from the authentication_frames package
@@ -32,10 +28,7 @@ import menu.MainMenuFrame;
 import user.CurrentUser;
 import user.SavedGame;
 
-/**
- *
- * @author Eks and Adityya
- */
+
 public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements ActionListener{
 
     // Initializes the board, difficulty and player/computer letters
