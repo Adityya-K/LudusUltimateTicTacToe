@@ -1,6 +1,16 @@
+/*
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: to create a page with the saved games
+ * 
+ */
 
 package user;
 
+// import methods
 import user.SHAEncryption;
 import user.config;
 import java.util.*;
@@ -17,7 +27,8 @@ import menu.*;
 username,encryptedPassword,rating,wins,losses,currentGame,gamesPlayed,dateJoined, email
 */
 
-// User class: stores
+// User class: stores info about user
+// The current logged user should be accessed through CurrentUser.getUser()
 public class User {
     // class feilds, username, rating, encrypted pasword ...
     
@@ -29,17 +40,23 @@ public class User {
     private int gamesPlayed;
     private String dateJoined;
     private ArrayList<SavedGame> games; // array list of saved games    
-    
+    // email field
     private String email;
-
+    
+    // getters and setters for all attributes
+    // get games
     public ArrayList<SavedGame> getGames() {
+        // return games
         return games;
     }
-
+    
+    // set games
     public void setGames(ArrayList<SavedGame> games) {
+        // set games
         this.games = games;
     }
     
+    // clear games
     public void clearGames() {
         games.clear();
     }
@@ -49,72 +66,93 @@ public class User {
         return email;
     }
     
+    // set email
     public void setEmail(String email) {
         this.email = email;
         // save user database after field update
         UserDatabase.saveUsers();
     }
-
+    
+    // get username
     public String getUsername() {
+        // return username
         return username;
     }
-
+    
+    // set username
     public void setUsername(String username) {
+        // set username and savae database
         this.username = username;
         UserDatabase.saveUsers();
     }
-
+    // getter for raing
     public double getRating() {
+        // return rating
         return rating;
     }
-
+    // set raing
     public void setRating(double rating) {
+        // return rating and save dabatase
         this.rating = rating;
         UserDatabase.saveUsers();
     }
-
+    // get the user ecyprted password
     public String getEncryptedPassword() {
         return encryptedPassword;
     }
-
+    
+    // set the user encrypted password
     public void setEncryptedPassword(String encryptedPassword) {
         this.encryptedPassword = encryptedPassword;
         UserDatabase.saveUsers();
     }
-
+    
+    // get wins
     public int getWins() {
         return wins;
     }
-
+    
+    // set wins
     public void setWins(int wins) {
+        // set instance wins to wins
         this.wins = wins;
+        // save databse
         UserDatabase.saveUsers();
     }
-
+    // get losses
     public int getLosses() {
+        // return loses
         return losses;
     }
-
+    
+    // set losses
     public void setLosses(int losses) {
         this.losses = losses;
+        // save databse
         UserDatabase.saveUsers();
     }
-
+    
+    // get games played
     public int getGamesPlayed() {
+        // return number of gagmes played
         return gamesPlayed;
     }
-
+    
+    // set games played
     public void setGamesPlayed(int gamesPlayed) {
         this.gamesPlayed = gamesPlayed;
+        // save database
         UserDatabase.saveUsers();
     }
-
+    
+    // get date joined
     public String getDateJoined() {
         return dateJoined;
     }
-
+    // set date joined
     public void setDateJoined(String dateJoined) {
         this.dateJoined = dateJoined;
+        // save users
         UserDatabase.saveUsers();
     }
     
@@ -123,10 +161,12 @@ public class User {
         this.wins += 1;
     }
     
+    // decrease loss by 1
     public void addLoss() {
         this.losses += 1;
     }
     
+    // increase rating by n points
     public void increaseRating(int points) {
         this.rating += points;
     }
@@ -144,17 +184,17 @@ public class User {
         this.email = email;
         // format the current date to string
         Date date = new Date();
-        DateFormat dateFormat = new SimpleDateFormat(config.dateFormat);  
+        DateFormat dateFormat = new SimpleDateFormat(config.USER_DATE_FORMAT);  
         // store this information
         String strDate = dateFormat.format(date);
         // in a dateJoined field
         this.dateJoined = strDate;
+        // new array list of saved games
         this.games = new ArrayList<SavedGame>();
         
     }
     
     // User object constructor with all attributes
-
     public User(String username, double rating, String encryptedPassword, int wins, int losses, int gamesPlayed, String dateJoined, String email) {
         this.username = username;
         this.rating = rating;
@@ -166,6 +206,7 @@ public class User {
         this.email = email;
     }
     
+    // save game given game
     public void saveGame(SavedGame game) {
         // add the game to the user
         this.games.add(game);
@@ -221,7 +262,9 @@ public class User {
         String gameString = "";
         // add the game to string and seperate with |
         if (games.size() != 0){
+            // loop through each game
             for (SavedGame game: games) {
+                // add gameString to game string
                 gameString += game.toString() + "|";
             }
         }
@@ -231,9 +274,9 @@ public class User {
             gameString = gameString.substring(0, gameString.length() - 1);
         }
         
-        
-        // base64 encode the games string
+        // base64 encode the games string to avoid conflicts with commas.
         String base64encodedGames = new String(Base64.getEncoder().encode(gameString.getBytes()));
+        // return commas seperate attributess
         return username + "," + encryptedPassword + "," + rating + "," + wins + "," + losses + "," + gamesPlayed + "," + dateJoined + "," + email + "," + base64encodedGames;
     }
     
