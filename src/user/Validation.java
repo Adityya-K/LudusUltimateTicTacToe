@@ -1,7 +1,15 @@
+/*
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: validation class for validating user input
+ * 
+ */
 
 package user;
 
-// validation class for validating user input
 /*
 @author Ludus Team
 */

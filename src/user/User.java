@@ -4,14 +4,13 @@
  * ICS4UE
  * August 20-22, 2023
  * Mr. Diakoloukas
- * Purpose: to create a page with the saved games
+ * Purpose: to store information about you
  * 
  */
 
 package user;
 
 // import methods
-import user.SHAEncryption;
 import user.config;
 import java.util.*;
 import java.text.DateFormat;  
@@ -24,17 +23,17 @@ import menu.*;
  */
 
 /*
-username,encryptedPassword,rating,wins,losses,currentGame,gamesPlayed,dateJoined, email
+username,Password,rating,wins,losses,currentGame,gamesPlayed,dateJoined, email
 */
 
 // User class: stores info about user
 // The current logged user should be accessed through CurrentUser.getUser()
 public class User {
-    // class feilds, username, rating, encrypted pasword ...
+    // class feilds, username, rating, pasword ...
     
     private String username;
     private double rating;
-    private String encryptedPassword;
+    private String password;
     private int wins; // int for wins
     private int losses; //
     private int gamesPlayed;
@@ -97,13 +96,13 @@ public class User {
         UserDatabase.saveUsers();
     }
     // get the user ecyprted password
-    public String getEncryptedPassword() {
-        return encryptedPassword;
+    public String getPassword() {
+        return password;
     }
     
-    // set the user encrypted password
-    public void setEncryptedPassword(String encryptedPassword) {
-        this.encryptedPassword = encryptedPassword;
+    // set the user password
+    public void setPassword(String password) {
+        this.password = password;
         UserDatabase.saveUsers();
     }
     
@@ -174,8 +173,7 @@ public class User {
     // Basic user when regristering.
     public User(String username, String password, String email) {
         this.username = username;
-        // sha256 encrypt the passowrd
-        this.encryptedPassword = SHAEncryption.getSHA256Hash(password);
+        this.password = password;
         this.wins = 0;
         this.losses = 0;
         this.gamesPlayed = 0;
@@ -195,10 +193,10 @@ public class User {
     }
     
     // User object constructor with all attributes
-    public User(String username, double rating, String encryptedPassword, int wins, int losses, int gamesPlayed, String dateJoined, String email) {
+    public User(String username, double rating, String password, int wins, int losses, int gamesPlayed, String dateJoined, String email) {
         this.username = username;
         this.rating = rating;
-        this.encryptedPassword = encryptedPassword;
+        this.password = password;
         this.wins = wins;
         this.losses = losses;
         this.gamesPlayed = gamesPlayed;
@@ -222,7 +220,7 @@ public class User {
         // split the userdatabase string into attrbutes. limit=-1 to allow for empyt attributes
         String [] attributes = userString.split(",", -1);
         this.username = attributes[0];
-        this.encryptedPassword = attributes[1];
+        this.password = attributes[1];
         this.rating = Double.parseDouble(attributes[2]);
         this.wins = Integer.parseInt(attributes[3]);
         this.losses = Integer.parseInt(attributes[4]);
@@ -276,10 +274,7 @@ public class User {
         // base64 encode the games string to avoid conflicts with commas.
         String base64encodedGames = new String(Base64.getEncoder().encode(gameString.getBytes()));
         // return commas seperate attributess
-        return username + "," + encryptedPassword + "," + rating + "," + wins + "," + losses + "," + gamesPlayed + "," + dateJoined + "," + email + "," + base64encodedGames;
+        return username + "," + password + "," + rating + "," + wins + "," + losses + "," + gamesPlayed + "," + dateJoined + "," + email + "," + base64encodedGames;
     }
-    
-    
-    
-    
+
 }

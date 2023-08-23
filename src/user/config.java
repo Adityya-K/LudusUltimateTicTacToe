@@ -1,3 +1,12 @@
+/*
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: configuration variables for application
+ * 
+ */
 
 package user;
 

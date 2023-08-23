@@ -1,10 +1,19 @@
 package user;
 
-import user.SHAEncryption;
-import user.AESEncryption;
 import user.config;
 import java.io.*;
 import java.util.*;
+
+
+/*
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: store info about user database information
+ * 
+ */
 
 /*
 Database file:
@@ -57,10 +66,13 @@ public class UserDatabase {
         }
 
         
-        // decrypted database
-        String decrypted = decryptDataBase(fileData);
-        // spilt the decrypted database into an array of user strings
-        String [] usersStrings = decrypted.split("\n");
+        // decoded database
+        String decoded = decodeDatabase(fileData);
+        // spilt the decoded database into an array of user strings
+        String [] usersStrings = decoded.split("\n");
+        // print list of users
+        // print decoded
+
 
         // databse is stored as comma seperated user strings
         // e.g. user1, rating ...
@@ -82,9 +94,7 @@ public class UserDatabase {
         // todo hash maps instead
         for (User user: users) {
             if (user.getUsername().equals(userName)) {
-                String inputEncryptedPassword = SHAEncryption.getSHA256Hash(password);
-                // check if the encrypted input password is equal to the actual user password
-                if (user.getEncryptedPassword().equals(inputEncryptedPassword)) {
+                if (user.getPassword().equals(password)) {
                     return user;
                 }
             }
@@ -165,27 +175,30 @@ public class UserDatabase {
             // add user with newline
             fileData += user.toString() + "\n";
         }
-        // use regext to remove the final newline
+        // output debug message
+
         fileData = fileData.trim();
         
-        // encrypt the database with AES
-        String encryptedFile = encryptDataBase(fileData);
+        // encrypt the database with base64
+        String encodedFile = encodeDatabase(fileData);
         // attempt ot save file
         try {
             // user buffered writer on the DATABASE_FILE_PATH
             BufferedWriter writer = new BufferedWriter(new FileWriter(USER_DATABASE_FILE_PATH));
-            // write to file with encrypted file contents
-            writer.write(encryptedFile);
+            // write to file with encoded file contents
+            writer.write(encodedFile);
             // close the writer
             writer.close();
         } catch (IOException e) {
             // hyandle IO exceptions
             e.printStackTrace();
         }
-        // Saving unencrypted file for debugging purposes:
+        // Saving unencoded file for debugging purposes:
         try {
-            // buffered write on the encyrpted database
-            BufferedWriter writer = new BufferedWriter(new FileWriter("unencryptedDatabase.txt"));
+            // print saving file
+            // buffered write on the un encoded database
+            BufferedWriter writer = new BufferedWriter(new FileWriter("unencodedDatabase.txt"));
+
             // write on the filedata
             writer.write(fileData);
             // close writer
@@ -264,22 +277,14 @@ public class UserDatabase {
     }
     
     // decrypt databse, takes in encrypted database
-    public static String decryptDataBase (String encryptedDatabase) {
-        // new AES encypion object
-        AESEncryption aes = new AESEncryption();
-        // decrypt the database using AES with secret key
-        String decryptedDatabase = aes.decrypt(encryptedDatabase, USER_DATABASE_ENCRYPTION_KEY);
-        // return the decrypted database
-        return decryptedDatabase;
+    public static String decodeDatabase (String encodedDatabase){ 
+        // base64 decode the database;
+        return new String(Base64.getDecoder().decode(encodedDatabase));
     }
     
     // encrypt the database
-    public static String encryptDataBase (String database) {
-        // new AES encryptin object
-        AESEncryption aes = new AESEncryption();
-        // encrypt database with key
-        String encryptedDatabase = aes.encrypt(database, USER_DATABASE_ENCRYPTION_KEY);
-        // return the encrypted database
-        return encryptedDatabase;
+    public static String encodeDatabase (String database) {
+        // return encoded database
+        return new String(Base64.getEncoder().encode(database.getBytes()));
     }
 }
