@@ -164,7 +164,6 @@ public class NormalComputerSelectFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_formWindowOpened
     
-    String error; // DELETE
     /**
      * @param args the command line arguments
      */

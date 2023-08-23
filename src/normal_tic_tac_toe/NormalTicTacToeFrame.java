@@ -313,7 +313,6 @@ public class NormalTicTacToeFrame extends javax.swing.JFrame implements ActionLi
             // Saves the game, passing information about the game
             SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), "X", "normal", "player", Integer.toString(turnNumber), boardString);
             CurrentUser.getUser().saveGame(currentGame);
-            System.out.print(currentGame); // DELETE
             
         }
         
