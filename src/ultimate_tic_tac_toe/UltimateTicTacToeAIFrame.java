@@ -52,7 +52,7 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
         
         // get the current game board
         NormalTTT[] gameBoard = ultBoard.getGameBoard();
-        gameBoard[currentSectionIndex].highlightButtons(); // highlight the current section
+        ultBoard.setCurrentSectionIndex(currentSectionIndex); // update the current section
         
         // loop through game board
         for (int i = 0; i < gameBoard.length; i++) {
@@ -72,7 +72,7 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
             ultBoard.moveAI(); // ai move
         }
         else {
-            ultBoard.setCurrentSectionIndex(currentSectionIndex); // update the current section
+            gameBoard[currentSectionIndex].highlightButtons(); // highlight the current section
         }
         
         String result = ultBoard.getGameResult(); // check game result
