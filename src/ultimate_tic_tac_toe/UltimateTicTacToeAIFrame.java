@@ -323,7 +323,7 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
         
         for (int i = 0; i < gameBoard.length; i++) {
             for (int j = 0; j < gameBoard[i].getBoard().length; j++) {
-                if (gameBoard[i].getBoard()[j] != null) {
+                if (gameBoard[i].getIndex(j) != null) {
                     movesPresent++;
                 }
             }
@@ -337,7 +337,7 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
             String boardString = "";
             for (int i = 0; i < ultBoard.getGameBoard().length; i++) {
                 for (int j = 0; j < ultBoard.getGameBoard()[i].getBoard().length; j++) {
-                    boardString += (ultBoard.getGameBoard()[i].getBoard()[j] == null ? "e" : ultBoard.getGameBoard()[i].getBoard()[j]) + ":";
+                    boardString += (ultBoard.getGameBoard()[i].getIndex(j) == null ? "e" : ultBoard.getGameBoard()[i].getIndex(j)) + ":";
                 }
             }
             boardString += Integer.toString(ultBoard.getCurrentSectionIndex());
