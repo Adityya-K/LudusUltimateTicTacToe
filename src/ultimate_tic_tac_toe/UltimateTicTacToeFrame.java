@@ -10,17 +10,12 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import menu.MainMenuFrame;
 import user.CurrentUser;
 import user.SavedGame;
 
-/**
- *
- * @author gaudium
- */
 public class UltimateTicTacToeFrame extends javax.swing.JFrame implements ActionListener {
 
     UltTTT ultBoard;
@@ -32,40 +27,69 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         setSize(940, 820);
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
-        addButtonsToPanel(panTTTB1, btnArray[0], 0);
-        addButtonsToPanel(panTTTB2, btnArray[1], 1);
-        addButtonsToPanel(panTTTB3, btnArray[2], 2);
-        addButtonsToPanel(panTTTB4, btnArray[3], 3);
-        addButtonsToPanel(panTTTB5, btnArray[4], 4);
-        addButtonsToPanel(panTTTB6, btnArray[5], 5);
-        addButtonsToPanel(panTTTB7, btnArray[6], 6);
-        addButtonsToPanel(panTTTB8, btnArray[7], 7);
-        addButtonsToPanel(panTTTB9, btnArray[8], 8);
+        // Create an array of panels
+        JPanel[] panels = {panTTTB1, panTTTB2, panTTTB3, panTTTB4, panTTTB5, panTTTB6, panTTTB7, panTTTB8, panTTTB9 };
         
+        // Loop through the whole array and add each panel to the main panel
+        for (int i = 0; i < panels.length; i++) {
+            // Use the add function to add the panel to the main panel with all
+            // the buttons
+            addButtonsToPanel(panels[i], btnArray[i], 0);
+        }
+        
+        // Create a new ultBoard that represents the ultimate Tic Tac Toe with
         ultBoard = new UltTTT(btnArray, "X", "None");
     }
     
+    /**
+     * A method that sets the parameters for the current game
+     * @param player the player peice
+     * @param board the board of the game
+     * @param currentSectionIndex The index of the current section that the move can be played on
+     * @param currentPlayer The current player who is playing (i.e.  "X" or "O")
+     */
     public void setGameProperties ( String player, String[][] board, int currentSectionIndex, String currentPlayer) {
-        
+        // Create a new ult board
         ultBoard = new UltTTT(btnArray, player, "None");
+        
+        // Create an array of normal tic tac toe game boards
         NormalTTT[] gameBoard = ultBoard.getGameBoard();
+        
+        // Set the current section to be playing on
         ultBoard.setCurrentSectionIndex(currentSectionIndex);
+        
+        // Highlight the current section
         gameBoard[currentSectionIndex].highlightButtons();
+        
+        // Set the current player
         ultBoard.setCurrentPlayer(currentPlayer);
+        
+        // Set the text to reflect the current player
         lblTurn.setText(currentPlayer + "'s turn");
         
+        // Loop through the entire gameboard
         for (int i = 0; i < gameBoard.length; i++) {
+            // Loop through each small Tic Tac Toe board in the main board
             for (int j = 0; j < gameBoard[i].getBoard().length; j++) {
+                // Set the string to null if e otherwise set it to the index of the board passed in
                 gameBoard[i].getBoard()[j] = board[i][j].equals("e") ? null : board[i][j];
+                // Set the foreground color of the button to be a blue to show that it loaded form a saved game
                 btnArray[i][j].setForeground(new Color(0,102,255));
+                
+                // Set the button text to reflect the board
                 btnArray[i][j].setText(board[i][j].equals("e") ? " " : board[i][j]);
             }
         }
         
+        // check the result of the game
         String result = ultBoard.getGameResult();
         
+        // If the result is decided
         if (!result.equals("undecided")) {
+            // Tell the user
             JOptionPane.showMessageDialog(this, result.equals("draw") ? "It was a draw" : result + " won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            
+            // Prevent the user from making further moves
             disableButtons();
         }
     }
@@ -264,73 +288,108 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * A method that saves the game
+     */
     private void saveGame() {
+        // Create a move counter
         int movesPresent = 0;
+        
+        // Get the game board of the ultBoard
         NormalTTT[] gameBoard = ultBoard.getGameBoard();
         
+        // Loop through the entire game board
         for (int i = 0; i < gameBoard.length; i++) {
+            // Loop through each mini Tic Tac Toe board in the game board
             for (int j = 0; j < gameBoard[i].getBoard().length; j++) {
+                // Check if the current index is null
                 if (gameBoard[i].getIndex(j) != null) {
+                    // Add to the move counter as a move was played
                     movesPresent++;
                 }
             }
         }
         
+        // If less than one move was played
         if(movesPresent < 1) {
+            // Return out of the function as we don't want to save an empty game
             return;
         }
         
+        // Ask the user if the want to save the game
         if (JOptionPane.showConfirmDialog(this, "Would you like to save your current game?", "Save Game?",JOptionPane.YES_NO_OPTION) == 0) {
+            // Declare a string representation of the board
             String boardString = "";
+            // Loop through the gameBoard
             for (int i = 0; i < ultBoard.getGameBoard().length; i++) {
+                // Loop through the each tiny Tic Tac Toe board in the game board
                 for (int j = 0; j < ultBoard.getGameBoard()[i].getBoard().length; j++) {
+                    // If the element if null assign e otherwise assign the letter seperated by colons
                     boardString += (ultBoard.getGameBoard()[i].getIndex(j) == null ? "e" : ultBoard.getGameBoard()[i].getIndex(j)) + ":";
                 }
             }
+            // Use the 81st index to store the currentSection that is being played on
             boardString += Integer.toString(ultBoard.getCurrentSectionIndex());
+            
+            // Create a new SaveGame object with the respective parameters
             SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), "X", "ultimate", "player", ultBoard.getCurrentPlayer(), boardString);
+            
+            // Add the current game to an arrayList of saved games stored in the
+            // database with the saveGame() method.
             CurrentUser.getUser().saveGame(currentGame);
         }
     }
     
+    
     private void btnRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestartActionPerformed
-        // TODO add your handling code here:
+        // Reset the ultimate tic tac toe board
         ultBoard.resetBoard();
+        // Enable the buttons if they were disabled from the win
         enableButtons();
+        // Set the turn so that X goes first
         lblTurn.setText("X's turn");
     }//GEN-LAST:event_btnRestartActionPerformed
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
-        // TODO add your handling code here:
+        // Ask the user if they want to quit
         if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {    
+            // Ask if they want to save game
             saveGame();
+            // Create main menu frame
             MainMenuFrame frmMainMenu = new MainMenuFrame();
+            // Make it visible
             frmMainMenu.setVisible(true);
+            // Dispose the current frame
             this.dispose();
         }
     }//GEN-LAST:event_btnToMainMenuActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
+        // On startup check if the current user is null
         if(CurrentUser.getUser() == null) {
+            // Create a new login frame
             LoginFrame frmLogin = new LoginFrame();
+            // Make it visible
             frmLogin.setVisible(true);
+            // Dispose the current frame
             this.dispose();
         }
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
+        // Ask for save game if the window is closed
         saveGame();
     }//GEN-LAST:event_formWindowClosing
 
     private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
-        // TODO add your handling code here:\
+        // Create the help create help frame
         UltimateHelpFrame frmUltimateHelp = new UltimateHelpFrame();
+        // Make it visible
         frmUltimateHelp.setVisible(true);
     }//GEN-LAST:event_btnHelpActionPerformed
 
     private void addButtonsToPanel(JPanel panel, JButton[] btnArray, int index) {
+        //Loop through all the buttons
         for (int i = 0; i < 9; i++) {
             // Instantiate the button with a label (in this case i+1)
             btnArray[i] = new JButton();
@@ -339,25 +398,33 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
             btnArray[i].setActionCommand(index + "" + i);
             // Add the frame as the actionlistener (i.e. where the action happens)
             btnArray[i].addActionListener(this);
-            
+            // Set the background to the color
             btnArray[i].setBackground(new Color(128, 176, 247));
+            // Set the font and size of the text of the button
             btnArray[i].setFont(new Font("SansSerif", Font.BOLD, 25));
-            
+            // Add the button to the panel
             panel.add(btnArray[i]);
         }
     }
     
+    /**
+     * A method that disables all buttons
+     */
     private void disableButtons() {
+        // Loop through the 2D array of buttons using a nested for loop
         for (int i = 0; i < btnArray.length; i++) {
             for (int j = 0; j < btnArray[i].length; j++) {
+                // Disable the button
                 btnArray[i][j].setEnabled(false);
             }
         }
     }
     
     private void enableButtons() {
+        // Loop through the 2D array of buttons using a nested for loop
         for (int i = 0; i < btnArray.length; i++) {
             for (int j = 0; j < btnArray[i].length; j++) {
+                // Enable the button
                 btnArray[i][j].setEnabled(true);
             }
         }
@@ -365,24 +432,34 @@ public class UltimateTicTacToeFrame extends javax.swing.JFrame implements Action
         
     // Handles a button click
     public void actionPerformed(ActionEvent ae) {
+        // Set a result to an empty string
         String result = "";
         
+        // Use a nested for loop through loop through the 2D button array
         for (int i = 0; i < btnArray.length; i++) {
             for (int j = 0; j < btnArray[i].length; j++) {
+                // Check if the button clicked is the current button
                 if (ae.getActionCommand().equals(i + "" + j)) {
+                    // Set the result the return of movePlayer
                     result = ultBoard.movePlayer(i, j);
+                    // Change whose turn it is using the ternary operatory
                     lblTurn.setText(ultBoard.getCurrentPlayer().equals("X") ? "X's Turn" : "O's Turn");
                     break;
                 }
             }
+            // If the result is not empty, break
             if (!result.equals("")) {
                 break;
             }
         }
         
+        // Check if the result is not movemade or invalid
         if (!(result.equals("MoveMade") || result.equals("Invalid"))) {
+            // Show a win/loss/draw to the user
             JOptionPane.showMessageDialog(this, result.equals("draw") ? "It was a draw" : result + " won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            // Set the text of the label as well
             lblTurn.setText(result.equals("draw") ? "It was a draw" : result + " won!");
+            // Disable all buttons so the game doesn't continue
             disableButtons();
         }
     }
