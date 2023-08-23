@@ -1,3 +1,13 @@
+/*
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: 
+ * 
+ */
+
 package user;
 
 import java.text.DateFormat;
@@ -5,11 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import user.*;
 
-// class for saved game
-/*
-    @author Ludus Team
 
-*/
 public class SavedGame {
     // declare vairables, player1, player1 piece, game_type, opponent_type, ai_difficulty, turn
     private String player1;
