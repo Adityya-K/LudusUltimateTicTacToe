@@ -19,7 +19,7 @@ public class UltimateModeSelectFrame extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public UltimateModeSelectFrame() {
-        setSize(938, 788);
+        setSize(938, 788); // set window size
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
     }
@@ -34,7 +34,7 @@ public class UltimateModeSelectFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         lblTitle = new javax.swing.JLabel();
-        btnPVE = new javax.swing.JButton();
+        btnPVC = new javax.swing.JButton();
         btnToMainMenu = new javax.swing.JButton();
         btnPVP = new javax.swing.JButton();
         lblBackground = new javax.swing.JLabel();
@@ -55,17 +55,17 @@ public class UltimateModeSelectFrame extends javax.swing.JFrame {
         getContentPane().add(lblTitle);
         lblTitle.setBounds(0, 220, 940, 50);
 
-        btnPVE.setBackground(new java.awt.Color(0, 102, 255));
-        btnPVE.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
-        btnPVE.setForeground(new java.awt.Color(255, 255, 255));
-        btnPVE.setText("Play Against The Computer");
-        btnPVE.addActionListener(new java.awt.event.ActionListener() {
+        btnPVC.setBackground(new java.awt.Color(0, 102, 255));
+        btnPVC.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        btnPVC.setForeground(new java.awt.Color(255, 255, 255));
+        btnPVC.setText("Play Against The Computer");
+        btnPVC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPVEActionPerformed(evt);
+                btnPVCActionPerformed(evt);
             }
         });
-        getContentPane().add(btnPVE);
-        btnPVE.setBounds(260, 400, 430, 60);
+        getContentPane().add(btnPVC);
+        btnPVC.setBounds(260, 400, 430, 60);
 
         btnToMainMenu.setBackground(new java.awt.Color(0, 102, 255));
         btnToMainMenu.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
@@ -103,33 +103,32 @@ public class UltimateModeSelectFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnPVEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPVEActionPerformed
-        // TODO add your handling code here:
+    private void btnPVCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPVCActionPerformed
+        // create new computer select frame
         UltimateComputerSelectFrame frmComputerSelect = new UltimateComputerSelectFrame();
-        frmComputerSelect.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnPVEActionPerformed
+        frmComputerSelect.setVisible(true); // set visible
+        this.dispose(); // close this window
+    }//GEN-LAST:event_btnPVCActionPerformed
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
-        // TODO add your handling code here:
+        // create new main menu frame
         MainMenuFrame frmMainMenu = new MainMenuFrame();
-        frmMainMenu.setVisible(true);
-        this.dispose();
+        frmMainMenu.setVisible(true); // set visible
+        this.dispose(); // close this window
     }//GEN-LAST:event_btnToMainMenuActionPerformed
 
     private void btnPVPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPVPActionPerformed
-        // TODO add your handling code here:
+        // create new 2 player frame
         UltimateTicTacToeFrame frmUltimateTicTacToe = new UltimateTicTacToeFrame();
-        frmUltimateTicTacToe.setVisible(true);
-        this.dispose();
+        frmUltimateTicTacToe.setVisible(true); // set visible
+        this.dispose(); // close this window
     }//GEN-LAST:event_btnPVPActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-        if(CurrentUser.getUser() == null) {
-            LoginFrame frmLogin = new LoginFrame();
-            frmLogin.setVisible(true);
-            this.dispose();
+        if(CurrentUser.getUser() == null) { // if no current user
+            LoginFrame frmLogin = new LoginFrame(); // open login screen
+            frmLogin.setVisible(true); // make visible
+            this.dispose(); // close this window
         }
     }//GEN-LAST:event_formWindowOpened
 
@@ -170,7 +169,7 @@ public class UltimateModeSelectFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnPVE;
+    private javax.swing.JButton btnPVC;
     private javax.swing.JButton btnPVP;
     private javax.swing.JButton btnToMainMenu;
     private javax.swing.JLabel lblBackground;

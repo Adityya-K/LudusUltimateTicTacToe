@@ -22,68 +22,80 @@ import user.SavedGame;
  * @author gaudium
  */
 public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements ActionListener {
-
-    UltTTT ultBoard;
+    UltTTT ultBoard; // create new ult board
+    final Color SAVE_COLOR = new Color(0,102,255);
+    final Color DEFAULT_COLOR = new Color(128, 176, 247);
     
+    // edit game's difficulty, ai and player piece
     public void setGameProperties (String difficulty, String ai, String player) {
+        // update ui to give game info
         lblComputerIs.setText("Computer is: " + ai + " ( " + difficulty.toUpperCase() + " difficulty )");
         lblPlayerIs.setText("You are: " + player);
         
+        // create new ultimate ttt board with all passed in parameters
         ultBoard = new UltTTT(btnArray, player, difficulty);
         
         if (ultBoard.getPlayerPiece().equals("O")) // ai goes first
         {
-            ultBoard.moveAI();
+            ultBoard.moveAI(); // ai move
         }
     }
     
+    // method overload and edit game's difficulty, ai, player piece, board and current section 
     public void setGameProperties (String difficulty, String ai, String player, String[][] board, int currentSectionIndex) {
+        // update ui to give game info
         lblComputerIs.setText("Computer is: " + ai + " ( " + difficulty.toUpperCase() + " difficulty )");
         lblPlayerIs.setText("You are: " + player);
         
+        // create new ultimate ttt board with all passed in parameters
         ultBoard = new UltTTT(btnArray, player, difficulty);
-        NormalTTT[] gameBoard = ultBoard.getGameBoard();
-        ultBoard.setCurrentSectionIndex(currentSectionIndex);
-        gameBoard[currentSectionIndex].highlightButtons();
         
+        // get the current game board
+        NormalTTT[] gameBoard = ultBoard.getGameBoard();
+        ultBoard.setCurrentSectionIndex(currentSectionIndex); // update the current section
+        gameBoard[currentSectionIndex].highlightButtons(); // highlight the current section
+        
+        // loop through game board
         for (int i = 0; i < gameBoard.length; i++) {
+            // loop through sub boards
             for (int j = 0; j < gameBoard[i].getBoard().length; j++) {
+                // if index is empty then make it null, otherwise set it to the correct value
                 gameBoard[i].getBoard()[j] = board[i][j].equals("e") ? null : board[i][j];
-                btnArray[i][j].setForeground(new Color(0,102,255));
+                
+                // set button colour and text depending on if it's in board
+                btnArray[i][j].setForeground(SAVE_COLOR);
                 btnArray[i][j].setText(board[i][j].equals("e") ? " " : board[i][j]);
             }
         }
         
         if (ultBoard.getPlayerPiece().equals("O")) // ai goes first
         {
-            ultBoard.moveAI();
+            ultBoard.moveAI(); // ai move
         }
         
-        String result = ultBoard.getGameResult();
+        String result = ultBoard.getGameResult(); // check game result
         
-        winBehavoir(result);
+        winBehavior(result);
     }
     
     /**
      * Creates new form UltimateTicTacToeFrame
      */
     public UltimateTicTacToeAIFrame() {
-        setSize(940, 820);
+        setSize(940, 820); // set window sizes
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
-        addButtonsToPanel(panTTTB1, btnArray[0], 0);
-        addButtonsToPanel(panTTTB2, btnArray[1], 1);
-        addButtonsToPanel(panTTTB3, btnArray[2], 2);
-        addButtonsToPanel(panTTTB4, btnArray[3], 3);
-        addButtonsToPanel(panTTTB5, btnArray[4], 4);
-        addButtonsToPanel(panTTTB6, btnArray[5], 5);
-        addButtonsToPanel(panTTTB7, btnArray[6], 6);
-        addButtonsToPanel(panTTTB8, btnArray[7], 7);
-        addButtonsToPanel(panTTTB9, btnArray[8], 8);
+        
+        // all the panels
+        JPanel[] panels = {panTTTB1, panTTTB2, panTTTB3, panTTTB4, panTTTB5, panTTTB6, panTTTB7, panTTTB8, panTTTB9};
+        
+        // add buttons to panel
+        for (int i = 0; i < panels.length; i++)
+        {
+            addButtonsToPanel(panels[i], btnArray[i], i);
+        }
     }
     
-    
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -285,29 +297,40 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void winBehavoir (String result) {
+    
+    /*
+     * Check for win and update rating
+     */
+    private void winBehavior (String result) {
+        // if move not made or invalid or undecided
         if (!(result.equals("MoveMade") || result.equals("Invalid") || result.equals("undecided"))) {
+            // display corresponding popup
             JOptionPane.showMessageDialog(this, result.equals("draw") ? "It was a draw" : result + " won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
-            disableButtons();
+            
+            disableButtons(); // disable buttons
+            
+            // if user won and not a draw
             if (result.equals(ultBoard.getPlayerPiece()) && !result.equals("draw")) {
-                CurrentUser.getUser().addWin();
-                switch (ultBoard.getAi()) {
-                    case "Easy":
-                        CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() + 10);
+                CurrentUser.getUser().addWin(); // add win to user
+                switch (ultBoard.getAi()) { // do corresponding according to ai
+                    case "Easy": // if ai was easy
+                        CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() + 10); // add 10 rating
                         break;
-                    case "Medium":
-                        CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() + 20);
+                    case "Medium": // if ai was medium
+                        CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() + 20); // add 20 rating
                         break;
                 }
             }
+            // if player lost and not draw
             else if (!result.equals(ultBoard.getPlayerPiece()) && !result.equals("draw")) {
-                CurrentUser.getUser().addLoss();
-                switch (ultBoard.getAi()) {
-                    case "Easy":
+                CurrentUser.getUser().addLoss(); // add loss to user
+                switch (ultBoard.getAi()) { // do corresponding according to ai
+                    case "Easy": // if ai was easy
+                        // subtract 20 rating unless it would make it negative, where you would make it 0
                         CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() >= 20 ? CurrentUser.getUser().getRating() - 20 : 0);
                         break;
-                    case "Medium":
+                    case "Medium": // if ai was medium
+                        // subtract 10 rating unless it would make it negative, where you would make it 0
                         CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() >= 10 ? CurrentUser.getUser().getRating() - 10 : 0);
                         break;
                 }
@@ -317,74 +340,87 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
         }
     }
     
+    /*
+     * Save the current game
+     */
     private void saveGame() {
-        int movesPresent = 0;
-        NormalTTT[] gameBoard = ultBoard.getGameBoard();
+        int movesPresent = 0; // tracks how many moves
+        NormalTTT[] gameBoard = ultBoard.getGameBoard(); // get the current game board
         
+       // loop through all indexes
         for (int i = 0; i < gameBoard.length; i++) {
             for (int j = 0; j < gameBoard[i].getBoard().length; j++) {
+                // if there's a piece played there then a move was played
                 if (gameBoard[i].getIndex(j) != null) {
-                    movesPresent++;
+                    movesPresent++; // incremenet moves played
                 }
             }
         }
         
+        // if less than 2 moves then don't save
         if(movesPresent < 2) {
             return;
         }
         
+        // prompt user to save current game
         if (JOptionPane.showConfirmDialog(this, "Would you like to save your current game?", "Save Game?",JOptionPane.YES_NO_OPTION) == 0) {
-            String boardString = "";
+            String boardString = ""; // board in string form
+            // loop through each index in gameBoard
             for (int i = 0; i < ultBoard.getGameBoard().length; i++) {
                 for (int j = 0; j < ultBoard.getGameBoard()[i].getBoard().length; j++) {
+                    // add to saved board string
                     boardString += (ultBoard.getGameBoard()[i].getIndex(j) == null ? "e" : ultBoard.getGameBoard()[i].getIndex(j)) + ":";
                 }
             }
+            // add on the current section to the board string
             boardString += Integer.toString(ultBoard.getCurrentSectionIndex());
+            
+            // create a new game save
             SavedGame currentGame = new SavedGame(CurrentUser.getUser().getUsername(), ultBoard.getPlayerPiece(), "ultimate", "computer", ultBoard.getAi(), ultBoard.getPlayerPiece(), boardString);
-            CurrentUser.getUser().saveGame(currentGame);
+            CurrentUser.getUser().saveGame(currentGame); // save the game to the current user
+            
             System.out.print(currentGame);
         }
     }
     
     private void btnRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestartActionPerformed
-        // TODO add your handling code here:
-        ultBoard.resetBoard();
-        ultBoard.setCurrentPlayer("X");
-        ultBoard.setCurrentSectionIndex(-1);
-        enableButtons();
+        // restart the game
+        ultBoard.resetBoard(); // reset the board
+        ultBoard.setCurrentPlayer("X"); // make the current player x
+        ultBoard.setCurrentSectionIndex(-1); // go anywhere
+        enableButtons(); // enable the buttons
     }//GEN-LAST:event_btnRestartActionPerformed
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
-        // TODO add your handling code here:
-        if (JOptionPane.showConfirmDialog(this, "Do you want to quit Mid-game?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {   
-            saveGame();
-            MainMenuFrame frmMainMenu = new MainMenuFrame();
-            frmMainMenu.setVisible(true);
-            this.dispose();
+        // ask if user wants to go back to main menu
+        if (JOptionPane.showConfirmDialog(this, "Do you want to quit mid-game?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {   
+            saveGame(); // save the game
+            MainMenuFrame frmMainMenu = new MainMenuFrame(); // create main menu frame
+            frmMainMenu.setVisible(true); // show main menu frame
+            this.dispose(); // close current window
         }
     }//GEN-LAST:event_btnToMainMenuActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-        if(CurrentUser.getUser() == null) {
-            LoginFrame frmLogin = new LoginFrame();
-            frmLogin.setVisible(true);
-            this.dispose();
+        if(CurrentUser.getUser() == null) { // if no current user
+            LoginFrame frmLogin = new LoginFrame(); // open login screen
+            frmLogin.setVisible(true); // make visible
+            this.dispose(); // close this window
         }
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
-        saveGame();
+        saveGame(); // save the game
     }//GEN-LAST:event_formWindowClosing
 
     private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
-        // TODO add your handling code here:
-        UltimateHelpFrame frmUltimateHelp = new UltimateHelpFrame();
-        frmUltimateHelp.setVisible(true);
+        UltimateHelpFrame frmUltimateHelp = new UltimateHelpFrame(); // create new help frame
+        frmUltimateHelp.setVisible(true); // make it visible
     }//GEN-LAST:event_btnHelpActionPerformed
 
+    /*
+     * This method adds all the buttons passed in to the JPanel
+     */
     private void addButtonsToPanel(JPanel panel, JButton[] btnArray, int index) {
         for (int i = 0; i < 9; i++) {
             // Instantiate the button with a label (in this case i+1)
@@ -395,53 +431,58 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
             // Add the frame as the actionlistener (i.e. where the action happens)
             btnArray[i].addActionListener(this);
             
-            btnArray[i].setBackground(new Color(128, 176, 247));
-            btnArray[i].setFont(new Font("SansSerif", Font.BOLD, 25));
+            btnArray[i].setBackground(DEFAULT_COLOR); // set button color
+            btnArray[i].setFont(new Font("SansSerif", Font.BOLD, 25)); // set button font
             
-            panel.add(btnArray[i]);
+            panel.add(btnArray[i]); // add the button to the panel
         }
     }
     
+    // disable all the buttons
     private void disableButtons() {
+        // loop through all buttons
         for (int i = 0; i < btnArray.length; i++) {
             for (int j = 0; j < btnArray[i].length; j++) {
-                btnArray[i][j].setEnabled(false);
+                btnArray[i][j].setEnabled(false); // disable button
             }
         }
     }
     
+    // enable all the buttons
     private void enableButtons() {
         for (int i = 0; i < btnArray.length; i++) {
             for (int j = 0; j < btnArray[i].length; j++) {
-                btnArray[i][j].setEnabled(true);
+                btnArray[i][j].setEnabled(true); // enable button
             }
         }
     }
-        
+    
     // Handles a button click
     public void actionPerformed(ActionEvent ae) {
-        String result = "";
+        String result = ""; // result of button click (NotYourTurn, Invalid, MoveMade)
         
+        // loop through all buttons
         for (int i = 0; i < btnArray.length; i++) {
             for (int j = 0; j < btnArray[i].length; j++) {
-                if (ae.getActionCommand().equals(i + "" + j)) {
-                    result = ultBoard.movePlayer(i, j);
+                if (ae.getActionCommand().equals(i + "" + j)) { // if found corresponding button
+                    result = ultBoard.movePlayer(i, j); // attempt to move player
                     break;
                 }
             }
+            // if did something, no need to check further
             if (!result.equals(""))
             {
                 break;
             }
         }
         
-        if (result.equals("MoveMade"))
+        if (result.equals("MoveMade")) // if made a move
         {
-            ultBoard.moveAI();
-            result = ultBoard.getGameResult();
+            ultBoard.moveAI(); // make an ai move
+            result = ultBoard.getGameResult(); // check the game result after ai move
         }
         
-        winBehavoir(result);
+        winBehavior(result); // do corresponding behaviour according to board state
     }
     
     /**
@@ -499,6 +540,6 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
     private javax.swing.JPanel panTTTB8;
     private javax.swing.JPanel panTTTB9;
     // End of variables declaration//GEN-END:variables
-    // Creating an array for cleaner code (So we don't have to create 86 seperate buttons)
+    // Creating an array for cleaner code (So we don't have to create 81 seperate buttons)
     private JButton[][] btnArray = new JButton[9][9];
 }

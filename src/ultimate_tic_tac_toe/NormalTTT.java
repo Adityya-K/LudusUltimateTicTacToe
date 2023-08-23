@@ -12,7 +12,6 @@ import javax.swing.JButton;
  * @author oweny
  */
 public class NormalTTT {
-
     private JButton[] btnArray = new JButton[9]; // all the buttons in the board
     private String[] board = new String[9]; // current board state
     
