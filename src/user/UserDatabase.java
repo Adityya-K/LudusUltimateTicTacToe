@@ -20,7 +20,7 @@ username,encryptedPassword,rating,wins,losses,currentGame,gamesPlayed,dateJoined
 // need to user .loadDatabase(); before adding user
 public class UserDatabase {
     private static String USER_DATABASE_FILE_PATH = "userDatabase.txt";
-    private static String userDatabaseEncryptionKey = config.userDataBaseEncryptionKey;
+    private static String USER_DATABASE_ENCRYPTION_KEY = config.USER_DATABASE_ENCRYPTION_KEY;
 
     public static ArrayList<User> getUsers() {
         return users;
@@ -111,22 +111,27 @@ public class UserDatabase {
         return null;
     }
     
-    
+    // Check if user exists givne username
     public static boolean existsUser(String userName) {
         // perform linear search on user database.
         // todo hash maps instead
         for (User user: users) {
+            // if username is equal to user's uesrname
             if (user.getUsername().equals(userName)) {
+                // reutrn true
                 return true;
             }
         }
-        // otherwise return null.
+        // otherwise return false.
         return false;
     }    
     // also saves the user DB
     public static User addUser(String userName, String password, String email) {
+        // creaqte new user with addtributes
         User newUser = new User(userName, password, email);
+        // add user to users array list
         users.add(newUser);
+        // saves it
         saveUserDatabase(users);
         return newUser;
     }
@@ -141,39 +146,54 @@ public class UserDatabase {
         saveUserDatabase(users);
     }
     
+    // save user database
     public static void saveUserDatabase(ArrayList<User> users) {
+        // file data
         String fileData = "";
-        
+        // loop through each user
         for (User user: users) {
             System.out.println(user.toString());
+            // add user with newline
             fileData += user.toString() + "\n";
         }
-        
+        // output debug message
         System.out.println("Saving");
         System.out.println(fileData);
         // use regext to remove the final newline
         fileData = fileData.trim();
         
+        // encrypt the database with AES
         String encryptedFile = encryptDataBase(fileData);
+        // attempt ot save file
         try {
             System.out.println("Saving file");
+            // user buffered writer on the DATABASE_FILE_PATH
             BufferedWriter writer = new BufferedWriter(new FileWriter(USER_DATABASE_FILE_PATH));
+            // write to file with encrypted file contents
             writer.write(encryptedFile);
+            // close the writer
             writer.close();
         } catch (IOException e) {
+            // hyandle IO exceptions
             e.printStackTrace();
         }
         // Saving unencrypted file for debugging purposes:
         try {
+            // print saving file
             System.out.println("Saving file");
+            // buffered write on the encyrpted database
             BufferedWriter writer = new BufferedWriter(new FileWriter("unencryptedDatabase.txt"));
+            // write on the filedata
             writer.write(fileData);
+            // close writer
             writer.close();
         } catch (IOException e) {
+            // catch IO exception and print stakc trace
             e.printStackTrace();
         }
     }
     
+    // get top players
     public static ArrayList<User> getTopPlayers() {
         // quicksort the top players
         // clone the users array
@@ -240,16 +260,23 @@ public class UserDatabase {
         arr.set(j, temp);
     }
     
-    
+    // decrypt databse, takes in encrypted database
     public static String decryptDataBase (String encryptedDatabase) {
+        // new AES encypion object
         AESEncryption aes = new AESEncryption();
-        String decryptedDatabase = aes.decrypt(encryptedDatabase, userDatabaseEncryptionKey);
+        // decrypt the database using AES with secret key
+        String decryptedDatabase = aes.decrypt(encryptedDatabase, USER_DATABASE_ENCRYPTION_KEY);
+        // return the decrypted database
         return decryptedDatabase;
     }
     
+    // encrypt the database
     public static String encryptDataBase (String database) {
+        // new AES encryptin object
         AESEncryption aes = new AESEncryption();
-        String encryptedDatabase = aes.encrypt(database, userDatabaseEncryptionKey);
+        // encrypt database with key
+        String encryptedDatabase = aes.encrypt(database, USER_DATABASE_ENCRYPTION_KEY);
+        // return the encrypted database
         return encryptedDatabase;
     }
 }

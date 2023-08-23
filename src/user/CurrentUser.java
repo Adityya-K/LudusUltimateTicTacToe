@@ -21,6 +21,4 @@ public class CurrentUser {
     public static void setUser(User user) {
         CurrentUser.user = user;
     }
-    
-    
 }
