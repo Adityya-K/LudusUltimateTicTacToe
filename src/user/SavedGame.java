@@ -152,7 +152,6 @@ public class SavedGame {
     public SavedGame(String databaseString) {
         // split database by commas
         String[] attributes = databaseString.split(",", -1);
-        System.out.println(attributes[0]);
         // get the user from database and set as player1
         this.player1 = attributes[0];
         /*
