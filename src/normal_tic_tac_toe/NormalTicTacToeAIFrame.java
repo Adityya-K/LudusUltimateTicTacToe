@@ -255,24 +255,59 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         
     }
     
-    // TODO comment this
+    /**
+     * A method that calls minimax on each of the available positions to find 
+     * the best possible outcome and return the move to reach that outcome
+     */
     private void moveAI() {
+        // Set the most min value possible, negative inifinty
         Double bestMoveScore = Double.NEGATIVE_INFINITY;
+        
+        // Set the move index ot an impossible number to diagnose problems
         int moveIndex = -1;
+        
+        // Loop through the entire board
         for (int i = 0; i < board.length; i++) {
+            
+            // Check if the spot if null by passing in its respective parameters
             if (board[i] == null) {
+                // Play the move at the avaliable spot
                 board[i] = ai;
+                
+                // Call on minimax to evaluate the position with initial call 
+                // parameters. In this case since we are maximzing in this
+                // function we call minimax to minimize. The depth is zero
+                // as this is the first call. Alpha and Beta are small values
+                // so that they can be used to prune recursion branches
                 double moveScore = minimax(board, 0, Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, false);
+                
+                // After getting the evaluation reset the board
                 board[i] = null;
+                
+                // Check if the evaluation returns a greater score than the besScore
+                // that was found so far
                 if (moveScore > bestMoveScore) {
+                    // Set the best Score to the current evaluation as that is
+                    // the new mark to beat
                     bestMoveScore = moveScore;
+                    
+                    // Set the current move index to the current value i as
+                    // at this index is a higher evaluation than best socre
                     moveIndex = i;
                 }
             }
         }
         
+        // After the for loop has run, it will have found the move with the
+        // highest evalulation
+        
+        // We move to the index with the highest score
         board[moveIndex] = ai;
+        
+        // We change color of the text of the button based on what the ai piece is
         btnArray[moveIndex].setForeground(ai.equals("X") ? Color.black : Color.white);
+        
+        // Set the text at the button to reflect the ai move
         btnArray[moveIndex].setText(ai);
         
     }

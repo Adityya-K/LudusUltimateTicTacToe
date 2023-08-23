@@ -357,7 +357,7 @@ public class UltimateTicTacToeAIFrame extends javax.swing.JFrame implements Acti
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
         // TODO add your handling code here:
-        if (JOptionPane.showConfirmDialog(this, "Do you want to quit Mid-game?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {   
+        if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {   
             saveGame();
             MainMenuFrame frmMainMenu = new MainMenuFrame();
             frmMainMenu.setVisible(true);
