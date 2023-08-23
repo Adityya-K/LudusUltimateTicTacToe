@@ -24,7 +24,7 @@ public class UltimateHelpFrame extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public UltimateHelpFrame() {
-        setSize(938, 788);
+        setSize(938, 788); // set window size
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
     }
@@ -77,15 +77,14 @@ public class UltimateHelpFrame extends javax.swing.JFrame {
 
     private void btnGoBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoBackActionPerformed
         // TODO add your handling code here:
-        this.dispose();
+        this.dispose(); // close window
     }//GEN-LAST:event_btnGoBackActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-        if(CurrentUser.getUser() == null) {
-            LoginFrame frmLogin = new LoginFrame();
-            frmLogin.setVisible(true);
-            this.dispose();
+        if(CurrentUser.getUser() == null) { // if no current user
+            LoginFrame frmLogin = new LoginFrame(); // open login screen
+            frmLogin.setVisible(true); // make visible
+            this.dispose(); // close this window
         }
     }//GEN-LAST:event_formWindowOpened
 
@@ -114,20 +113,6 @@ public class UltimateHelpFrame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(UltimateHelpFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

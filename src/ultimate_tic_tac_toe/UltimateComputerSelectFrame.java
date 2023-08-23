@@ -14,11 +14,9 @@ import user.*;
 
 public class UltimateComputerSelectFrame extends javax.swing.JFrame {
 
-    /**
-     * Creates new form frmLogin
-     */
+    // initialize window
     public UltimateComputerSelectFrame() {
-        setSize(938, 788);
+        setSize(938, 788); // set window size
         setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
         initComponents();
     }
@@ -108,48 +106,47 @@ public class UltimateComputerSelectFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGoToGameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGoToGameActionPerformed
-        // TODO add your handling code here:
+        // setup variables for user selected
         String difficulty = "";
         String playerLetter = "";
         String computerLetter = "";
                 
+        // get the ai difficulty 
         switch (cmbDifficulty.getSelectedIndex()) {
-            case 0:
+            case 0: // choice 0 is easy
                 difficulty = "Easy";
                 break;
-            case 1:
+            case 1: // choice 1 is medium
                 difficulty = "Medium";
                 break;
         }
         
+        // get the letter the player chose
         switch (cmbXOrO.getSelectedIndex()) {
-            case 0:
+            case 0: // if player chose x
                 playerLetter = "X";
-                computerLetter = "O";
+                computerLetter = "O"; // ai will be o
                 break;
-            case 1:
+            case 1: // player chose o
                 playerLetter = "O";
-                computerLetter = "X";
+                computerLetter = "X"; // ai will be x
                 break;
         }
         
-        UltimateTicTacToeAIFrame frmUltimateTicTacToeAI = new UltimateTicTacToeAIFrame();
-        frmUltimateTicTacToeAI.setGameProperties(difficulty, computerLetter, playerLetter);
-        frmUltimateTicTacToeAI.setVisible(true);
-        this.dispose();
-        
+        UltimateTicTacToeAIFrame frmUltimateTicTacToeAI = new UltimateTicTacToeAIFrame(); // create new ai frame to show options
+        frmUltimateTicTacToeAI.setGameProperties(difficulty, computerLetter, playerLetter); // pass in user inputted stuff
+        frmUltimateTicTacToeAI.setVisible(true); // set visible
+        this.dispose(); // close this window
     }//GEN-LAST:event_btnGoToGameActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        // TODO add your handling code here:
-        if(CurrentUser.getUser() == null) {
-            LoginFrame frmLogin = new LoginFrame();
-            frmLogin.setVisible(true);
-            this.dispose();
+        if(CurrentUser.getUser() == null) { // if no current user
+            LoginFrame frmLogin = new LoginFrame(); // open login screen
+            frmLogin.setVisible(true); // make visible
+            this.dispose(); // close this window
         }
     }//GEN-LAST:event_formWindowOpened
     
-    String error;
     /**
      * @param args the command line arguments
      */
