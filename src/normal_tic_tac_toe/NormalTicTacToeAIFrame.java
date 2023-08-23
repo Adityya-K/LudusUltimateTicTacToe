@@ -1,16 +1,33 @@
 /*
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: to allow the user to play normal Tic-Tac-Toe against the computer
+ * 
+ */
+
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package normal_tic_tac_toe;
 
+// Imports LoginFrame from the authentication_frames package
 import authentication_frames.LoginFrame;
+
+// Imports Color, Font, ActionEvent, ActionListener from java.awt
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+// Imports JButton and JOptionPane from javax.swing
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+
+// Imports MainMenuFrame from the menu package and CurrentUser and SavedGame from the user package
 import menu.MainMenuFrame;
 import user.CurrentUser;
 import user.SavedGame;
@@ -21,24 +38,26 @@ import user.SavedGame;
  */
 public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements ActionListener{
 
-    // Board
+    // Initializes the board, difficulty and player/computer letters
     String[] board = new String[9];
-    
     String difficulty = "medium";
     String ai = "O";
     String player = "X";
     
+    // Gives the correct value to the difficulty and player letters if the board is new
     public void setGameProperties (String difficulty, String ai, String player) {
         this.ai = ai;
         this.player = player;
         this.difficulty = difficulty;
         
+        // Displays helpful hints about what letter represent what player
         lblComputerIs.setText("Computer is: " + ai + " ( " + difficulty.toUpperCase() + " difficulty )");
         lblPlayerIs.setText("You are: " + player);
         
+        // Plays the first computer move if the computer is X
         if (ai.equals("X")) {
             if (difficulty.equals("easy")) {
-                    moveEasyComputer();
+                moveEasyComputer();
             } else if (difficulty.equals("medium")) {
                 moveMediumComputer();
             } else if (difficulty.equals("hard")) {
@@ -47,21 +66,30 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         }
     }
     
+    // Gives the correct value to the difficulty and player letters if the board is loaded
     public void setGameProperties (String difficulty, String ai, String player, String[] board) {
         this.ai = ai;
         this.player = player;
         this.difficulty = difficulty;
         this.board = board;
         
+        // Iterates through all of the indices in the button array
         for (int i = 0; i < btnArray.length; i++) {
+            
+            // Sets the color of the squares to indicate they have been loaded
             btnArray[i].setForeground(new Color(0,102,255));
+            
+            // Adds " " to the board if it is empty (indicated by "e"), adds the player/computer if it isn't
             btnArray[i].setText(board[i].equals("e") ? " " : board[i]);
             this.board[i] = board[i].equals("e") ? null : board[i];
+            
         }
         
+        // Displays helpful hints about what letter represent what player
         lblComputerIs.setText("Computer is: " + ai + " ( " + difficulty.toUpperCase() + " difficulty )");
         lblPlayerIs.setText("You are: " + player);
         
+        // Plays the first computer move if the computer is X
         if (ai.equals("X")) {
             if (difficulty.equals("easy")) {
                     moveEasyComputer();
@@ -72,78 +100,146 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
             }
         }
         
+        // Stores the game result
         String gameResult = getGameResult(getAllLines());
                 
         // Checks if the game has been decided
         if (!gameResult.equals("undecided")) {
 
-            // TODO output game result on gui instead of console
-            // Prints out the game result
+            // Displays the game result
             JOptionPane.showMessageDialog(this, gameResult.equals("draw") ? "It was a draw" : gameResult + " won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
             
+            // Disables all of the buttons
             for (int i = 0; i < btnArray.length; i++) {
                 btnArray[i].setEnabled(false);
             }
+            
         }
+        
     }
     
     /**
      * Creates new form NormalTicTacToeFrame
      */
     public NormalTicTacToeAIFrame() {
+        
+        // Displays the JFrame at the center position of the screen
         setSize(940, 788);
         setLocationRelativeTo(null);
         initComponents();
         
         // Creates all the buttons
         for (int i = 0; i < btnArray.length; i++) {
+            
+            // Sets the text
             btnArray[i] = new JButton(" ");
+            
+            // Sets the background color
             btnArray[i].setBackground(new Color(128, 176, 247));
+            
+            // Sets the font
             btnArray[i].setFont(new Font("SansSerif", Font.BOLD, 50));
+            
+            // Sets the action command
             btnArray[i].setActionCommand("" + i);
+            
+            // Adds an action listener
             btnArray[i].addActionListener(this);
+            
+            // Adds the button to the panel
             panButtons.add(btnArray[i]);
+            
         }
+        
     }
     
+    // Plays a random move
     private void moveEasyComputer() {
+        
+        // Initializes the move index
         int moveIndex;
+        
+        // Chooses a random square that is empty
         do {
             moveIndex = (int) (Math.random() * 9);
         } while (board[moveIndex] != null);
+        
+        // Sets the square at the index to the computer's letter
         board[moveIndex] = ai;
+        
+        // Sets the color according to the computer's letter
         btnArray[moveIndex].setForeground(ai.equals("X") ? Color.black : Color.white);
+        
+        // Sets the squares at the index to the computer's letter
         btnArray[moveIndex].setText(ai);
+        
     }
     
+    // Plays a random move, unless the computer can win in one move
     private void moveMediumComputer() {
+        
+        // Determines if there is a win in one move
         int moveIndex = findWin();
+        
+        // Plays a random move if there is no winning move
         if (moveIndex == -1) {
             do {
                 moveIndex = (int) (Math.random() * 9);
             } while (board[moveIndex] != null);
         }
+        
+        // Sets the square at the index to the computer's letter
         board[moveIndex] = ai;
+        
+        // Sets the color according to the computer's letter
         btnArray[moveIndex].setForeground(ai.equals("X") ? Color.black : Color.white);
+        
+        // Sets the square at the index to the computer's letter
         btnArray[moveIndex].setText(ai);
+        
     }
     
+    // Returns the index indicating a win-in-one-move, returns -1 if such a move doesn't exist
     private int findWin() {
+        
+        // Initializes the move index
         int moveIndex = -1;
+        
+        // Stores all of the lines in an array
         String [] lines = getAllLines();
+        
+        // Initializes the index of the winning line
         int winningLineIndex = -1;
+        
+        // Initializes the winning line
         String winningLine = "";
+        
+        // Initializes an array containing the indices of all three squares in each line
         String [] indicesInLines = {"012", "345", "678", "036", "147", "258", "048", "246"};
         
+        // (this is a linear search) Iterates through all the indices of the lines array
         for (int i = 0; i < lines.length; i++) {
+            
+            // Runs if the line has two Xs and one empty spot
             if (lines[i].equals("XXnull") || lines[i].equals("XnullX") || lines[i].equals("nullXX")) {
+                
+                // Sets the index of the winning line to the current index
                 winningLineIndex = i;
+                
+                // Sets the winning line to the current line
                 winningLine = lines[i];
+                
+                // Breaks out of the loop
                 break;
+                
             }
+            
         }
         
+        // Runs if a winning line was found
         if (winningLineIndex != -1) {
+            
+            // Sets the move index to the appropriate number
             if (winningLine.equals("XXnull")) {
                 moveIndex = Integer.parseInt(String.valueOf(indicesInLines[winningLineIndex].charAt(2)));
             } else if (winningLine.equals("XnullX")) {
@@ -151,11 +247,15 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
             } else {
                 moveIndex = Integer.parseInt(String.valueOf(indicesInLines[winningLineIndex].charAt(0)));
             }
+            
         }
         
+        // Returns the winning move index
         return moveIndex;
+        
     }
     
+    // TODO comment this
     private void moveAI() {
         Double bestMoveScore = Double.NEGATIVE_INFINITY;
         int moveIndex = -1;
@@ -177,6 +277,7 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         
     }
     
+    // TODO comment this
     private double minimax(String[] board, int depth, double alpha, double beta, boolean isMaximizing) {
         String gameResult = getGameResult(getAllLines());
         if (gameResult.equals(ai)) {
@@ -222,6 +323,7 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         }
     }
 
+    // TODO comment this
     private void saveGame() {
         int movesPresent = 0;
         for (int i = 0; i < board.length; i++) {
@@ -253,16 +355,20 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
             
             // Runs if the button was clicked
             if (ae.getActionCommand().equals("" + i) && board[i] == null) {
-                // Board stuff
+                
+                // Plays the move
                 board[i] = player;
                 
+                // Sets the color accordingly
                 btnArray[i].setForeground(player.equals("X") ? Color.black : Color.white);
+                
                 // Sets the button text to the correct player using the parity of the turn number
                 btnArray[i].setText(player);
                 
                 // Stores the game result
                 String gameResult = getGameResult(getAllLines());
                 
+                // Plays a computer move according to the difficulty
                 if (gameResult.equals("undecided")) {
                     if (difficulty.equals("easy")) {
                         moveEasyComputer();
@@ -273,15 +379,16 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                     }
                 }
                 
+                // Stores the game result
                 gameResult = getGameResult(getAllLines());
                 
                 // Checks if the game has been decided
                 if (!gameResult.equals("undecided")) {
                     
-                    // TODO output game result on gui instead of console
                     // Prints out the game result
                     JOptionPane.showMessageDialog(this, gameResult.equals("draw") ? "It was a draw" : gameResult + " won!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
                     
+                    // Adds a win to the player and adjusts their rating if they won
                     if (gameResult.equals(player)) {
                         CurrentUser.getUser().addWin();
                         switch (difficulty) {
@@ -295,8 +402,9 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                                 CurrentUser.getUser().setRating(CurrentUser.getUser().getRating() + 20);
                                 break;
                         }
-                    }
-                    else if (gameResult.equals(ai)) {
+                    
+                    // Adds a loss to the player and adjusts their rating if they lost
+                    } else if (gameResult.equals(ai)) {
                         CurrentUser.getUser().addLoss();
                         switch (difficulty) {
                             case "easy":
@@ -311,6 +419,7 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                         }
                     }
                     
+                    // Disables all of the buttons
                     for (int j = 0; j < btnArray.length; j++) {
                         btnArray[j].setEnabled(false);
                     }
@@ -319,8 +428,11 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                 
                 // Stops the search for a button click
                 break;
+                
             }
+            
         }
+        
     }
     
     /**
@@ -467,37 +579,52 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
 
     private void btnRestartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestartActionPerformed
         // TODO add your handling code here:
+        
+        // Resets the board to an empty one
         resetBoard();
+        
     }//GEN-LAST:event_btnRestartActionPerformed
 
     private void btnToMainMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnToMainMenuActionPerformed
         // TODO add your handling code here:
+        
+        // Displays the main menu if the user confirms it
         if (JOptionPane.showConfirmDialog(this, "Are you sure you want to quit?", "Confirmation",JOptionPane.YES_NO_OPTION) == 0) {    
             saveGame();
             MainMenuFrame frmMainMenu = new MainMenuFrame();
             frmMainMenu.setVisible(true);
             this.dispose();
         }
+        
     }//GEN-LAST:event_btnToMainMenuActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        
+        // Displays the login page if the current user is null when the window is opened
         if(CurrentUser.getUser() == null) {
             LoginFrame frmLogin = new LoginFrame();
             frmLogin.setVisible(true);
             this.dispose();
         }
+        
     }//GEN-LAST:event_formWindowOpened
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
+        
+        // Saves the game when the window is closed
         saveGame();
+        
     }//GEN-LAST:event_formWindowClosing
 
     private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
         // TODO add your handling code here:
+        
+        // Displays the help page
         NormalHelpFrame frmNormalHelp = new NormalHelpFrame();
         frmNormalHelp.setVisible(true);
+        
     }//GEN-LAST:event_btnHelpActionPerformed
 
     /**
@@ -547,10 +674,13 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
     private javax.swing.JPanel panButtons;
     private javax.swing.JPanel panRootBackground;
     // End of variables declaration//GEN-END:variables
+    
+    // Creates an array of 9 buttons
     private JButton[] btnArray = new JButton[9];
 
     // Resets the board
     private void resetBoard() {
+        
         // Iterates through every index in the array and resets the text
         for (int i = 0; i < btnArray.length; i++) {
             btnArray[i].setText(" ");
@@ -558,6 +688,7 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
             board[i] = null;
         }
         
+        // Plays a computer move according to the difficulty if the computer is X
         if (ai.equals("X")) {
             if (difficulty.equals("easy")) {
                 moveEasyComputer();
@@ -567,6 +698,7 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                 moveAI();
             }
         }
+        
     }
 
     // Returns a string with the winner, if there is a draw or if the game is undecided
@@ -607,18 +739,27 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
                 break;
                 
             }
+            
         }
         
+        // Runs if the game is a draw
         if (draw == true) {
+            
+            // Sets the game result string to a draw
             gameResult = "draw";
+            
+            // (this is a linear search) If there are still empty squares, sets the game result to undecided
             for (int i = 0; i < board.length; i++) {
                 if (board[i] == null) {
                     gameResult = "undecided";
                 }
             }
+            
         }
         
+        // Returns the game result
         return gameResult;
+        
     }
 
     // Returns an array of strings that represent all the lines on the board

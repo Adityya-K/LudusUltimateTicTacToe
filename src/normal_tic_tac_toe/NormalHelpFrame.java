@@ -1,9 +1,20 @@
 /*
+ * Group Name: Ludus 
+ * Members: Adityya Kaushal, Alexander Tan, Eksjot Multani, Owen Yang
+ * ICS4UE
+ * August 20-22, 2023
+ * Mr. Diakoloukas
+ * Purpose: to create a help page for normal Tic-Tac-Toe
+ * 
+ */
+
+/*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package normal_tic_tac_toe;
 
+// Imports LoginFrame and CurrentUser
 import authentication_frames.LoginFrame;
 import user.CurrentUser;
 
@@ -17,9 +28,12 @@ public class NormalHelpFrame extends javax.swing.JFrame {
      * Creates new form frmLogin
      */
     public NormalHelpFrame() {
+        
+        // Displays the JFrame at the center position of the screen
         setSize(938, 788);
-        setLocationRelativeTo(null); // this method display the JFrame to center position of a screen
+        setLocationRelativeTo(null);
         initComponents();
+        
     }
 
     /**
@@ -70,16 +84,22 @@ public class NormalHelpFrame extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
         // TODO add your handling code here:
+        
+        // Exits the application
         this.dispose();
+        
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
+        
+        // Displays the login page if the current user is null when the window is opened
         if(CurrentUser.getUser() == null) {
             LoginFrame frmLogin = new LoginFrame();
             frmLogin.setVisible(true);
             this.dispose();
         }
+        
     }//GEN-LAST:event_formWindowOpened
 
     /**
