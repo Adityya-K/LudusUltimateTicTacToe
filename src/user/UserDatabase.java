@@ -135,10 +135,25 @@ public class UserDatabase {
         saveUserDatabase(users);
         return newUser;
     }
-
+    
+    // empty constrctor for user database
     public UserDatabase() {
     }
     
+    // get user by email returns the user with the email
+    public static User getUserByEmail(String email) {
+        // loop through each user 
+        for (User user: users) {
+            // check if email is == to requested email
+            if (user.getEmail().equals(email)){
+                // return the associated user
+                return user;
+            }
+            
+        }
+        // otherwise return null
+        return null;
+    }
     // saves users after change
     // the user object is already updated
     // so save the user database with the current users list
