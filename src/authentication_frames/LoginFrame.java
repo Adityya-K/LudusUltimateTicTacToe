@@ -131,7 +131,6 @@ public class LoginFrame extends javax.swing.JFrame {
         } else {
             // Sets the current user as the user
             CurrentUser.setUser(currentUser);
-            CurrentUser.getUser().setRating(1000);
             
             // Displays the main menu
             MainMenuFrame frmMainMenu = new MainMenuFrame(); 
