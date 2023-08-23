@@ -82,17 +82,6 @@ public class NormalTicTacToeAIFrame extends javax.swing.JFrame implements Action
         lblComputerIs.setText("Computer is: " + ai + " ( " + difficulty.toUpperCase() + " difficulty )");
         lblPlayerIs.setText("You are: " + player);
         
-        // Plays the first computer move if the computer is X
-        if (ai.equals("X")) {
-            if (difficulty.equals("easy")) {
-                    moveEasyComputer();
-            } else if (difficulty.equals("medium")) {
-                moveMediumComputer();
-            } else if (difficulty.equals("hard")) {
-                moveAI();
-            }
-        }
-        
         // Stores the game result
         String gameResult = getGameResult(getAllLines());
                 
