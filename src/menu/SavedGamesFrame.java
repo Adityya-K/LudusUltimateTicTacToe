@@ -56,7 +56,7 @@ public class SavedGamesFrame extends javax.swing.JFrame {
             // Add a row for each game with the type of game (i.e. normal or ultimate),
             // the opponent (i.e. AI or player) and the difficulty of the AI
             // if the opponent if it is AI (decided by ternary operator)
-            model.addRow(new Object[]{gamesPlayed.get(i).getGameType(), gamesPlayed.get(i).getOpponentType(), gamesPlayed.get(i).getAIDifficulty().equals("null") ? "N/A" : gamesPlayed.get(i).getAIDifficulty()});
+            model.addRow(new Object[]{gamesPlayed.get(i).getSavedDate(), gamesPlayed.get(i).getGameType().toUpperCase(), gamesPlayed.get(i).getOpponentType().toUpperCase(), gamesPlayed.get(i).getAIDifficulty() == null || gamesPlayed.get(i).getAIDifficulty().equals("null") ? "N/A" : gamesPlayed.get(i).getAIDifficulty().toUpperCase()});
         }
         
                
@@ -102,11 +102,11 @@ public class SavedGamesFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Type of Game", "Opponent", "AI Difficulty"
+                "Time Saved", "Type of Game", "Opponent", "AI Difficulty"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
